@@ -10,6 +10,8 @@ public class AppManager {
          */
         JFrame mainPageFrame = new MainPageFrame();
         mainPageFrame.setVisible(true);
+        CalendarFrame calendarFrame = new CalendarFrame();
+        calendarFrame.setVisible(true);
 
     }
 
