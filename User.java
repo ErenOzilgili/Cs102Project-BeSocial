@@ -8,6 +8,7 @@ public class User{
     
     private ArrayList<Activity> activitiesDisliked;
     private ArrayList<Activity> activitiesLiked;
+    private ArrayList<Activity> activitiesEnrolled;
 
     public User(String name, String password){
         //After first creation of the account, password and name is resolved.
@@ -16,6 +17,7 @@ public class User{
 
         activitiesDisliked = new ArrayList<Activity>();
         activitiesLiked = new ArrayList<Activity>();
+        activitiesEnrolled = new ArrayList<Activity>();
 
     }
 
@@ -130,6 +132,9 @@ public class User{
         return this.activitiesLiked;
     }
 
+    public ArrayList<Activity> getActivitiesEnrolled(){
+        return this.activitiesEnrolled;
+    }
 
 
     
