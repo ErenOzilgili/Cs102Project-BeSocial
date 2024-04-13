@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -17,13 +18,15 @@ public class FullScreenCalendar extends JFrame {
     this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     this.setVisible(true);
  
- 
+    JPanel panel2 = new JPanel();
+    panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
     label = new JLabel();
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setText("MY CALENDAR");
     label.setFont(new Font("Courier", Font.BOLD, 40));
     
-    this.add(label,BorderLayout.NORTH);
+    
+    
  
     JButton b1 = new JButton("<-");
     b1.addActionListener(new ActionListener() {
@@ -40,11 +43,29 @@ public class FullScreenCalendar extends JFrame {
         updateMonth();
       }
     });
+
+    JButton b3 = new JButton();
+    b3.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+        //TODO: Return to the main page.
+
+      }
+    });
     setFocusable(true);
-    this.add(b1,BorderLayout.WEST);
-    this.add(b2,BorderLayout.EAST);
+    panel2.add(Box.createHorizontalGlue());
+    panel2.add(b1);
+    panel2.add(label);
+    panel2.add(b2);
+    ImageIcon icon = new ImageIcon("C:\\Users\\hikme\\OneDrive\\Belgeler\\Cs102Project-BeSocial\\resources\\25694.png");
+    Image image = icon.getImage(); // transform it 
+    Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+    icon = new ImageIcon(newimg);  // transform it back
+    b3.setIcon(icon);
+    panel2.add(Box.createHorizontalGlue());
+    panel2.add(b3);
+
+    this.add(panel2,BorderLayout.NORTH);
     this.updateMonth();
- 
   }
  
   void updateMonth() {
@@ -82,7 +103,6 @@ public class FullScreenCalendar extends JFrame {
       JLabel newLabel = new JLabel(String.valueOf(day),SwingConstants.CENTER);
       newLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
       newLabel.setFont(new Font("Courier", Font.BOLD, 20));
-      newLabel.setToolTipText(Integer.toString(day));
       newLabel.addMouseListener(new MyMouseListener());
       panel.add(newLabel);
       
@@ -95,13 +115,11 @@ public class FullScreenCalendar extends JFrame {
       panel.add(newLabel);
     }
     this.add(panel,BorderLayout.CENTER);
- 
   }
  
   private class MyMouseListener extends MouseAdapter {
     public void mouseEntered(MouseEvent e) {
-      JLabel newlabel = (JLabel)e.getSource();
-      System.out.println(newlabel.getText());
+      
     }
     public void mouseExited(MouseEvent e) {
       
