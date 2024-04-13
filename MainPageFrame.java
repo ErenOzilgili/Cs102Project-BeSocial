@@ -40,7 +40,7 @@ public class MainPageFrame extends JFrame{
 
         //This panel will be placed in center in this frame.
         //We will replace the firstCol (First Column) and secondCol (Second Column)
-        //panels inside this laerger panel.
+        //panels inside this larger panel.
         centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(1, 2));
 

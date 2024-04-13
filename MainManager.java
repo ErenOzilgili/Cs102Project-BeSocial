@@ -1,21 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
-package com.mycompany.mainmanager;
-
-import javax.swing.JFrame;
-
-/**
- *
- * @author ereno
- */
 public class MainManager {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-        JFrame mainpage = new MainPage();
-        mainpage.setVisible(true);
+    public static void main(String[] args){
+        // TODO code application logic here
+        
+        db = new Database1();        
+        db.crateConnection();
+        
+        javax.swing.JFrame login = new LogInFrame(); // Creating frame that I implement in LogInFrame class
+        login.setVisible(true);
+        login.pack();
+        login.setLocationRelativeTo(null); //center
+        
+        // I try to connect the database with our java program
+        
+        
         
     }
+    protected static Database1 db; 
 }
