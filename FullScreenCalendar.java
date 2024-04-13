@@ -13,13 +13,14 @@ public class FullScreenCalendar extends JFrame {
  
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //this.setTitle("Swing Calandar");
-    this.setSize(1920,1080);
+    this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     this.setVisible(true);
  
  
     label = new JLabel();
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setText("MY CALENDAR");
+    label.setFont(new Font("Courier", Font.BOLD, 20));
     
     this.add(label,BorderLayout.NORTH);
  
@@ -69,12 +70,16 @@ public class FullScreenCalendar extends JFrame {
       panel.add(new JButton(""+day));   
       i = i + 1;
     }
+    for(int j = 0; j<7-i%7; j++){
+      panel.add(new JButton(""));
+    }
+    this.add(panel,BorderLayout.CENTER);
  
   }
  
   public static void main(String[] arguments) {
-    JFrame.setDefaultLookAndFeelDecorated(true);
-    FullScreenCalendar sc = new CalendarFrame();
+    JFrame.setDefaultLookAndFeelDecorated(false);
+    FullScreenCalendar sc = new FullScreenCalendar();
   }
  
 }
