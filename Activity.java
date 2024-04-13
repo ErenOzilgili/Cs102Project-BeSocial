@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.awt.Dimension;
+import java.sql.Date;
 
 public class Activity implements Comparable<Activity>{
     
@@ -11,6 +12,7 @@ public class Activity implements Comparable<Activity>{
     private String name;
     private String description;
     private int activityNo;
+    private Date date ;
     private int dislikeNum;
     private int likeNum;
     private int appearanceHeight;
@@ -20,13 +22,14 @@ public class Activity implements Comparable<Activity>{
      * More instance variables to add here.
      */
 
-    public Activity(String name, String description, ArrayList<Tag> tagsTemp){
+    public Activity(String name, String description, ArrayList<Tag> tagsTemp, Date date){
         //Instead of this get from database.
         tags = new ArrayList<Tag>();
 
         //Initializing the name and description according to the input.
         this.name = name;
         this.description = description;
+        this.date = date;
 
         //Activity no
         numberOfActiveActivities++;
@@ -89,6 +92,7 @@ public class Activity implements Comparable<Activity>{
     public String getName(){ return this.name; }
     public String getDescription(){ return this.description; }
     public ArrayList<Tag> getTags(){ return this.tags; }
+    public Date getDate(){ return this.date; }
 
     //Setter Methods
     public void changeDislikeNum(int change){ this.dislikeNum += change; }
