@@ -7,7 +7,7 @@ import javax.swing.border.Border;
 import javax.swing.table.*;
  
 public class FullScreenCalendar extends JFrame {
- 
+  JPopupMenu popup;
   Calendar cal = new GregorianCalendar();
   JLabel label;
  
@@ -51,7 +51,7 @@ public class FullScreenCalendar extends JFrame {
 
       }
     });
-    setFocusable(true);
+
     panel2.add(Box.createHorizontalGlue());
     panel2.add(b1);
     panel2.add(label);
@@ -65,12 +65,14 @@ public class FullScreenCalendar extends JFrame {
     panel2.add(b3);
 
     this.add(panel2,BorderLayout.NORTH);
+    cal.set(Calendar.DAY_OF_MONTH, 1);
+    this.add(new JPanel());
     this.updateMonth();
+    this.setVisible(true);
   }
  
-  void updateMonth() {
-    cal.set(Calendar.DAY_OF_MONTH, 1);
- 
+  public void updateMonth() {
+    this.getContentPane().remove(1);
     String month = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
     int year = cal.get(Calendar.YEAR);
     label.setText(month + " " + year);
@@ -115,6 +117,7 @@ public class FullScreenCalendar extends JFrame {
       panel.add(newLabel);
     }
     this.add(panel,BorderLayout.CENTER);
+    
   }
  
   private class MyMouseListener extends MouseAdapter {
@@ -124,6 +127,16 @@ public class FullScreenCalendar extends JFrame {
     public void mouseExited(MouseEvent e) {
       
     }
+
+    public void mouseClicked(MouseEvent e) {
+      if(((JLabel)e.getSource()).getText() != "") {
+        popup = new JPopupMenu();
+        popup.add(new JMenuItem("1"));
+        popup.add(new JMenuItem("2"));
+        popup.show((Component)e.getSource(), e.getX(), e.getY());
+      }
+    }   
+
   }
 
   public static void main(String[] arguments) {
