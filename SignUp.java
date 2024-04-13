@@ -2,11 +2,14 @@
 package loginandsignup;
 
 
-public class SignUp extends javax.swing.JFrame {
+
+public class SignUp extends javax.swing.JFrame  {
 
     
     public SignUp() {
         initComponents();
+        
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -84,6 +87,11 @@ public class SignUp extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Sign Up");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel5.setText("I have an account");
@@ -172,6 +180,7 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -186,6 +195,12 @@ public class SignUp extends javax.swing.JFrame {
         login2.setLocationRelativeTo(null); //center
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
