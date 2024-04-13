@@ -129,10 +129,11 @@ public class FullScreenCalendar extends JFrame {
     }
 
     public void mouseClicked(MouseEvent e) {
-      if(((JLabel)e.getSource()).getText() != "") {
+      if(((JLabel)e.getSource()).getText() != "" && !((JLabel)e.getSource()).getText().contains("day")) {
         popup = new JPopupMenu();
-        popup.add(new JMenuItem("1"));
-        popup.add(new JMenuItem("2"));
+        popup.setBounds(1000, 100, 1000, 1000);
+        popup.add(new JMenuItem("Sport Festival"));
+        popup.add(new JMenuItem("Efe's Birthday"));
         popup.show((Component)e.getSource(), e.getX(), e.getY());
       }
     }   
