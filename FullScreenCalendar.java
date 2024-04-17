@@ -56,7 +56,7 @@ public class FullScreenCalendar extends JFrame {
     panel2.add(b1);
     panel2.add(label);
     panel2.add(b2);
-    ImageIcon icon = new ImageIcon("C:\\Users\\hikme\\OneDrive\\Belgeler\\Cs102Project-BeSocial\\resources\\25694.png");
+    ImageIcon icon = new ImageIcon("25694.png");
     Image image = icon.getImage(); // transform it 
     Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
     icon = new ImageIcon(newimg);  // transform it back
