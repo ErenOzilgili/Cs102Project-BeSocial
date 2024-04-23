@@ -14,7 +14,19 @@ public class DBConnection {
             if (rs.next()) {
                 System.out.println(rs.getString(1));
             }
+            addUser(con);
         } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void addUser(Connection con)
+    {
+        try (Statement st = con.createStatement()) 
+        {
+            st.executeUpdate("INSERT INTO account (userID,username,userPassword,aboutMe,tags) VALUES (1,'aEren123','SeKa132', 'Hi! I am great.','<football><chess>');");
+        } 
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
