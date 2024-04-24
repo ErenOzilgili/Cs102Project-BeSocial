@@ -2,7 +2,8 @@ import java.sql.*;
 
 public class DBConnection {
 
-    public static void main(String[] args) {
+    public static Connection createConnection() 
+    {
         // jdbc:mysql://34.88.41.65:3306/BeSocial?useSSL=false
         String url = "jdbc:mysql://34.88.41.65:3306/BeSocial?connectTimeout=5000";
         String user = "BeSocial";
@@ -14,10 +15,13 @@ public class DBConnection {
             if (rs.next()) {
                 System.out.println(rs.getString(1));
             }
-            addUser(con);
+            //addUser(con);
+            return con;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return null;
+
     }
 
     public static void addUser(Connection con)

@@ -1,19 +1,27 @@
+import java.sql.*;
+
 public class MainManager {
 
     public static void main(String[] args){
         // TODO code application logic here
         
-        db = new Database1();        
-        db.crateConnection();
-        
-        javax.swing.JFrame login = new LogInFrame(); // Creating frame that I implement in LogInFrame class
-        login.setVisible(true);
-        login.pack();
-        login.setLocationRelativeTo(null); //center
-        
-        // I try to connect the database with our java program
-        
-        
+        // db = new Database1();        
+        // db.crateConnection();
+        Connection con = DBConnection.createConnection();
+        try (con;
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery("SELECT VERSION()")) {
+            
+            if (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        LogInFrame logIn = new LogInFrame();
+        logIn.setVisible(true);
+        logIn.pack();
+        logIn.setLocationRelativeTo(null);
         
     }
     protected static Database1 db; 

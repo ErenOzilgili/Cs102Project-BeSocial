@@ -1,5 +1,5 @@
 
-package loginandsignup;
+//package loginandsignup;
 
 
 import java.sql.*;
@@ -200,7 +200,7 @@ public class SignUp extends javax.swing.JFrame  {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        NewJFrame login2 = new NewJFrame(); // Creating frame that I implement in NewJFrame class
+        LogInFrame login2 = new LogInFrame(); // Creating frame that I implement in NewJFrame class
         login2.setVisible(true);
         login2.pack();
         login2.setLocationRelativeTo(null); //center
@@ -222,6 +222,7 @@ public class SignUp extends javax.swing.JFrame  {
         else if(found)
         {
             try {
+                
                 Statement stm = LoginAndSignUp.db.getCon().createStatement();
                 String add = "INSERT INTO users(name, email, password) VALUES ('" + name + "' , '" + email + "','" + password + "') ";
                 //INSERT INTO student(name, major) VALUES('Jack', 'Biology');                
