@@ -30,7 +30,7 @@ public class Pop{
 
     }
     
-    public static void decideAction(){
+    public void decideAction(){
         if(!page.isNotiDisplayed){
             createPopup();
             page.isNotiDisplayed = true;
