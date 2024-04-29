@@ -37,10 +37,7 @@ public class SignUp extends javax.swing.JFrame  {
             catch (SQLException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
             }
-            finally
-            {
-                return false;
-            }
+            return false;
     }
 
     @SuppressWarnings("unchecked")
@@ -246,7 +243,10 @@ public class SignUp extends javax.swing.JFrame  {
                 try 
                 {
                     Statement stm = MainManager.db.getCon().createStatement();
-                    String add = "INSERT INTO account(username, aboutMe, userPassword, userId, email) VALUES ('" + name + "' , '" + "hi" + "','" + password + "','" + 3 + "''" + email + "' ) ";
+                    ResultSet resultset = stm.executeQuery("SELECT COUNT(userID) FROM account");
+                    resultset.next();
+                    int ID = resultset.getInt("COUNT(userID)") + 1;
+                    String add = "INSERT INTO account(username, aboutMe, userPassword, userId, email) VALUES ('" + name + "' , '" + "Hi! I want to be social." + "','" + password + "','" + ID + "','" + email + "' ) ";
                     //INSERT INTO student(name, major) VALUES('Jack', 'Biology');                
                     // ınsert the data 
                     stm.execute(add);
