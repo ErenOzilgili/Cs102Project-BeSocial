@@ -9,14 +9,16 @@ public class Activity implements Comparable<Activity>{
     public static final Dimension appearanceSize = new Dimension(400, 300);
 
     private ArrayList<Tag> tags;
-    private String name;
+    private String name, place;
     private String description;
     private int activityNo, quota;
     private Date date;
+    private Time time;
     private int dislikeNum;
     private int likeNum;
     private int appearanceHeight;
     private int appearanceWidth;
+    private Tag tag;
     
     /*
      * More instance variables to add here.
@@ -55,8 +57,12 @@ public class Activity implements Comparable<Activity>{
             this.name = name;
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM activities WHERE activity_name = '%s';".formatted(name));
+            tag = new Tag(Tag.TagType.valueOf(rs.getString(2)));
             quota = rs.getInt(3);
             date = rs.getDate(4);
+            time = rs.getTime(5);
+            place = rs.getString(6);
+            description = rs.getString(7);
         }
         catch(SQLException e){
             System.out.println(e);
