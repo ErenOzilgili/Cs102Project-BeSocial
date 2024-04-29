@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.awt.Dimension;
-import java.sql.Date;
+import java.sql.*;
 
 public class Activity implements Comparable<Activity>{
     
@@ -11,8 +11,8 @@ public class Activity implements Comparable<Activity>{
     private ArrayList<Tag> tags;
     private String name;
     private String description;
-    private int activityNo;
-    private Date date ;
+    private int activityNo, quota;
+    private Date date;
     private int dislikeNum;
     private int likeNum;
     private int appearanceHeight;
@@ -48,6 +48,19 @@ public class Activity implements Comparable<Activity>{
         this.appearanceHeight = (int)Activity.appearanceSize.getHeight();
         this.appearanceHeight = (int)Activity.appearanceSize.getWidth();
  
+    }
+
+    public Activity(String name){
+        try{
+            this.name = name;
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM activities WHERE activity_name = '%s';".formatted(name));
+            quota = rs.getInt(3);
+            date = rs.getDate(4);
+        }
+        catch(SQLException e){
+            System.out.println(e);
+        }
     }
 
     /*
@@ -98,5 +111,19 @@ public class Activity implements Comparable<Activity>{
     public void changeDislikeNum(int change){ this.dislikeNum += change; }
     public void changeLikeNum(int change){ this.likeNum += change; }
 
+    public static ArrayList<Activity> getAllActivities(){
+        ArrayList<Activity> allActivities = new ArrayList<Activity>();
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT activity_name FROM activities;");
+            while(rs.next()){
+                allActivities.add(new Activity(rs.getString(1)));
+            }
+        }
+        catch(SQLException e){
+
+        }
+        return allActivities;
+    }
 
 }
