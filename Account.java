@@ -52,6 +52,10 @@ public class Account {
         return allAccounts;
     }
 
+    public ArrayList<Notification> getNotifications(){
+        return notifications;
+    }
+
     
 
 }
