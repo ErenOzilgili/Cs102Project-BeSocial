@@ -20,5 +20,5 @@ public class LoginAndSignUp {
         
         
     }
-    protected static Database1 db; 
+    public static Database1 db; 
 }
