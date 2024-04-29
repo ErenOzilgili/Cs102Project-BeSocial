@@ -5,7 +5,7 @@ import java.sql.*;
 public class Account {
     public String userName;
     private String userPassword, aboutMe;
-    private int userID;
+    public int userID;
     private ArrayList<Tag> tags;
     private ArrayList<Activity> likedActivities, dislikedActivities, enrolledActivities, myActivities;
     private ArrayList<Account> friends;
@@ -34,7 +34,25 @@ public class Account {
         finally {
             
         }
-        
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(this.userID));
+            while(rs.next()){
+                int friendID = rs.getInt(1);
+                for(Account acc: MainManager.allAccounts){
+                    if(acc.userID == friendID){
+                        this.friends.add(acc);
+                        break;
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
+        finally {
+            
+        }
     }
 
     public static ArrayList<Account> getAllAccounts(){
@@ -46,9 +64,32 @@ public class Account {
                 allAccounts.add(new Account(rs.getString(1)));
             }
         }
+        
         catch(SQLException e){
 
         }
+        for(Account acc: MainManager.allAccounts){
+            if(acc.userName.equals(LogIn.get_current_user())){
+                MainManager.user = acc;
+                break;
+            }
+        }
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(MainManager.user.userID));
+            while(rs.next()){
+                int friendID = rs.getInt(1);
+                for(Account acc: MainManager.allAccounts){
+                    if(acc.userID == friendID){
+                        MainManager.user.friends.add(acc);
+                        break;
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }    
         return allAccounts;
     }
 
