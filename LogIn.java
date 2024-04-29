@@ -14,12 +14,12 @@ import java.sql.*;
  *
  * @author HP
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class LogIn extends javax.swing.JFrame {
     
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public LogIn() {
         initComponents();      
 
     }

@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Database1 {
+public class Database {
     
     // lets write the doce of the database
     

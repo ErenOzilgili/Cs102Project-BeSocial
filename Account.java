@@ -59,7 +59,7 @@ public class Account {
     public static void login(String name){
         MainManager.allAccounts = Account.getAllAccounts();
         for(Account acc: MainManager.allAccounts){
-            if(acc.userName.equals(NewJFrame.get_current_user())){
+            if(acc.userName.equals(LogIn.get_current_user())){
                 MainManager.user = acc;
                 break;
             }
