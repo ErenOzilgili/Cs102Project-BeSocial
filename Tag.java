@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.sql.*;
+
 public class Tag{
     private TagType type;
 
