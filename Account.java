@@ -56,6 +56,17 @@ public class Account {
         return notifications;
     }
 
+    public static void login(String name){
+        MainManager.allAccounts = Account.getAllAccounts();
+        for(Account acc: MainManager.allAccounts){
+            if(acc.userName.equals(NewJFrame.get_current_user())){
+                MainManager.user = acc;
+                break;
+            }
+        }
+        MainManager.allActivities = Activity.getAllActivities();
+    }
+
     
 
 }
