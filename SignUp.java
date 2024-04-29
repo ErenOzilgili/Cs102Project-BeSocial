@@ -17,8 +17,10 @@ public class SignUp extends javax.swing.JFrame  {
     {
         try {
                 Statement stm = MainManager.db.getCon().createStatement();
-                ResultSet resultset = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE email = ' " + inputEmail + "')");
-                if(resultset.next())
+                ResultSet resultset = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE email = '" + inputEmail + "') as hasEmail");
+                resultset.next();
+                int check = resultset.getInt("hasEmail");
+                if(check == 1)
                 {
                     stm.close();
                     JOptionPane.showMessageDialog(this, "This mail address is already used.", "Change E-mail", JOptionPane.WARNING_MESSAGE);
