@@ -37,6 +37,21 @@ public class Account {
         
     }
 
-  
+    public static ArrayList<Account> getAllAccounts(){
+        ArrayList<Account> allAccounts = new ArrayList<Account>();
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT username FROM account;");
+            while(rs.next()){
+                allAccounts.add(new Account(rs.getString(1)));
+            }
+        }
+        catch(SQLException e){
+
+        }
+        return allAccounts;
+    }
+
+    
 
 }
