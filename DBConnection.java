@@ -16,7 +16,10 @@ public class DBConnection {
                 System.out.println(rs.getString(1));
             }
             //addUser(con);
+<<<<<<< Updated upstream
             return con;
+=======
+>>>>>>> Stashed changes
         } catch (Exception ex) {
             ex.printStackTrace();
         }
