@@ -20,9 +20,13 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public NewJFrame() {
-        initComponents();       
-       
-        
+        initComponents();      
+
+    }
+    private static String current_user;
+    public static String get_current_user()
+    {
+        return current_user;
     }
 
     /**
@@ -212,6 +216,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     if(email.equals(email2) && password.equals(password2))
                     {
                         System.out.println("Hello");
+                        current_user = resultset.getString("username");
                     }
                     else
                     {
