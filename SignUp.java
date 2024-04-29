@@ -2,6 +2,8 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 
 public class SignUp extends javax.swing.JFrame  {
 
@@ -11,9 +13,32 @@ public class SignUp extends javax.swing.JFrame  {
         
        
     }
-    private boolean checkAcoount()
+    private boolean checkAcoount(String inputEmail)
     {
-        return false;
+        try {
+                Statement stm = MainManager.db.getCon().createStatement();
+                ResultSet resultset = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE email = ' " + inputEmail + "')");
+                if(resultset.next())
+                {
+                    stm.close();
+                    JOptionPane.showMessageDialog(this, "This mail address is already used.", "Change E-mail", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+                else
+                {
+                    stm.close();
+                    return true;
+                }
+                
+
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            finally
+            {
+                return false;
+            }
     }
 
     @SuppressWarnings("unchecked")
@@ -214,17 +239,22 @@ public class SignUp extends javax.swing.JFrame  {
         }
         else if(found)
         {
-            try {
-                Statement stm = MainManager.db.getCon().createStatement();
-                String add = "INSERT INTO account(username, aboutMe, userPassword, userId, email) VALUES ('" + name + "' , '" + "hi" + "','" + password + "','" + 3 + "''" + email + "' ) ";
-                //INSERT INTO student(name, major) VALUES('Jack', 'Biology');                
-                // ınsert the data 
-                stm.execute(add);
-                stm.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            if(checkAcoount(email))
+            {
+                try 
+                {
+                    Statement stm = MainManager.db.getCon().createStatement();
+                    String add = "INSERT INTO account(username, aboutMe, userPassword, userId, email) VALUES ('" + name + "' , '" + "hi" + "','" + password + "','" + 3 + "''" + email + "' ) ";
+                    //INSERT INTO student(name, major) VALUES('Jack', 'Biology');                
+                    // ınsert the data 
+                    stm.execute(add);
+                    stm.close();
+                } 
+                catch (SQLException ex) 
+                {
+                    Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            
         }
         
         
