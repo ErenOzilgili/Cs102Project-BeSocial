@@ -24,6 +24,7 @@ public class FullScreenCalendar extends JFrame {
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setText("MY CALENDAR");
     label.setFont(new Font("Courier", Font.BOLD, 40));
+    label.setPreferredSize(new Dimension(350, 50));
     
     
     
