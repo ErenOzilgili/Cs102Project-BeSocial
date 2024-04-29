@@ -1,22 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-package com.mycompany.mainmanager;
-
 import java.awt.Dimension;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author ereno
- */
 public class ActivitiesForPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ActivitiesForPanel
-     */
     public ActivitiesForPanel() {
         initComponents();
         addToInitComponents();

@@ -12,7 +12,7 @@ public class Database1 {
     // I will pass this code to sign in and sign up page this is just a try in this class
     private Connection con;
     
-   public  void crateConnection()  {
+    public void crateConnection()  {
 
     try
         {
