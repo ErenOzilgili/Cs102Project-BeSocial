@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.sql.*;
 public class Tag{
     private TagType type;
 
@@ -18,8 +18,20 @@ public class Tag{
 
     public static ArrayList<Tag> detectTags(Account acc){
         //"<Chess><Sports><Chat>" --> into 3 tags
-        ArrayList tags = new ArrayList<tagType>();
-        String allTags = "<Chess><Sports><Chat>";
+        ArrayList tags = new ArrayList<Tag>();
+        String allTags = "<>";
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT tags FROM account WHERE username = '%s';".formatted(acc.userName));
+            allTags = rs.getString(1);
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
+        finally {
+            
+        }
+        
 
         String tag = "";
         int closeSign = 0;
@@ -48,4 +60,6 @@ public class Tag{
     public TagType getType(){
         return this.type;
     }
+
+    
 }
