@@ -1,11 +1,8 @@
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 
 public class Database1 {
@@ -15,10 +12,6 @@ public class Database1 {
     // I will pass this code to sign in and sign up page this is just a try in this class
     private Connection con;
     
-   public Database1(){
-
-
-}
    public  void crateConnection()  {
 
     try
@@ -38,7 +31,7 @@ public class Database1 {
         }*/
         catch(SQLException ex)
         {
-            Logger.getLogger(LoginAndSignUp.class.getName()).log(Level.SEVERE, null, ex); 
+            Logger.getLogger(MainManager.class.getName()).log(Level.SEVERE, null, ex); 
         }
 }
    public Connection getCon()

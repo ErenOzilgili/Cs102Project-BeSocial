@@ -1,13 +1,6 @@
-
-package loginandsignup;
-
-
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
-
 
 
 public class SignUp extends javax.swing.JFrame  {
@@ -222,7 +215,7 @@ public class SignUp extends javax.swing.JFrame  {
         else if(found)
         {
             try {
-                Statement stm = LoginAndSignUp.db.getCon().createStatement();
+                Statement stm = MainManager.db.getCon().createStatement();
                 String add = "INSERT INTO account(username, aboutMe, userPassword, userId, email) VALUES ('" + name + "' , '" + "hi" + "','" + password + "','" + 3 + "''" + email + "' ) ";
                 //INSERT INTO student(name, major) VALUES('Jack', 'Biology');                
                 // ınsert the data 
