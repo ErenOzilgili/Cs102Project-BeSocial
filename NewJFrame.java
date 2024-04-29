@@ -4,6 +4,12 @@
  */
 package loginandsignup;
 
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.*;
+
 /**
  *
  * @author HP
@@ -195,6 +201,28 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String email = Get_email.getText();
         String password = Get_Password.getText();
+       
+         try {
+                Statement stm = LoginAndSignUp.db.getCon().createStatement();
+                ResultSet resultset = stm.executeQuery("select * from account");
+                while(resultset.next())
+                {
+                    String email2 = resultset.getString("username");
+                    String password2 = resultset.getString("userPassword");
+                    if(email.equals(email2) && password.equals(password2))
+                    {
+                        System.out.println("Hello");
+                    }
+                    else
+                    {
+                        System.out.println("Failed");
+                    }
+                }
+                
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -223,7 +223,7 @@ public class SignUp extends javax.swing.JFrame  {
         {
             try {
                 Statement stm = LoginAndSignUp.db.getCon().createStatement();
-                String add = "INSERT INTO account(username, aboutMe, userPassword, userId) VALUES ('" + name + "' , '" + email + "','" + password + "','" + 3 + "') ";
+                String add = "INSERT INTO account(username, aboutMe, userPassword, userId, email) VALUES ('" + name + "' , '" + "hi" + "','" + password + "','" + 3 + "''" + email + "' ) ";
                 //INSERT INTO student(name, major) VALUES('Jack', 'Biology');                
                 // ınsert the data 
                 stm.execute(add);
