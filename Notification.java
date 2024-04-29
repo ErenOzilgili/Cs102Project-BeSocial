@@ -20,7 +20,7 @@ public class Notification {
             ResultSet set = stat.executeQuery("SELECT * FROM notifications WHERE receiverID=%d".formatted(MainManager.user.getID()));
             while(set.next()){
                 Notification noti = new Notification();
-                noti.setNotiID(set.);
+                noti.setNotiID(set.getString("notiID"));
                 
             }
         }
@@ -33,6 +33,9 @@ public class Notification {
         try{
 
         }
+        catch(SQLException ex){
+            ex.getMessage();
+        }
     }
 
     public static void addNotifications(Account account, Notification noti){
@@ -40,4 +43,5 @@ public class Notification {
         account.getNotifications().add(noti);
     }
 
+    
 }
