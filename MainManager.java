@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+
 public class MainManager {
 
     public static Database1 db; 
+    public static Account user;
+    public static ArrayList<Account> allUsers;
+    public static ArrayList<Activity>allActivities;
     public static void main(String[] args){
         // TODO code application logic here
         
