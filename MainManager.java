@@ -4,7 +4,7 @@ public class MainManager {
 
     public static Database1 db; 
     public static Account user;
-    public static ArrayList<Account> allUsers;
+    public static ArrayList<Account> allAccounts;
     public static ArrayList<Activity>allActivities;
     public static void main(String[] args){
         // TODO code application logic here
@@ -16,6 +16,9 @@ public class MainManager {
         login.setVisible(true);
         login.pack();
         login.setLocationRelativeTo(null); //center
+
+        
+            
         
         // I try to connect the databse with our java program
     }
