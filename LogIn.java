@@ -4,10 +4,11 @@
  */
 
 
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
 import java.sql.*;
 
 /**
@@ -209,21 +210,27 @@ public class LogIn extends javax.swing.JFrame {
          try {
                 Statement stm = MainManager.db.getCon().createStatement();
                 ResultSet resultset = stm.executeQuery("select * from account");
+                boolean isUserFound = false;
                 while(resultset.next())
                 {
-                    String email2 = resultset.getString("username");
+                    String email2 = resultset.getString("email");
                     String password2 = resultset.getString("userPassword");
                     if(email.equals(email2) && password.equals(password2))
                     {
+                        isUserFound = true;
                         System.out.println("Hello");
                         current_user = resultset.getString("username");
+                        MainManager.appStarter(this);
                     }
                     else
                     {
                         System.out.println("Failed");
                     }
                 }
-                
+                if(!isUserFound)
+                {
+                    JOptionPane.showMessageDialog(this, "If you are a newcomer, sign up and enjoy!", "User Not Found", JOptionPane.WARNING_MESSAGE);
+                }
                 stm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);

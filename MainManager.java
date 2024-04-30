@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 public class MainManager {
 
     public static Database db; 
@@ -18,9 +20,18 @@ public class MainManager {
         login.setLocationRelativeTo(null); //center
 
         
+
             
-        
-        // I try to connect the databse with our java program
+    }
+
+    //When user logs in or signs up, all commands that will be done once are here.   
+    public static void appStarter(JFrame frame)
+    {
+        MainPage mainPage = new MainPage();
+        mainPage.setVisible(true);
+        mainPage.pack();
+        mainPage.setLocationRelativeTo(null); //center
+        frame.dispose();
     }
 
 

@@ -13,7 +13,7 @@ public class SignUp extends javax.swing.JFrame  {
         
        
     }
-    private boolean checkAcoount(String inputEmail)
+    private boolean checkAccount(String inputEmail)
     {
         try {
                 Statement stm = MainManager.db.getCon().createStatement();
@@ -238,7 +238,7 @@ public class SignUp extends javax.swing.JFrame  {
         }
         else if(found)
         {
-            if(checkAcoount(email))
+            if(checkAccount(email))
             {
                 try 
                 {
@@ -251,6 +251,7 @@ public class SignUp extends javax.swing.JFrame  {
                     // ınsert the data 
                     stm.execute(add);
                     stm.close();
+                    MainManager.appStarter(this);
                 } 
                 catch (SQLException ex) 
                 {
