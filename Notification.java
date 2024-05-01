@@ -25,7 +25,7 @@ public class Notification {
 
         try{
             Statement stat = MainManager.db.getCon().createStatement();
-            ResultSet set = stat.executeQuery("SELECT * FROM notifications WHERE receiverID=%d".formatted(MainManager.user.getID()));
+            ResultSet set = stat.executeQuery("SELECT * FROM notifications WHERE receiverID = %d".formatted(MainManager.user.getID()));
             while(set.next()){
                 //Assigning values to instance variables for ne notifcation object
                 int nID = set.getInt("notiID");

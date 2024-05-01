@@ -13,13 +13,23 @@ public class SignUp extends javax.swing.JFrame  {
         
        
     }
-    private boolean checkAccount(String inputEmail)
+    private boolean checkAccount(String inputEmail , String inputName)
     {
         try {
                 Statement stm = MainManager.db.getCon().createStatement();
-                ResultSet resultset = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE email = '" + inputEmail + "') as hasEmail");
-                resultset.next();
-                int check = resultset.getInt("hasEmail");
+                ResultSet resultset1 = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE username = '" + inputName + "') as hasName");
+                resultset1.next();
+                int check = resultset1.getInt("hasName");
+                if(check == 1)
+                {
+                    stm.close();
+                    JOptionPane.showMessageDialog(this, "This username is already used.", "Change Username", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+
+                ResultSet resultset2 = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE email = '" + inputEmail + "') as hasEmail");
+                resultset2.next();
+                check = resultset2.getInt("hasEmail");
                 if(check == 1)
                 {
                     stm.close();
@@ -238,7 +248,7 @@ public class SignUp extends javax.swing.JFrame  {
         }
         else if(found)
         {
-            if(checkAccount(email))
+            if(checkAccount(email , name))
             {
                 try 
                 {
@@ -251,6 +261,7 @@ public class SignUp extends javax.swing.JFrame  {
                     // ınsert the data 
                     stm.execute(add);
                     stm.close();
+                    MainManager.currUserName = name;
                     MainManager.appStarter(this);
                 } 
                 catch (SQLException ex) 
