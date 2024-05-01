@@ -17,11 +17,7 @@ public class MainManager {
         LogIn login = new LogIn(); // Creating frame that I implement in NewJFrame class
         login.setVisible(true);
         login.pack();
-        login.setLocationRelativeTo(null); //center
-
-        //Adjusting the timers for retreiving new information from database
-        Refresh.adjustTimers();
-    
+        login.setLocationRelativeTo(null); //center    
     }
 
     //When user logs in or signs up, all commands that will be done once are here.   
@@ -34,6 +30,8 @@ public class MainManager {
         mainPage.pack();
         mainPage.setLocationRelativeTo(null); //center
         frame.dispose();
+        //Adjusting the timers for retreiving new information from database
+        Refresh.adjustTimers();
     }
 
 }
