@@ -32,9 +32,6 @@ public class Account {
         catch (SQLException e) {
             System.out.println(e);
         }
-        finally {
-            
-        }
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(this.userID));
@@ -51,8 +48,37 @@ public class Account {
         catch (SQLException e) {
             System.out.println(e);
         }
-        finally {
-            
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT actID FROM enrolledActivities WHERE userID = %d;".formatted(this.userID));
+            while(rs.next()){
+                int activityID = rs.getInt(1);
+                for(Activity act: MainManager.allActivities){
+                    if(act.getActivityNo() == activityID){
+                        this.enrolledActivities.add(act);
+                        break;
+                    }
+                }
+            }    
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT actID FROM likedActivities WHERE userID = %d;".formatted(this.userID));
+            while(rs.next()){
+                int activityID = rs.getInt(1);
+                for(Activity act: MainManager.allActivities){
+                    if(act.getActivityNo() == activityID){
+                        this.likedActivities.add(act);
+                        break;
+                    }
+                }
+            }    
+        }
+        catch (SQLException e) {
+            System.out.println(e);
         }
     }
 
