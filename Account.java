@@ -7,7 +7,7 @@ public class Account {
     private String userPassword, aboutMe;
     public int userID;
     private ArrayList<Tag> tags;
-    private ArrayList<Activity> likedActivities, dislikedActivities, enrolledActivities, myActivities;
+    public ArrayList<Activity> likedActivities, dislikedActivities, enrolledActivities, myActivities;
     private ArrayList<Account> friends;
     private ArrayList<Notification> notifications;
     

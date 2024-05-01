@@ -52,12 +52,13 @@ public class Activity implements Comparable<Activity>{
  
     }
 
-    public Activity(String name){
+    public Activity(int id){
         try{
-            this.name = name;
+            this.activityNo = id;
             Statement st = MainManager.db.getCon().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM activities WHERE activity_name = '%s';".formatted(name));
+            ResultSet rs = st.executeQuery("SELECT * FROM activities WHERE actID = '%s';".formatted(name));
             tag = new Tag(Tag.TagType.valueOf(rs.getString(2)));
+            this.name = rs.getString(1);
             quota = rs.getInt(3);
             date = rs.getDate(4);
             time = rs.getTime(5);
@@ -121,9 +122,9 @@ public class Activity implements Comparable<Activity>{
         ArrayList<Activity> allActivities = new ArrayList<Activity>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
-            ResultSet rs = st.executeQuery("SELECT activity_name FROM activities;");
+            ResultSet rs = st.executeQuery("SELECT actID FROM activities;");
             while(rs.next()){
-                allActivities.add(new Activity(rs.getString(1)));
+                allActivities.add(new Activity(rs.getInt(1)));
             }
         }
         catch(SQLException e){
