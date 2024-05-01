@@ -18,6 +18,7 @@ public class Account {
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM account WHERE username = '%s';".formatted(userName));
+            rs.next();
             this.userID = rs.getInt(1);
             this.userPassword = rs.getString(3);
             this.aboutMe = rs.getString(4);
@@ -119,12 +120,12 @@ public class Account {
 
     public static ArrayList<Account> getAllAccounts()
     {
-        ArrayList<Account> allAccounts = new ArrayList<Account>();
+        MainManager.allAccounts = new ArrayList<Account>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT username FROM account;");
             while(rs.next()){
-                allAccounts.add(new Account(rs.getString(1)));
+                MainManager.allAccounts.add(new Account(rs.getString(1)));
             }
         }
         
@@ -138,7 +139,7 @@ public class Account {
             }
         }
         MainManager.user.constructAccountRelations(MainManager.user);
-        return allAccounts;
+        return MainManager.allAccounts;
     }
 
     public ArrayList<Notification> getNotifications()
