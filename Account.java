@@ -15,12 +15,6 @@ public class Account {
     Account(String userName) 
     {
         this.userName = userName;
-        likedActivities = new ArrayList<Activity>();
-        dislikedActivities = new ArrayList<Activity>();
-        enrolledActivities = new ArrayList<Activity>();
-        myActivities = new ArrayList<Activity>();
-        friends = new ArrayList<Account>();
-        notifications = new ArrayList<Notification>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM account WHERE username = '%s';".formatted(userName));
@@ -32,14 +26,23 @@ public class Account {
         catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public void constructAccountRelations(Account acc){
+        likedActivities = new ArrayList<Activity>();
+        dislikedActivities = new ArrayList<Activity>();
+        enrolledActivities = new ArrayList<Activity>();
+        myActivities = new ArrayList<Activity>();
+        friends = new ArrayList<Account>();
+        notifications = new ArrayList<Notification>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(this.userID));
             while(rs.next()){
                 int friendID = rs.getInt(1);
-                for(Account acc: MainManager.allAccounts){
-                    if(acc.userID == friendID){
-                        this.friends.add(acc);
+                for(Account act: MainManager.allAccounts){
+                    if(act.userID == friendID){
+                        this.friends.add(act);
                         break;
                     }
                 }
@@ -80,6 +83,22 @@ public class Account {
         catch (SQLException e) {
             System.out.println(e);
         }
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT actID FROM dislikedActivities WHERE userID = %d;".formatted(this.userID));
+            while(rs.next()){
+                int activityID = rs.getInt(1);
+                for(Activity act: MainManager.allActivities){
+                    if(act.getActivityNo() == activityID){
+                        this.dislikedActivities.add(act);
+                        break;
+                    }
+                }
+            }    
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     public static ArrayList<Account> getAllAccounts()
@@ -102,22 +121,7 @@ public class Account {
                 break;
             }
         }
-        try{
-            Statement st = MainManager.db.getCon().createStatement();
-            ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(MainManager.user.userID));
-            while(rs.next()){
-                int friendID = rs.getInt(1);
-                for(Account acc: MainManager.allAccounts){
-                    if(acc.userID == friendID){
-                        MainManager.user.friends.add(acc);
-                        break;
-                    }
-                }
-            }
-        }
-        catch (SQLException e) {
-            System.out.println(e);
-        }    
+        MainManager.user.constructAccountRelations(MainManager.user);
         return allAccounts;
     }
 
