@@ -1,4 +1,16 @@
 
+import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.*;
+import javax.swing.ButtonGroup;
+import java.sql.Statement;
+
+
+
 public class CreateActivity extends javax.swing.JFrame {
 
     /**
@@ -385,17 +397,75 @@ public class CreateActivity extends javax.swing.JFrame {
     private void VIDEOGAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VIDEOGAMEActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_VIDEOGAMEActionPerformed
+    private Tag find_tag()
+    {
+        Tag activityTag = new Tag(Tag.TagType.CHESS);
+        ButtonGroup activity_tags = new ButtonGroup();
+        activity_tags.add(CHESS);
+        activity_tags.add(SPORTS);
+        activity_tags.add(CHAT);
+        activity_tags.add(VIDEOGAME);
+        activity_tags.add(CINEMA);
+        activity_tags.add(DANCE);
+        if(CHESS.isSelected())
+        {
+            activityTag = new Tag(Tag.TagType.CHESS);
+        }
+        else if(SPORTS.isSelected())
+        {
+            activityTag = new Tag(Tag.TagType.SPORTS);
+        }
+        else if(CHAT.isSelected())
+        {
+            activityTag = new Tag(Tag.TagType.CHAT);
+        }
+        else if(VIDEOGAME.isSelected())
+        {
+            activityTag = new Tag(Tag.TagType.VIDEOGAME);
+        }
+        else if(CINEMA.isSelected())
+        {
+            activityTag = new Tag(Tag.TagType.CINEMA);
+        }
+        else if(DANCE.isSelected())
+        {
+            activityTag = new Tag(Tag.TagType.DANCE);
+        }
+        return activityTag;                
+    }
 
     private void CreatingActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatingActivityActionPerformed
         // TODO add your handling code here:
         String name = GetName.getText();
+        int Quota = Integer.parseInt(GetQuota.getText());
+        Tag activity_tag = find_tag();
+        Tag.TagType tagType = activity_tag.getType();
+        //TagType tag_of_activity = 
+        int Day = Integer.parseInt(GetDay.getText());
+        int Month =Integer.parseInt(GetMonth.getText());
+        int Year = Integer.parseInt(GetYear.getText());
+        Date date_of_activity = new Date(Day, Month, Year);
+        Time time_of_activity = new Time(Long.valueOf(GetTime.getText())); // solve this problem
+        String activity_place = GetPlace.getText();
+        String activity_definition = GetDescription.getText();
+        try {
+            Statement stm = MainManager.db.getCon().createStatement();
+            String add = "INSERT INTO account(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activity_ID) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" +date_of_activity + "' , '" +time_of_activity + "','" + activity_place + "','" + activity_definition + "''" + 1 + "' ) ";
+            stm.execute(add);
+            stm.close();
+            
+        } catch (SQLException ex) {
+            // TODO: handle exception
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
     }//GEN-LAST:event_CreatingActivityActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void createActivity() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
