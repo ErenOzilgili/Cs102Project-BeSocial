@@ -5,6 +5,7 @@ public class MainManager {
 
     public static Database db;
     public static Account user;
+    public static String currUserName;
     public static ArrayList<Account> allAccounts;
     public static ArrayList<Activity>allActivities;
     public static void main(String[] args){
@@ -26,6 +27,8 @@ public class MainManager {
     //When user logs in or signs up, all commands that will be done once are here.   
     public static void appStarter(JFrame frame)
     {
+        MainManager.allAccounts = Account.getAllAccounts();
+        MainManager.allActivities = Activity.getAllActivities();
         MainPage mainPage = new MainPage();
         mainPage.setVisible(true);
         mainPage.pack();

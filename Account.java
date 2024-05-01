@@ -12,7 +12,8 @@ public class Account {
     private ArrayList<Notification> notifications;
     
 
-    Account(String userName) {
+    Account(String userName) 
+    {
         this.userName = userName;
         likedActivities = new ArrayList<Activity>();
         dislikedActivities = new ArrayList<Activity>();
@@ -55,7 +56,8 @@ public class Account {
         }
     }
 
-    public static ArrayList<Account> getAllAccounts(){
+    public static ArrayList<Account> getAllAccounts()
+    {
         ArrayList<Account> allAccounts = new ArrayList<Account>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
@@ -69,7 +71,7 @@ public class Account {
 
         }
         for(Account acc: MainManager.allAccounts){
-            if(acc.userName.equals(LogIn.get_current_user())){
+            if(acc.userName.equals(MainManager.currUserName)){
                 MainManager.user = acc;
                 break;
             }
@@ -93,25 +95,14 @@ public class Account {
         return allAccounts;
     }
 
-    public ArrayList<Notification> getNotifications(){
+    public ArrayList<Notification> getNotifications()
+    {
         return notifications;
     }
 
-    public int getID(){
+    public int getID()
+    {
         return this.userID;
-    }
-
-    public static void login(String name){
-        MainManager.allAccounts = Account.getAllAccounts();
-        for(Account acc: MainManager.allAccounts){
-            if(acc.userName.equals(LogIn.get_current_user())){
-                MainManager.user = acc;
-                break;
-            }
-        }
-        MainManager.allActivities = Activity.getAllActivities();
-    }
-
-    
+    }    
 
 }

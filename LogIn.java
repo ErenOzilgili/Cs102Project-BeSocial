@@ -24,11 +24,6 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();      
 
     }
-    private static String current_user;
-    public static String get_current_user()
-    {
-        return current_user;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -219,7 +214,7 @@ public class LogIn extends javax.swing.JFrame {
                     {
                         isUserFound = true;
                         System.out.println("Hello");
-                        current_user = resultset.getString("username");
+                        MainManager.currUserName = resultset.getString("username");
                         MainManager.appStarter(this);
                     }
                     else

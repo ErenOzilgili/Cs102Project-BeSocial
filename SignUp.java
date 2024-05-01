@@ -261,6 +261,7 @@ public class SignUp extends javax.swing.JFrame  {
                     // ınsert the data 
                     stm.execute(add);
                     stm.close();
+                    MainManager.currUserName = name;
                     MainManager.appStarter(this);
                 } 
                 catch (SQLException ex) 
