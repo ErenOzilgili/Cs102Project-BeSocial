@@ -2,12 +2,13 @@
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
-import java.util.Date;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
 import javax.swing.ButtonGroup;
 import java.sql.Statement;
+import java.sql.Date;
 
 
 
@@ -444,13 +445,15 @@ public class CreateActivity extends javax.swing.JFrame {
         int Day = Integer.parseInt(GetDay.getText());
         int Month =Integer.parseInt(GetMonth.getText());
         int Year = Integer.parseInt(GetYear.getText());
-        Date date_of_activity = new Date(Day, Month, Year);
-        Time time_of_activity = new Time(Long.valueOf(GetTime.getText())); // solve this problem
+        String str= ""+ Year+ "-"+ Month + "-" + Day;
+        Date date2 = Date.valueOf(str);//converting string into sql date
+        //Date date_of_activity = new Date(Year,Month,Day);
+        Time time_of_activity = Time.valueOf(GetTime.getText()); // solve this problem
         String activity_place = GetPlace.getText();
         String activity_definition = GetDescription.getText();
         try {
             Statement stm = MainManager.db.getCon().createStatement();
-            String add = "INSERT INTO account(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activity_ID) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" +date_of_activity + "' , '" +time_of_activity + "','" + activity_place + "','" + activity_definition + "''" + 1 + "' ) ";
+            String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" +date2 + "' , '" +time_of_activity + "','" + activity_place + "','" + activity_definition + "' ) ";
             stm.execute(add);
             stm.close();
             
