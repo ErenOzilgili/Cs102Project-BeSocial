@@ -99,6 +99,22 @@ public class Account {
         catch (SQLException e) {
             System.out.println(e);
         }
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT activityID FROM dislikedActivities WHERE userID = %d;".formatted(this.userID));
+            while(rs.next()){
+                int activityID = rs.getInt(1);
+                for(Activity act: MainManager.allActivities){
+                    if(act.getActivityNo() == activityID){
+                        this.dislikedActivities.add(act);
+                        break;
+                    }
+                }
+            }    
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     public static ArrayList<Account> getAllAccounts()
