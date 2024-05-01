@@ -346,7 +346,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void createActivityButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         this.dispose();
-        JFrame createActivityFrame = new CreateActivity();
+        CreateActivity.createActivity();
         
     }                                                    
 
