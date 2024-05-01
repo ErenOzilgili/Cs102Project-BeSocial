@@ -97,6 +97,10 @@ public class Account {
         return notifications;
     }
 
+    public int getID(){
+        return this.userID;
+    }
+
     public static void login(String name){
         MainManager.allAccounts = Account.getAllAccounts();
         for(Account acc: MainManager.allAccounts){
