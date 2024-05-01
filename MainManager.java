@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 
 public class MainManager {
 
-    public static Database db; 
+    public static Database db;
     public static Account user;
     public static ArrayList<Account> allAccounts;
     public static ArrayList<Activity>allActivities;
