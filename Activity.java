@@ -11,7 +11,7 @@ public class Activity implements Comparable<Activity>{
     private ArrayList<Tag> tags;
     private String name, place;
     private String description;
-    private int activityNo, quota;
+    private int activityID, quota;
     private Date date;
     private Time time;
     private int dislikeNum;
@@ -35,7 +35,6 @@ public class Activity implements Comparable<Activity>{
 
         //Activity no
         numberOfActiveActivities++;
-        this.activityNo = numberOfActiveActivities;
 
         //Like and dislike count will be 0 whenever an activity has been created.
         this.likeNum = 0;
@@ -54,7 +53,7 @@ public class Activity implements Comparable<Activity>{
 
     public Activity(int id){
         try{
-            this.activityNo = id;
+            this.activityID = id;
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM activities WHERE actID = '%s';".formatted(name));
             tag = new Tag(Tag.TagType.valueOf(rs.getString(2)));
@@ -100,19 +99,20 @@ public class Activity implements Comparable<Activity>{
     public void activityDisliked(User user){ user.removeActDisliked(this); }
 
     public int compareTo(Activity activity){
-        //Comparing activities according to their activity number (activityNo).
-        if(this.activityNo == activity.getActivityNo()){ return 0; }
-        else if(this.activityNo > activity.getActivityNo()){ return 1; }
+        //Comparing activities according to their activity number (activityID).
+        if(this.activityID == activity.getActivityID()){ return 0; }
+        else if(this.activityID > activity.getActivityID()){ return 1; }
         else{ return -1; }
 
     }
 
     //GetterMethods
-    public int getActivityNo(){ return this.activityNo; }
+    public int getActivityID(){ return this.activityID; }
     public String getName(){ return this.name; }
     public String getDescription(){ return this.description; }
     public ArrayList<Tag> getTags(){ return this.tags; }
     public Date getDate(){ return this.date; }
+    public int getQuota(){ return this.quota; }
 
     //Setter Methods
     public void changeDislikeNum(int change){ this.dislikeNum += change; }

@@ -4,7 +4,6 @@ import java.sql.*;
 public class Tag{
     private TagType type;
 
-    
     public enum TagType{
         CHESS,
         SPORTS,

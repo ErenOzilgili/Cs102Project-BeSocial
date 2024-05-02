@@ -58,7 +58,7 @@ public class Account {
             while(rs.next()){
                 int activityID = rs.getInt(1);
                 for(Activity act: MainManager.allActivities){
-                    if(act.getActivityNo() == activityID){
+                    if(act.getActivityID() == activityID){
                         this.enrolledActivities.add(act);
                         break;
                     }
@@ -74,7 +74,7 @@ public class Account {
             while(rs.next()){
                 int activityID = rs.getInt(1);
                 for(Activity act: MainManager.allActivities){
-                    if(act.getActivityNo() == activityID){
+                    if(act.getActivityID() == activityID){
                         this.likedActivities.add(act);
                         break;
                     }
@@ -90,7 +90,7 @@ public class Account {
             while(rs.next()){
                 int activityID = rs.getInt(1);
                 for(Activity act: MainManager.allActivities){
-                    if(act.getActivityNo() == activityID){
+                    if(act.getActivityID() == activityID){
                         this.dislikedActivities.add(act);
                         break;
                     }
@@ -106,7 +106,7 @@ public class Account {
             while(rs.next()){
                 int activityID = rs.getInt(1);
                 for(Activity act: MainManager.allActivities){
-                    if(act.getActivityNo() == activityID){
+                    if(act.getActivityID() == activityID){
                         this.dislikedActivities.add(act);
                         break;
                     }

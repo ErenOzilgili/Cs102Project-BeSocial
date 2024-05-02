@@ -17,7 +17,13 @@ public class MainManager {
         LogIn login = new LogIn(); // Creating frame that I implement in NewJFrame class
         login.setVisible(true);
         login.pack();
-        login.setLocationRelativeTo(null); //center    
+        login.setLocationRelativeTo(null); //center  
+        
+        /* 
+        user = new Account("a");
+        ActivityPage actPage = new ActivityPage(new Activity(1));
+        actPage.setVisible(true);  
+        */
     }
 
     //When user logs in or signs up, all commands that will be done once are here.   
@@ -25,6 +31,7 @@ public class MainManager {
     {
         MainManager.allAccounts = Account.getAllAccounts();
         MainManager.allActivities = Activity.getAllActivities();
+        
         MainPage mainPage = new MainPage();
         mainPage.setVisible(true);
         mainPage.pack();
