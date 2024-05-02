@@ -9,7 +9,6 @@ public class MainManager {
     public static ArrayList<Account> allAccounts;
     public static ArrayList<Activity>allActivities;
     public static void main(String[] args){
-        // TODO code application logic here
         
         db = new Database();        
         db.crateConnection();
@@ -32,13 +31,17 @@ public class MainManager {
         MainManager.allAccounts = Account.getAllAccounts();
         MainManager.allActivities = Activity.getAllActivities();
         
+        openMainPage(frame);
+        //Adjusting the timers for retreiving new information from database
+        Refresh.adjustTimers();
+    }
+
+    public static void openMainPage(JFrame frame)
+    {
         MainPage mainPage = new MainPage();
         mainPage.setVisible(true);
         mainPage.pack();
         mainPage.setLocationRelativeTo(null); //center
         frame.dispose();
-        //Adjusting the timers for retreiving new information from database
-        Refresh.adjustTimers();
     }
-
 }

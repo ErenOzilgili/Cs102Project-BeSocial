@@ -5,8 +5,11 @@
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -122,6 +125,14 @@ public class MainPage extends javax.swing.JFrame {
         calendarPanel.setForeground(new java.awt.Color(0, 204, 204));
         calendarPanel.setAutoscrolls(true);
         calendarPanel.setPreferredSize(new java.awt.Dimension(180, 250));
+
+        calendarPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e)
+            {
+                calendarFrameActionPerformed(e);
+            }
+        });
+
 
         CalendarLabel.setBackground(new java.awt.Color(0, 204, 204));
         CalendarLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -250,7 +261,14 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
+        //profile picture adding part
         profileButton.setBackground(new java.awt.Color(255, 102, 102));
+        ImageIcon profilePhoto = new ImageIcon("photos/PP2.jpeg");
+        Image ppImage = profilePhoto.getImage();
+        Image newPPImg = ppImage.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
+        profileButton.setIcon(scaledProfileIcon);
+
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileButtonActionPerformed(evt);
@@ -283,7 +301,7 @@ public class MainPage extends javax.swing.JFrame {
             .addGap(0, 200, Short.MAX_VALUE)
         );
 
-        profileName.setText("ProfileName\n");
+        profileName.setText(MainManager.currUserName);
 
         javax.swing.GroupLayout chat_Profile_SettingsPanelLayout = new javax.swing.GroupLayout(chat_Profile_SettingsPanel);
         chat_Profile_SettingsPanel.setLayout(chat_Profile_SettingsPanelLayout);
@@ -293,7 +311,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(chat_Profile_SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(chat_Profile_SettingsPanelLayout.createSequentialGroup()
-                        .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(notificationsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(chat_Profile_SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -301,8 +319,8 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30))
             .addGroup(chat_Profile_SettingsPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(profileName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(profileName, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         chat_Profile_SettingsPanelLayout.setVerticalGroup(
@@ -364,7 +382,13 @@ public class MainPage extends javax.swing.JFrame {
 
     private void searchActivityBarActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
-    }                                                 
+    }       
+    
+    private void calendarFrameActionPerformed(MouseEvent evt) {                                              
+        // TODO add your handling code here:
+        this.dispose();
+        FullScreenCalendar fullScreenCalendar = new FullScreenCalendar();
+    }  
 
     /**
      * @param args the command line arguments

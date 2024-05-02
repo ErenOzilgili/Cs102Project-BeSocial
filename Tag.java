@@ -19,7 +19,7 @@ public class Tag{
 
     public static ArrayList<Tag> detectTags(Account acc){
         //"<Chess><Sports><Chat>" --> into 3 tags
-        ArrayList tags = new ArrayList<Tag>();
+        ArrayList<Tag> tags = new ArrayList<Tag>();
         String allTags = "<>";
         try{
             Statement st = MainManager.db.getCon().createStatement();

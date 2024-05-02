@@ -48,8 +48,7 @@ public class FullScreenCalendar extends JFrame {
     JButton b3 = new JButton();
     b3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
-        //TODO: Return to the main page.
-
+        mainPageButtonActionPerformed();
       }
     });
 
@@ -139,6 +138,11 @@ public class FullScreenCalendar extends JFrame {
       }
     }   
 
+  }
+
+  private void mainPageButtonActionPerformed()
+  {
+    MainManager.openMainPage(this);
   }
 
   public static void main(String[] arguments) {
