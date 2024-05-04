@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.sql.*;
 
-public class Account {
+public class Account{
     public String userName;
     private String userPassword, aboutMe;
     public int userID;
@@ -11,7 +11,6 @@ public class Account {
     private ArrayList<Account> friends;
     private ArrayList<Notification> notifications;
     
-
     Account(String userName) 
     {
         this.userName = userName;
@@ -86,7 +85,7 @@ public class Account {
         }
         try{
             Statement st = MainManager.db.getCon().createStatement();
-            ResultSet rs = st.executeQuery("SELECT actID FROM dislikedActivities WHERE userID = %d;".formatted(this.userID));
+            ResultSet rs = st.executeQuery("SELECT activityID FROM dislikedActivities WHERE userID = %d;".formatted(this.userID));
             while(rs.next()){
                 int activityID = rs.getInt(1);
                 for(Activity act: MainManager.allActivities){
@@ -100,6 +99,7 @@ public class Account {
         catch (SQLException e) {
             System.out.println(e);
         }
+        /* 
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT activityID FROM dislikedActivities WHERE userID = %d;".formatted(this.userID));
@@ -116,6 +116,7 @@ public class Account {
         catch (SQLException e) {
             System.out.println(e);
         }
+        */
     }
 
     public static ArrayList<Account> getAllAccounts()
@@ -151,5 +152,16 @@ public class Account {
     {
         return this.userID;
     }    
+
+    public String getUserName()
+    {
+        return this.userName;
+    }
+
+    public boolean equals(Object obj){
+        Account accToCheck = (Account)obj;
+        if(accToCheck.getID() == this.getID()){ return true; }
+        return false;
+    }
 
 }

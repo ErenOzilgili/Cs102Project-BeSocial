@@ -10,7 +10,7 @@ public class Tag{
         CHAT,
         VIDEOGAME,
         CINEMA,
-        DANCE;
+        FOOTBALL;
     }
 
     public Tag(TagType type){
@@ -24,7 +24,8 @@ public class Tag{
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT tags FROM account WHERE username = '%s';".formatted(acc.userName));
-            allTags = rs.getString(1);
+            rs.next();
+            allTags = rs.getString("tags");
         }
         catch (SQLException e) {
             System.out.println(e);
@@ -37,24 +38,26 @@ public class Tag{
         String tag = "";
         int closeSign = 0;
 
-        while(allTags.length() > 0){
+        if(allTags != null){
+            while(allTags.length() > 0){
 
-            for(int j = 1; j < allTags.length(); j++){
-                if(allTags.charAt(j) == '>'){
-                    closeSign = j;
-                    break;
+                for(int j = 1; j < allTags.length(); j++){
+                    if(allTags.charAt(j) == '>'){
+                        closeSign = j;
+                        break;
+                    }
                 }
+    
+                if(!(allTags.substring(1, closeSign) == "")){
+                    tag = allTags.substring(1, closeSign);
+    
+                    TagType typeOf = TagType.valueOf(tag.toUpperCase());
+                    tags.add(new Tag(typeOf));
+                }
+                allTags = allTags.substring(closeSign + 1);
             }
-
-            if(!(allTags.substring(1, closeSign) == "")){
-                tag = allTags.substring(1, closeSign);
-
-                TagType typeOf = TagType.valueOf(tag.toUpperCase());
-                tags.add(new Tag(typeOf));
-            }
-            allTags = allTags.substring(closeSign + 1);
         }
-
+        
         return tags;
     }
 

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
+
 public abstract class Chat{
     
     private ArrayList<Account> users;
@@ -16,7 +18,7 @@ public abstract class Chat{
         messages = new ArrayList<Message>();
     }
 
-    public abstract void getChat(Object obj);
+    public abstract void getChat(Object obj, JPanel panel);
     public abstract void sendMessage(Message message);
 
 }

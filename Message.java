@@ -10,6 +10,7 @@ public class Message{
     private boolean type;//If true --> activityChat -------- if false --> friendChat
 
     //chatID is the receiverID in the messages table in the database
+    //Use while sending messages
     public Message(int messageID, String message,
                    Account sender, int receiverID,
                    Date date, boolean type, Chat chat){
@@ -22,6 +23,20 @@ public class Message{
 
         sendMessage(chat);//Send it to this chat
     }
+
+    //Use while forming a message instance for displaying the message
+     public Message(int messageID, String message,
+                   Account sender, int receiverID,
+                   Date date, boolean type){
+        this.messageID = messageID;
+        this.message = message;
+        this.sender = sender;
+        this.receiverID = receiverID;
+        this.date = date;// TODO add your handling code here:
+        this.type = type;
+    }
+
+
 
     private void sendMessage(Chat chat){
         chat.sendMessage(this);

@@ -45,6 +45,11 @@ public class ActivityPage extends javax.swing.JFrame {
         
         //2 samples added 1 left aligned 1 right aligned
         //-----------------------------
+        actChat.getChat(activity, chatPanel);
+
+        //ScrollBar
+        chatPane.getVerticalScrollBar().setUI(new NewScrollBarUI());
+
     }
 
     /**
@@ -103,7 +108,7 @@ public class ActivityPage extends javax.swing.JFrame {
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGap(0, 622, Short.MAX_VALUE)
         );
 
         getContentPane().add(menuPanel, java.awt.BorderLayout.WEST);
@@ -291,7 +296,8 @@ public class ActivityPage extends javax.swing.JFrame {
 
         getContentPane().add(infoPanel, java.awt.BorderLayout.CENTER);
 
-        activityChatPanel.setBackground(new java.awt.Color(51, 255, 51));
+        activityChatPanel.setBackground(new java.awt.Color(153, 153, 153));
+        activityChatPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
 
         sendMessageB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,6 +309,7 @@ public class ActivityPage extends javax.swing.JFrame {
         chatPane.setPreferredSize(new java.awt.Dimension(300, 100));
 
         chatPanel.setBackground(new java.awt.Color(255, 255, 255));
+        chatPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout chatPanelLayout = new javax.swing.GroupLayout(chatPanel);
         chatPanel.setLayout(chatPanelLayout);
@@ -384,7 +391,7 @@ public class ActivityPage extends javax.swing.JFrame {
         getContentPane().add(chatPanelOuter, java.awt.BorderLayout.EAST);
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>                         
 
     private void sendMessageBActionPerformed(java.awt.event.ActionEvent evt) {                                             
         if(chatInput.getText().length() > 0){
@@ -429,6 +436,6 @@ public class ActivityPage extends javax.swing.JFrame {
     private javax.swing.JLabel tagL;
     private javax.swing.JLabel timeL;
     private javax.swing.JPanel topPanel;
-    // End of variables declaration                   
+    // End of variables declaration    
 }
 
