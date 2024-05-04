@@ -28,8 +28,8 @@ public class MainManager {
     //When user logs in or signs up, all commands that will be done once are here.   
     public static void appStarter(JFrame frame)
     {
-        MainManager.allAccounts = Account.getAllAccounts();
         MainManager.allActivities = Activity.getAllActivities();
+        MainManager.allAccounts = Account.getAllAccounts();
         
         openMainPage(frame);
         //Adjusting the timers for retreiving new information from database

@@ -57,7 +57,7 @@ public class MainPage extends javax.swing.JFrame {
         //-------   
         //CreateActivityButton
         createActivityButton.setText(null);
-        ImageIcon icon = new ImageIcon("plus.png");
+        ImageIcon icon = new ImageIcon("photos//plus.png");
         Image img = icon.getImage() ; 
         //createActivityButton.getWidth()
         //createActivityButton.getHeight()
@@ -168,6 +168,11 @@ public class MainPage extends javax.swing.JFrame {
         enrolledActivitiesLabel.setPreferredSize(new java.awt.Dimension(175, 20));
 
         activitiesText.setPreferredSize(new java.awt.Dimension(151, 150));
+        activitiesText.setEditable(false);
+        for(Activity act : MainManager.user.enrolledActivities)
+        {
+            activitiesText.setText(act.getName());
+        }
         jScrollPane2.setViewportView(activitiesText);
 
         javax.swing.GroupLayout enrolledActivitiesPanelLayout = new javax.swing.GroupLayout(enrolledActivitiesPanel);
