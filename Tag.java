@@ -10,7 +10,8 @@ public class Tag{
         CHAT,
         VIDEOGAME,
         CINEMA,
-        FOOTBALL;
+        FOOTBALL,
+        DANCE;
     }
 
     public Tag(TagType type){

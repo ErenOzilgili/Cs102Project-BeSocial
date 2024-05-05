@@ -4,6 +4,8 @@
  */
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -12,11 +14,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -167,13 +173,18 @@ public class MainPage extends javax.swing.JFrame {
         enrolledActivitiesLabel.setText("Enrolled Activities");
         enrolledActivitiesLabel.setPreferredSize(new java.awt.Dimension(175, 20));
 
+        //not used, will be deleted
         activitiesText.setPreferredSize(new java.awt.Dimension(151, 150));
         activitiesText.setEditable(false);
+
+        //add enrolled activites to a new panel
+        JPanel enActivityWithScroll = new JPanel();
+        enActivityWithScroll.setLayout(new BoxLayout(enActivityWithScroll, BoxLayout.Y_AXIS));
         for(Activity act : MainManager.user.enrolledActivities)
         {
-            activitiesText.setText(act.getName());
+            enActivityWithScroll.add(new EnrolledActivityMiniPanel(act , enActivityWithScroll , this));
         }
-        jScrollPane2.setViewportView(activitiesText);
+        jScrollPane2.setViewportView(enActivityWithScroll);
 
         javax.swing.GroupLayout enrolledActivitiesPanelLayout = new javax.swing.GroupLayout(enrolledActivitiesPanel);
         enrolledActivitiesPanel.setLayout(enrolledActivitiesPanelLayout);
