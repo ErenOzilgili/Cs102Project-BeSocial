@@ -29,10 +29,13 @@ public class ChatMessages extends javax.swing.JPanel {
 
         nameField = new javax.swing.JTextField();
         msgField = new javax.swing.JTextField();
-    
+
         setBackground(new java.awt.Color(255, 255, 255));
 
         nameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        msgField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,10 +58,9 @@ public class ChatMessages extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>                        
-          
 
-    // Variables declaration                     
+    // Variables declaration - do not modify                     
     private javax.swing.JTextField msgField;
     private javax.swing.JTextField nameField;
-    // End of variables declaration                   
+    // End of variables declaration                 
 }

@@ -11,11 +11,11 @@ public class NewScrollBarUI extends BasicScrollBarUI{
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
         g.setColor(Color.WHITE);
         g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
-
     }
 
     @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+        /* 
         g.setColor(Color.GRAY);
         g.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);
 
@@ -28,6 +28,10 @@ public class NewScrollBarUI extends BasicScrollBarUI{
         g.fillRect(thumbBounds.x + thumbBounds.width / 3, thumbBounds.y + (thumbBounds.height / 2) - ((height / 2) + 2 * height), thumbBounds.width - 2 * thumbBounds.width / 3, height);
         g.fillRect(thumbBounds.x + thumbBounds.width / 3, thumbBounds.y + (thumbBounds.height / 2) - (height / 2), thumbBounds.width - 2 * thumbBounds.width / 3, height);
         g.fillRect(thumbBounds.x + thumbBounds.width / 3, thumbBounds.y + (thumbBounds.height / 2) - ((height / 2) - 2 * height), thumbBounds.width - 2 * thumbBounds.width / 3, height);
+        */
+
+        g.setColor(Color.GRAY);
+        g.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);
     }
     
 }
