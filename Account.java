@@ -164,4 +164,21 @@ public class Account{
         return false;
     }
 
+    public void leaveActivity(Activity activity)
+    {
+        this.enrolledActivities.remove(activity);
+        for(Activity act : enrolledActivities)
+        {
+            System.out.println(act.getName());
+        }
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.executeUpdate("DELETE FROM enrolledActivities WHERE userID = " + this.userID + " and actID = " + activity.getActivityID());
+            System.out.println("flkhflgkjfklghl");
+        }
+        catch(SQLException e){
+
+        }
+    }
 }
