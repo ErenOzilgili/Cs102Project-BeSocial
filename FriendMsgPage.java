@@ -15,7 +15,7 @@ public class FriendMsgPage extends javax.swing.JFrame {
         friendChat = new FriendChat(account.getID(), account.getUserName());
         this.account = account;
 
-        Refresh.adjustTimerForFriendChat(false, friendChat, account, chatPanel, 10000);
+        Refresh.adjustTimerForFriendChat(false, friendChat, account, chatPanel);
     }
     
     private void addToInitComponents(){
@@ -150,6 +150,7 @@ public class FriendMsgPage extends javax.swing.JFrame {
             //Refresh messages;
             friendChat.getChat(account, chatPanel);
             //Adjust scrollbar's position to bottom after sending message;
+            // TODO add your handling code here:
             chatPane.getVerticalScrollBar().setValue(chatPane.getVerticalScrollBar().getMaximum());
             // TODO add your handling code here:
             // Get Messages

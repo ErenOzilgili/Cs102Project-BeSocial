@@ -428,6 +428,7 @@ public class ActivityPage extends javax.swing.JFrame {
             //Refresh messages after sending one;
             actChat.getChat(activity, chatPanel);
             //Adjust scrollbar's position to bottom after sending message;
+            // TODO add your handling code here:
             chatPane.getVerticalScrollBar().setValue(chatPane.getVerticalScrollBar().getMaximum());
             // TODO add your handling code here:
             // Get Messages

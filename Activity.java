@@ -1,5 +1,11 @@
 import java.util.ArrayList;
+
+import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.sql.*;
 
 public class Activity implements Comparable<Activity>{
@@ -132,6 +138,28 @@ public class Activity implements Comparable<Activity>{
 
         }
         return allActivities;
+    }
+
+    public static void insertActivities(JPanel panelToDisplay){
+        //Remove old contents before getting the newest activities;
+        panelToDisplay.removeAll();
+        panelToDisplay.setLayout(new GridLayout(0, 1));
+                
+        for(Activity act : MainManager.allActivities){
+            //Set the individual panels
+            JPanel panelDisp = new JPanel();
+            panelDisp.setLayout(new BorderLayout());
+            panelDisp.setBackground(Color.WHITE);
+            //Fill those individual panels with single activity
+            panelDisp.add(new ActivitiesForPanel(act));
+                    
+            //Put individual panels into the main panel for display
+            panelToDisplay.add(panelDisp);  
+        }
+
+        //Lastly repaint and revalidete the panel;
+        panelToDisplay.revalidate();
+        panelToDisplay.repaint();
     }
 
 }

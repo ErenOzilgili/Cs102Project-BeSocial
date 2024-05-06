@@ -74,7 +74,7 @@ public class Refresh{
 
     }
 
-    public static void adjustTimerForFriendChat(boolean isOn, FriendChat chat, Account account, JPanel panel, int period){
+    public static void adjustTimerForFriendChat(boolean isOn, FriendChat chat, Account account, JPanel panel){
         if(isOn){
             t2.cancel();
             return;
@@ -87,7 +87,7 @@ public class Refresh{
                 Refresh.renewChatP(chat, account, panel);
             } 
 		};
-        t2.scheduleAtFixedRate(task2, 0, period);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
+        t2.scheduleAtFixedRate(task2, 0, 10000);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
 
     }
 
