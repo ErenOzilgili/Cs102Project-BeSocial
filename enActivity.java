@@ -1,9 +1,28 @@
+import javax.swing.JPanel;
+
+import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+
 public class enActivity extends javax.swing.JPanel {
 
+    private Activity eActivity;
+    private JPanel ePanel;
+    private JFrame mainFrame;
     /**
      * Creates new form enActivity
      */
-    public enActivity() {
+    public enActivity(Activity activity , JPanel aPanel , JFrame aMainFrame) {
+        this.eActivity = activity;
+        this.ePanel = aPanel;
+        this.mainFrame = aMainFrame;
+
         initComponents();
     }
 
@@ -19,9 +38,22 @@ public class enActivity extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText(eActivity.getName());
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Leave");
+
+        jLabel1.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                nameLabelActionPerformed();
+            }
+        });
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leaveButtonActionPerformed();
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -49,5 +81,19 @@ public class enActivity extends javax.swing.JPanel {
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    // End of variables declaration                   
+    // End of variables declaration               
+    
+        private void leaveButtonActionPerformed()
+    {
+        MainManager.user.leaveActivity(eActivity);
+        ePanel.remove(this);
+        ePanel.revalidate();
+        ePanel.repaint();
+    }
+
+    private void nameLabelActionPerformed()
+    {
+        ActivityPage acPage = new ActivityPage(eActivity);
+        mainFrame.dispose();
+    }
 }
