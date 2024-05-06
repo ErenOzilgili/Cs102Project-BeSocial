@@ -14,11 +14,33 @@ public class ActivityPage extends javax.swing.JFrame {
      * Creates new form ActivityPage
      */
     public ActivityPage(Activity activity){
+        initComponents();
+        
+        this.setVisible(true);
+
+        //Clear the text in the chatInput
+        chatInput.setText("");
+
+        //Do assign the activity and activityChat
         this.activity = activity;
         actChat = new ActivityChat(activity.getQuota(), activity.getActivityID(), activity.getName());
-        initComponents();
+
+        //Set the acitivities name
+        this.activityNameL.setText(activity.getName());
+
+        //After everything is set
+        //Adjust the aditional GUI
         addToInitComponents();
-        this.setVisible(true);
+
+        //Refreshing
+        //adjusts Timer whenever this page is on --> done below;
+        //To this actChat, put the chats related to activity --> messages are displayed on chatPanel;
+        Refresh.adjustTimerForActChat(false, actChat, activity, chatPanel);
+
+        // TODO add your handling code here:
+        //Whenever you exit this frame, call
+        //Refresh.adjustTimerForActChat(true, actChat, activity, chatPanel);
+        //in order to stop the timer for renewing activities;
     }
     
     private void addToInitComponents(){
@@ -400,7 +422,15 @@ public class ActivityPage extends javax.swing.JFrame {
             Message msg = new Message(0, chatInput.getText(),
                                       MainManager.user, activity.getActivityID(),
                                       null, type, actChat);
+            
+            //Clear the text in the chatInput
+            chatInput.setText("");
+            //Refresh messages after sending one;
+            actChat.getChat(activity, chatPanel);
+            //Adjust scrollbar's position to bottom after sending message;
+            chatPane.getVerticalScrollBar().setValue(chatPane.getVerticalScrollBar().getMaximum());
             // TODO add your handling code here:
+            // Get Messages
             // Date should not be null;
         }
     }                                            
