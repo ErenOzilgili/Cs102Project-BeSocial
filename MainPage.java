@@ -8,6 +8,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -179,7 +180,8 @@ public class MainPage extends javax.swing.JFrame {
 
         //add enrolled activites to a new panel
         JPanel enActivityWithScroll = new JPanel();
-        enActivityWithScroll.setLayout(new BoxLayout(enActivityWithScroll, BoxLayout.Y_AXIS));
+        //enActivityWithScroll.setLayout(new BoxLayout(enActivityWithScroll, BoxLayout.Y_AXIS));
+        enActivityWithScroll.setLayout(new GridLayout(0,1));
         for(Activity act : MainManager.user.enrolledActivities)
         {
             enActivityWithScroll.add(new EnrolledActivityMiniPanel(act , enActivityWithScroll , this));
