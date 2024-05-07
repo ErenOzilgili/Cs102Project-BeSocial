@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.*;
+import java.sql.Date;
+
  
 public class FullScreenCalendar extends JFrame {
   JPopupMenu popup;
@@ -132,8 +134,25 @@ public class FullScreenCalendar extends JFrame {
       if(((JLabel)e.getSource()).getText() != "" && !((JLabel)e.getSource()).getText().contains("day")) {
         popup = new JPopupMenu();
         popup.setBounds(1000, 100, 1000, 1000);
-        popup.add(new JMenuItem("Sport Festival"));
-        popup.add(new JMenuItem("Efe's Birthday"));
+        //
+        for(Activity act : MainManager.user.enrolledActivities){
+          java.sql.Date date = act.getDate();
+          java.sql.Date clickedDate = new java.sql.Date(cal.getTime().getTime());
+          clickedDate.setTime(clickedDate.getTime() + TimeUnit.DAYS.toMillis(Integer.parseInt(((JLabel)e.getSource()).getText())-1));
+          if(date.toString().equals(clickedDate.toString())){
+            JMenuItem item = new JMenuItem(act.getName());
+            item.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent ae) {
+                ActivityPage actPage = new ActivityPage(act);
+                actPage.setVisible(true);
+              }
+            });
+            popup.add(item);
+          }
+          else{
+            System.out.println("Dates are not equal" + date + " " + clickedDate);
+          }
+        }
         popup.show((Component)e.getSource(), e.getX(), e.getY());
       }
     }   
