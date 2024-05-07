@@ -449,9 +449,12 @@ public class CreateActivity extends javax.swing.JFrame {
         String activity_definition = GetDescription.getText();
         try {
             Statement stm = MainManager.db.getCon().createStatement();
-            ResultSet resultset = stm.executeQuery("SELECT COUNT(actID) FROM enrolledActivities");
-            resultset.next();
-            int ID = resultset.getInt("COUNT(actID)") + 1;
+            ResultSet resultset = stm.executeQuery("SELECT * FROM activities");
+            int ID;
+            while(resultset.next());
+            {
+                ID = resultset.getInt("activityID") + 1;
+            }            
             String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activityID) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" + date2 + "' , '" + time_of_activity + "','" + activity_place + "','" +activity_definition+ "','" + ID + "' ) ";
             stm.execute(add);
             stm.close();
