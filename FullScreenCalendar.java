@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,12 +8,11 @@ import javax.swing.border.Border;
 import javax.swing.table.*;
 import java.sql.Date;
 
- 
+
 public class FullScreenCalendar extends JFrame {
   JPopupMenu popup;
   Calendar cal = new GregorianCalendar();
   JLabel label;
- 
   FullScreenCalendar() {
  
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,7 +104,24 @@ public class FullScreenCalendar extends JFrame {
       panel.add(newLabel);
     }
     for(int day=1;day<=numberOfDays;day++){
-      JLabel newLabel = new JLabel(String.valueOf(day),SwingConstants.CENTER);
+      final int day2 = day;
+      JLabel newLabel = new JLabel(String.valueOf(day),SwingConstants.CENTER){
+        @Override
+        public void paintComponent(Graphics g) {
+          for(Activity act : MainManager.user.enrolledActivities){
+            java.sql.Date date = act.getDate();
+            java.sql.Date clickedDate = new java.sql.Date(cal.getTime().getTime());
+            clickedDate.setTime(clickedDate.getTime() + TimeUnit.DAYS.toMillis(day2-1));
+            if(date.toString().equals(clickedDate.toString())){
+              Random rand = new Random((clickedDate.toString() + MainManager.user.userName + day2).hashCode());  
+              g.setColor(new Color(rand.nextInt(196) + 60 ,rand.nextInt(196) + 60,rand.nextInt(196) + 60));
+              g.fillOval(getWidth()/2-25, getHeight()/2-25, 50, 50);
+              break;
+            }
+          }
+          super.paintComponent(g);
+        }
+      };
       newLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
       newLabel.setFont(new Font("Courier", Font.BOLD, 20));
       newLabel.addMouseListener(new MyMouseListener());
@@ -144,7 +161,9 @@ public class FullScreenCalendar extends JFrame {
             item.addActionListener(new ActionListener() {
               public void actionPerformed(ActionEvent ae) {
                 ActivityPage actPage = new ActivityPage(act);
+                actPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 actPage.setVisible(true);
+                FullScreenCalendar.this.dispose();
               }
             });
             popup.add(item);
@@ -164,9 +183,16 @@ public class FullScreenCalendar extends JFrame {
     MainManager.openMainPage(this);
   }
 
+  public void dispose()
+  {
+    super.dispose();
+  }
+
   public static void main(String[] arguments) {
     JFrame.setDefaultLookAndFeelDecorated(false);
     FullScreenCalendar sc = new FullScreenCalendar();
   }
  
+
+
 }
