@@ -1,7 +1,26 @@
-import java.awt.BorderLayout;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+
 
 public class Page extends javax.swing.JFrame {
 
@@ -14,7 +33,7 @@ public class Page extends javax.swing.JFrame {
 
         //Get all the activities from database --> Optional I (Eren) don't know
         //if we did or did not do this earlier ;
-        MainManager.allActivities = Activity.getAllActivities();
+        //MainManager.allActivities = Activity.getAllActivities();
 
         //Load all the activities;
         Activity.insertActivities(panelToDisplay);
@@ -23,6 +42,15 @@ public class Page extends javax.swing.JFrame {
     private void addToInitComponents(){
         scrollPane.getVerticalScrollBar().setUI(new NewScrollBarUI());      
         
+        //profile picture adding part
+        profileButton.setBackground(new java.awt.Color(255, 102, 102));
+        ImageIcon profilePhoto = new ImageIcon("photos/PP2.jpeg");
+        Image ppImage = profilePhoto.getImage();
+        Image newPPImg = ppImage.getScaledInstance(76, 76, Image.SCALE_SMOOTH);
+        ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
+        profileButton.setIcon(scaledProfileIcon);
+
+        //profileButton.setPreferredSize(new Dimension(76,76));
     }
 
     /**
@@ -38,13 +66,13 @@ public class Page extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         leftPanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        calendarPanel = new javax.swing.JPanel();
+        calendarLabel = new javax.swing.JLabel();
+        enrolledActivityPanel = new javax.swing.JPanel();
+        enrolledActivityLabel = new javax.swing.JLabel();
         middlePanel = new javax.swing.JPanel();
         searchPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        createActivityButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         scrollPane = new javax.swing.JScrollPane();
         panelToDisplay = new javax.swing.JPanel();
@@ -53,7 +81,7 @@ public class Page extends javax.swing.JFrame {
         profileSettingsPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        profileButton = new javax.swing.JButton();
         rightPanelBottomP = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -74,42 +102,68 @@ public class Page extends javax.swing.JFrame {
         leftPanel.setRequestFocusEnabled(false);
         leftPanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        calendarPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        calendarPanel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e)
+            {
+                calendarFrameActionPerformed(e);
+            }
+        });
+        calendarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        calendarLabel.setText("Calendar");
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Calendar");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(calendarPanel);
+        calendarPanel.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(calendarLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(calendarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 201, Short.MAX_VALUE))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jPanel1.setPreferredSize(new java.awt.Dimension(200, 265));
+        //add enrolled activites to a new panel
+        JPanel enActivityWithScroll = new JPanel();
+        JScrollPane jScrollPane2 = new JScrollPane();
+        //enActivityWithScroll.setLayout(new BoxLayout(enActivityWithScroll, BoxLayout.Y_AXIS));
+        enActivityWithScroll.setLayout(new GridLayout(0,1));
+        enActivityWithScroll.setBorder(new LineBorder(Color.CYAN));
+        for(Activity act : MainManager.user.enrolledActivities)
+        {
+            for(int i = 0 ; i < 7 ; i++)
+            {
+                enActivityWithScroll.add(new EnrolledActivityMiniPanel(act , enActivityWithScroll , this));
+            }
+            
+        }
+        jScrollPane2.setViewportView(enActivityWithScroll);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Enrolled Activities");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        enrolledActivityPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        enrolledActivityPanel.setPreferredSize(new java.awt.Dimension(200, 265));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        enrolledActivityLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        enrolledActivityLabel.setText("Enrolled Activities");
+        enrolledActivityLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(enrolledActivityPanel);
+        enrolledActivityPanel.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+            .addComponent(enrolledActivityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 266, Short.MAX_VALUE))
+                .addComponent(enrolledActivityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, Short.MAX_VALUE)//changed max
+                .addContainerGap()//deleted variables
+                )
+                
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -119,17 +173,17 @@ public class Page extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(enrolledActivityPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(calendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addComponent(enrolledActivityPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
 
@@ -145,8 +199,18 @@ public class Page extends javax.swing.JFrame {
         middlePanel.setRequestFocusEnabled(false);
         middlePanel.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("jButton1");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        ImageIcon plusPhoto = new ImageIcon("photos/plus.png");
+        Image plusImage = plusPhoto.getImage();
+        plusImage = plusImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        plusPhoto = new ImageIcon(plusImage);
+        createActivityButton.setIcon(plusPhoto);
+        createActivityButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        createActivityButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createActivityButtonActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("jTextField1");
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
@@ -159,7 +223,7 @@ public class Page extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(createActivityButton)
                 .addGap(25, 25, 25))
         );
         searchPanelLayout.setVerticalGroup(
@@ -168,7 +232,7 @@ public class Page extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(createActivityButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -219,7 +283,11 @@ public class Page extends javax.swing.JFrame {
 
         jButton4.setText("jButton3");
 
-        jButton2.setText("jButton2");
+        profileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout profileSettingsPanelLayout = new javax.swing.GroupLayout(profileSettingsPanel);
         profileSettingsPanel.setLayout(profileSettingsPanelLayout);
@@ -227,7 +295,7 @@ public class Page extends javax.swing.JFrame {
             profileSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileSettingsPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, Short.MAX_VALUE)
+                .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
                 .addGroup(profileSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
@@ -244,7 +312,7 @@ public class Page extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(profileSettingsPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
         );
 
@@ -314,19 +382,42 @@ public class Page extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
+    //listeners
+    private void calendarFrameActionPerformed(MouseEvent evt) {                                              
+        // TODO add your handling code here:
+        this.dispose();
+        FullScreenCalendar fullScreenCalendar = new FullScreenCalendar();
+    }  
+
+    private void createActivityButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        this.dispose();
+        CreateActivity.createActivity();
+        
+    }  
+
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+        this.dispose();
+        JFrame profileFrame = new JFrame();
+        profileFrame.add(new ProfilePage());
+        profileFrame.pack();
+        profileFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        profileFrame.setVisible(true);
+    }                   
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton createActivityButton;
+    private javax.swing.JButton profileButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel calendarLabel;
+    private javax.swing.JLabel enrolledActivityLabel;
+    private javax.swing.JPanel enrolledActivityPanel;
+    private javax.swing.JPanel calendarPanel;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;

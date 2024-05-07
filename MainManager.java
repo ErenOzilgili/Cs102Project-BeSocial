@@ -38,10 +38,11 @@ public class MainManager {
 
     public static void openMainPage(JFrame frame)
     {
-        MainPage mainPage = new MainPage();
+        Page mainPage = new Page();
         mainPage.setVisible(true);
         mainPage.pack();
         mainPage.setLocationRelativeTo(null); //center
+        mainPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.dispose();
     }
 }
