@@ -1,14 +1,10 @@
 
-import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalTime;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
 import javax.swing.ButtonGroup;
-import java.sql.Statement;
-import java.sql.Date;
 
 
 
@@ -453,7 +449,10 @@ public class CreateActivity extends javax.swing.JFrame {
         String activity_definition = GetDescription.getText();
         try {
             Statement stm = MainManager.db.getCon().createStatement();
-            String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" +date2 + "' , '" +time_of_activity + "','" + activity_place + "','" + activity_definition + "' ) ";
+            ResultSet resultset = stm.executeQuery("SELECT COUNT(actID) FROM enrolledActivities");
+            resultset.next();
+            int ID = resultset.getInt("COUNT(actID)") + 1;
+            String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activityID) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" + date2 + "' , '" + time_of_activity + "','" + activity_place + "','" +activity_definition+ "','" + ID + "' ) ";
             stm.execute(add);
             stm.close();
             
