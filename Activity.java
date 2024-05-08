@@ -25,37 +25,6 @@ public class Activity implements Comparable<Activity>{
     private int appearanceHeight;
     private int appearanceWidth;
     private Tag tag;
-    
-    /*
-     * More instance variables to add here.
-     */
-
-    public Activity(String name, String description, ArrayList<Tag> tagsTemp, Date date){
-        //Instead of this get from database.
-        tags = new ArrayList<Tag>();
-
-        //Initializing the name and description according to the input.
-        this.name = name;
-        this.description = description;
-        this.date = date;
-
-        //Activity no
-        numberOfActiveActivities++;
-
-        //Like and dislike count will be 0 whenever an activity has been created.
-        this.likeNum = 0;
-        this.dislikeNum = 0;
-
-        //Adding the chosen tags to the activities tags ArrayList.
-        for(Tag tag : tagsTemp){
-            tags.add(tag);
-        } 
-
-        //Height and Width of how the activity will appear in panel
-        this.appearanceHeight = (int)Activity.appearanceSize.getHeight();
-        this.appearanceHeight = (int)Activity.appearanceSize.getWidth();
- 
-    }
 
     public Activity(int id){
         try{
