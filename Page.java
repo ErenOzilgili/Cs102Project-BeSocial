@@ -44,7 +44,7 @@ public class Page extends javax.swing.JFrame {
         
         //profile picture adding part
         profileButton.setBackground(new java.awt.Color(255, 102, 102));
-        ImageIcon profilePhoto = new ImageIcon("photos/PP2.jpeg");
+        ImageIcon profilePhoto = new ImageIcon("photos/PP" +MainManager.user.getID()%5 +".jpeg");
         Image ppImage = profilePhoto.getImage();
         Image newPPImg = ppImage.getScaledInstance(76, 76, Image.SCALE_SMOOTH);
         ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
