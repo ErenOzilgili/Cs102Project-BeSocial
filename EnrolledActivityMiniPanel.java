@@ -58,7 +58,8 @@ public class EnrolledActivityMiniPanel extends JPanel {
 
     private void nameLabelActionPerformed()
     {
-        ActivityPage acPage = new ActivityPage(eActivity);
         mainFrame.dispose();
+        ActivityPage acPage = new ActivityPage(eActivity);
+        acPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 }

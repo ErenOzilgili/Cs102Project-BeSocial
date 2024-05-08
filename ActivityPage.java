@@ -2,7 +2,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Date;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
 
 public class ActivityPage extends javax.swing.JFrame {
     
@@ -66,6 +72,18 @@ public class ActivityPage extends javax.swing.JFrame {
         
         //2 samples added 1 left aligned 1 right aligned
         //-----------------------------
+
+        ImageIcon icon = new ImageIcon("photos/25694.png");
+        Image image = icon.getImage(); // transform it 
+        Image newimg = image.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        icon = new ImageIcon(newimg);  // transform it back
+        jButton3.setIcon(icon);
+
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainPageButtonActionPerformed();
+            }
+        });
 
         actChat.getChat(activity, chatPanel);
 
@@ -434,7 +452,12 @@ public class ActivityPage extends javax.swing.JFrame {
             // Get Messages
             // Date should not be null;
         }
-    }                                            
+    }      
+    
+    private void mainPageButtonActionPerformed()
+    {
+        MainManager.openMainPage(this);
+    }
                                                              
     // Variables declaration - do not modify                     
     private javax.swing.JPanel activityChatPanel;

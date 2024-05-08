@@ -133,7 +133,7 @@ public class Page extends javax.swing.JFrame {
         enActivityWithScroll.setBorder(new LineBorder(Color.CYAN));
         for(Activity act : MainManager.user.enrolledActivities)
         {
-            for(int i = 0 ; i < 7 ; i++)
+            for(int i = 0 ; i < 4 ; i++)
             {
                 enActivityWithScroll.add(new EnrolledActivityMiniPanel(act , enActivityWithScroll , this));
             }
@@ -403,6 +403,7 @@ public class Page extends javax.swing.JFrame {
         profileFrame.pack();
         profileFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         profileFrame.setVisible(true);
+        profileFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }                   
 
     /**
