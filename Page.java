@@ -111,18 +111,23 @@ public class Page extends javax.swing.JFrame {
         });
         calendarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         calendarLabel.setText("Calendar");
+        CalendarPanel calendarMini = new CalendarPanel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(calendarPanel);
         calendarPanel.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(calendarLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(calendarMini , 220, 220, 220)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(calendarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 201, Short.MAX_VALUE))
+                .addGap(0, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(calendarMini, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addContainerGap(15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                )
         );
 
         //add enrolled activites to a new panel
