@@ -1,5 +1,8 @@
 
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import java.sql.*;
 
 public class Account{
@@ -167,6 +170,7 @@ public class Account{
     public void leaveActivity(Activity activity)
     {
         this.enrolledActivities.remove(activity);
+        activity.changeCurrQuota(-1);
         for(Activity act : enrolledActivities)
         {
             System.out.println(act.getName());
@@ -174,11 +178,41 @@ public class Account{
         try
         {
             Statement st = MainManager.db.getCon().createStatement();
-            st.executeUpdate("DELETE FROM enrolledActivities WHERE userID = " + this.userID + " and actID = " + activity.getActivityID());
+            st.execute("DELETE FROM enrolledActivities WHERE userID = " + this.userID + " and actID = " + activity.getActivityID());
+            st.execute("UPDATE activities SET current_quota = " + activity.getCurrQuota() + " where activityID = " + activity.getActivityID());
             System.out.println("flkhflgkjfklghl");
         }
         catch(SQLException e){
 
+        }
+    }
+
+    public void joinActivity(Activity activity)
+    {
+        if(this.enrolledActivities.contains(activity))
+        {
+            JOptionPane.showMessageDialog(MainManager.mainPage, "You are already in this activity.", "Can not join!", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(activity.getCurrQuota() >= activity.getQuota())
+        {
+            JOptionPane.showMessageDialog(MainManager.mainPage, "This activity's quota is full. Try another options:)", "Can not join!", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            this.enrolledActivities.add(activity);
+            activity.changeCurrQuota(1);
+            try
+            {
+                Statement st1 = MainManager.db.getCon().createStatement();
+                st1.execute("INSERT INTO enrolledActivities (userID , actID) VALUES ("+ this.getID() +","+activity.getActivityID() +")");
+                Statement st2 = MainManager.db.getCon().createStatement();
+                st2.execute("UPDATE activities SET current_quota = " + activity.getCurrQuota() + " where activityID = " + activity.getActivityID());
+                System.out.println("flkhflgkjfklghl");
+                MainManager.mainPage.updateEnrolledPanel(activity);
+            }
+            catch(SQLException e){
+
+            }
         }
     }
 }

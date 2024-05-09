@@ -17,7 +17,7 @@ public class Activity implements Comparable<Activity>{
     private ArrayList<Tag> tags;
     private String name, place;
     private String description;
-    private int activityID, quota;
+    private int activityID, quota , currQuota;
     private Date date;
     private Time time;
     private int dislikeNum;
@@ -39,6 +39,7 @@ public class Activity implements Comparable<Activity>{
             time = rs.getTime(5);
             place = rs.getString(6);
             description = rs.getString(7);
+            currQuota = rs.getInt(9);
         }
         catch(SQLException e){
             System.out.println(e);
@@ -89,10 +90,12 @@ public class Activity implements Comparable<Activity>{
     public ArrayList<Tag> getTags(){ return this.tags; }
     public Date getDate(){ return this.date; }
     public int getQuota(){ return this.quota; }
+    public int getCurrQuota(){ return this.currQuota;}
 
     //Setter Methods
     public void changeDislikeNum(int change){ this.dislikeNum += change; }
     public void changeLikeNum(int change){ this.likeNum += change; }
+    public void changeCurrQuota(int change){this.currQuota+=change;};
 
     public static ArrayList<Activity> getAllActivities(){
         ArrayList<Activity> allActivities = new ArrayList<Activity>();

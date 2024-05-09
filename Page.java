@@ -131,14 +131,14 @@ public class Page extends javax.swing.JFrame {
         );
 
         //add enrolled activites to a new panel
-        JPanel enActivityWithScroll = new JPanel();
+        enActivityWithScroll = new JPanel();
         JScrollPane jScrollPane2 = new JScrollPane();
         //enActivityWithScroll.setLayout(new BoxLayout(enActivityWithScroll, BoxLayout.Y_AXIS));
         enActivityWithScroll.setLayout(new GridLayout(0,1));
         enActivityWithScroll.setBorder(new LineBorder(Color.CYAN));
         for(Activity act : MainManager.user.enrolledActivities)
         {
-            for(int i = 0 ; i < 4 ; i++)
+            for(int i = 0 ; i < 1 ; i++)
             {
                 enActivityWithScroll.add(new EnrolledActivityMiniPanel(act , enActivityWithScroll , this));
             }
@@ -429,7 +429,14 @@ public class Page extends javax.swing.JFrame {
         profileFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         profileFrame.setVisible(true);
         profileFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    }                   
+    }                 
+    
+    public void updateEnrolledPanel(Activity activity)
+    {
+        enActivityWithScroll.add(new EnrolledActivityMiniPanel(activity, enActivityWithScroll, this));
+        enActivityWithScroll.revalidate();
+        enActivityWithScroll.repaint();
+    }
 
     /**
      * @param args the command line arguments
@@ -460,5 +467,6 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JPanel searchPanel;
     private javax.swing.JPanel wholePanel;
+    private javax.swing.JPanel enActivityWithScroll;
     // End of variables declaration                   
 }

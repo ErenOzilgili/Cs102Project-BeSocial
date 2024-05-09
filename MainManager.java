@@ -8,6 +8,7 @@ public class MainManager {
     public static String currUserName;
     public static ArrayList<Account> allAccounts;
     public static ArrayList<Activity>allActivities;
+    public static Page mainPage;
     public static void main(String[] args){
         
         db = new Database();        
@@ -43,6 +44,7 @@ public class MainManager {
         mainPage.pack();
         mainPage.setLocationRelativeTo(null); //center
         mainPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        MainManager.mainPage = mainPage;
         frame.dispose();
     }
 }

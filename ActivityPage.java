@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.util.Date;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
@@ -20,16 +21,18 @@ public class ActivityPage extends javax.swing.JFrame {
      * Creates new form ActivityPage
      */
     public ActivityPage(Activity activity){
+
+        //Do assign the activity and activityChat
+        this.activity = activity;
+        actChat = new ActivityChat(activity.getQuota(), activity.getActivityID(), activity.getName());
+
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //Clear the text in the chatInput
         chatInput.setText("");
-
-        //Do assign the activity and activityChat
-        this.activity = activity;
-        actChat = new ActivityChat(activity.getQuota(), activity.getActivityID(), activity.getName());
 
         //Set the acitivities name
         this.activityNameL.setText(activity.getName());
@@ -160,7 +163,7 @@ public class ActivityPage extends javax.swing.JFrame {
         descriptionL.setText("Description:");
 
         descriptionDesc.setBackground(new java.awt.Color(204, 204, 255));
-        descriptionDesc.setText("asdıjkasdkaısdjsışkapjsdşkaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        descriptionDesc.setText(activity.getDescription());
         descriptionDesc.setOpaque(true);
 
         timeDesc.setBackground(new java.awt.Color(204, 204, 255));
@@ -178,7 +181,7 @@ public class ActivityPage extends javax.swing.JFrame {
         tagDesc.setPreferredSize(new java.awt.Dimension(40, 20));
 
         quotaDesc.setBackground(new java.awt.Color(204, 204, 255));
-        quotaDesc.setText("jLabel4");
+        quotaDesc.setText(activity.getQuota() + "");
         quotaDesc.setMaximumSize(new java.awt.Dimension(60, 30));
         quotaDesc.setMinimumSize(new java.awt.Dimension(40, 20));
         quotaDesc.setName(""); // NOI18N

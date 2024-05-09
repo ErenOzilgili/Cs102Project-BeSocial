@@ -60,6 +60,6 @@ public class EnrolledActivityMiniPanel extends JPanel {
     {
         mainFrame.dispose();
         ActivityPage acPage = new ActivityPage(eActivity);
-        acPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //acPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 }

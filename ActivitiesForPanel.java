@@ -14,7 +14,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         nameL.setText(this.activity.getName());//Name of the activity
         // TODO add your handling code here:
         //quotaTextField text should be in the from of 10/20; Need currentQuota
-        quotaTF.setText(this.activity.getQuota() + "");//Quota of the activity
+        quotaTF.setText(this.activity.getCurrQuota() + " / " + this.activity.getQuota());//Quota of the activity
 
         this.setVisible(true);
         this.setPreferredSize(new Dimension(275, 200));
@@ -220,6 +220,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
     private void joinBActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
+        MainManager.user.joinActivity(activity);
     }                                     
 
     private void likeBActionPerformed(java.awt.event.ActionEvent evt) {                                      
