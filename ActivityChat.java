@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,8 @@ public class ActivityChat extends Chat {
     }
 
     public void getChat(Object obj, JPanel panel){
+        final int NEEDED = 3;
+        int count = 0;
         //Object refers to activity here
         //panel is where we will be displaying the messages
         Activity act = (Activity)obj; 
@@ -49,11 +52,19 @@ public class ActivityChat extends Chat {
                 JPanel panelDisp = new JPanel();
                 panelDisp.setLayout(new BorderLayout());
                 panelDisp.setBackground(Color.WHITE);
+                panelDisp.setPreferredSize(new Dimension(200, 120));
                 //If the below is true, the message is send by the user
                 if(sender.equals(MainManager.user)){ panelDisp.add(new ChatMessages(msg, sender), BorderLayout.EAST); }
                 else{ panelDisp.add(new ChatMessages(msg, sender), BorderLayout.WEST); }
                 panel.add(panelDisp);//Add for displaying purpose to the panel (ChatPanel)
-
+                count++;
+            }
+            for(int i = NEEDED - count; i > 0; i--){
+                JPanel panelDisp = new JPanel();
+                panelDisp.setLayout(new BorderLayout());
+                panelDisp.setBackground(Color.WHITE);
+                panelDisp.setPreferredSize(new Dimension(200, 120));
+                panel.add(panelDisp);
             }
             //Lastly repaint and revalidete the panel;
             panel.revalidate();

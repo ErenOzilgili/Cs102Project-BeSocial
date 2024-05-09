@@ -21,8 +21,8 @@ public class ActivityPage extends javax.swing.JFrame {
      */
     public ActivityPage(Activity activity){
         initComponents();
-        
         this.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //Clear the text in the chatInput
         chatInput.setText("");
@@ -316,6 +316,7 @@ public class ActivityPage extends javax.swing.JFrame {
 
         chatPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         chatPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        chatPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         chatPane.setPreferredSize(new java.awt.Dimension(300, 100));
 
         chatPanel.setBackground(new java.awt.Color(255, 255, 255));
