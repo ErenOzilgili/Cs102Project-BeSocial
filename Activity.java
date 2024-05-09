@@ -109,12 +109,12 @@ public class Activity implements Comparable<Activity>{
         return allActivities;
     }
 
-    public static void insertActivities(JPanel panelToDisplay){
+    public static void insertActivities(JPanel panelToDisplay , ArrayList<Activity> result){
         //Remove old contents before getting the newest activities;
         panelToDisplay.removeAll();
         panelToDisplay.setLayout(new GridLayout(0, 1));
                 
-        for(Activity act : MainManager.allActivities){
+        for(Activity act : result){
             //Set the individual panels
             JPanel panelDisp = new JPanel();
             panelDisp.setLayout(new BorderLayout());
@@ -124,6 +124,16 @@ public class Activity implements Comparable<Activity>{
                     
             //Put individual panels into the main panel for display
             panelToDisplay.add(panelDisp);  
+        }
+
+        if(result.size()<3)
+        {
+            for(int i = 0 ; i < 3-result.size() ; i++)
+            {
+                JPanel empty = new JPanel();
+                empty.setBackground(new java.awt.Color(0, 224, 224));
+                panelToDisplay.add(empty);
+            }
         }
 
         //Lastly repaint and revalidete the panel;

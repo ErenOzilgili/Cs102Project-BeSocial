@@ -6,10 +6,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -36,7 +36,7 @@ public class Page extends javax.swing.JFrame {
         //MainManager.allActivities = Activity.getAllActivities();
 
         //Load all the activities;
-        Activity.insertActivities(panelToDisplay);
+        Activity.insertActivities(panelToDisplay , MainManager.allActivities);
     }
     
     private void addToInitComponents(){
@@ -217,8 +217,28 @@ public class Page extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        //jTextField1.setText("jTextField1");
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextField1.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                String text = jTextField1.getText();
+
+                ArrayList<Activity> result = new ArrayList<Activity>(); 
+                for(Activity ac : MainManager.allActivities)
+                {
+                    if(ac.getName().toLowerCase().startsWith(text.toLowerCase()))
+                    {
+                        result.add(ac);
+                    }
+                }
+                Activity.insertActivities(panelToDisplay , result);
+            }
+        });
+
+        //to show when there is no activity to display 
+        panelToDisplay.setBackground(Color.CYAN);
+
+        //SearchPage searchBar = new SearchPage();
 
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
