@@ -24,10 +24,13 @@ import javax.swing.JScrollPane;
 
 public class Page extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Page
-     */
+    //Variables for notification purposes
+    public boolean isNotiDisplayed;
+    private Pop noti;
+
     public Page() {
+        this.isNotiDisplayed = false;
+
         initComponents();
         addToInitComponents();
 
@@ -40,6 +43,7 @@ public class Page extends javax.swing.JFrame {
     }
     
     private void addToInitComponents(){
+        //ScrollBar UI
         scrollPane.getVerticalScrollBar().setUI(new NewScrollBarUI());      
         
         //profile picture adding part
@@ -50,7 +54,46 @@ public class Page extends javax.swing.JFrame {
         ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
         profileButton.setIcon(scaledProfileIcon);
 
+        //Notifications
+        noti = new Pop(this);
+
         //profileButton.setPreferredSize(new Dimension(76,76));
+
+
+        //ComponenetListener to keep track of if frame has been resized or not
+        this.addComponentListener(new java.awt.event.ComponentListener() {
+
+            @Override
+            public void componentResized(ComponentEvent e) {
+                if(isNotiDisplayed){
+                    noti.decideAction();
+                    noti.decideAction();
+                }
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                if(isNotiDisplayed){
+                    noti.decideAction();
+                    noti.decideAction();
+                }
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {}
+
+            @Override
+            public void componentHidden(ComponentEvent e) {}
+            
+        });
+
+        /* 
+        notiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notiButtonActionPerformed(evt);
+            }
+        });
+        */
     }
 
     /**
@@ -79,7 +122,7 @@ public class Page extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         rightPanel = new javax.swing.JPanel();
         profileSettingsPanel = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        notiButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         rightPanelBottomP = new javax.swing.JPanel();
@@ -304,9 +347,14 @@ public class Page extends javax.swing.JFrame {
         rightPanel.setPreferredSize(new java.awt.Dimension(220, 600));
         rightPanel.setLayout(new java.awt.BorderLayout());
 
-        jButton3.setText("jButton3");
+        notiButton.setText("notiButton");
+        notiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notiButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("jButton3");
+        jButton4.setText("notiButton");
 
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +371,7 @@ public class Page extends javax.swing.JFrame {
                 .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
                 .addGroup(profileSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(notiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
@@ -333,7 +381,7 @@ public class Page extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addComponent(notiButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(profileSettingsPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
@@ -414,6 +462,12 @@ public class Page extends javax.swing.JFrame {
         FullScreenCalendar fullScreenCalendar = new FullScreenCalendar();
     }  
 
+    //Listener for notifications
+    private void notiButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        noti.decideAction();//To decide whether to show the popup or hide it;
+    } 
+
     private void createActivityButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         this.dispose();
         CreateActivity.createActivity();
@@ -442,10 +496,18 @@ public class Page extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
+    public int positionX_profileP(){
+        return profileSettingsPanel.getX();
+    }
+    
+    public int positionY_profileP(){
+        return profileSettingsPanel.getY();
+    }
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton createActivityButton;
     private javax.swing.JButton profileButton;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton notiButton;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel calendarLabel;
     private javax.swing.JLabel enrolledActivityLabel;

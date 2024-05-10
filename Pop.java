@@ -19,11 +19,11 @@ public class Pop{
     
     PopupFactory pf;
     Popup popup;
-    MainPage page;
+    Page page;
     NotificationPopUp panel;//NotificationPopUp panel
     
     //Add user
-    public Pop(MainPage f){ 
+    public Pop(Page f){ 
         pf = new PopupFactory();
         panel = new NotificationPopUp();
         page = f;
@@ -46,6 +46,10 @@ public class Pop{
         popup.hide();//Dispose the popup
         
     }
+
+    public void determineCoordinate(){
+        popup = pf.getPopup(page, panel, page.getX() + page.getWidth() + page.positionX_profileP() - 390, page.getY() + page.positionY_profileP() + 130 );
+    }
     
     private void createPopup(){
         
@@ -62,7 +66,7 @@ public class Pop{
         }
         
         //Resolve the position issue;
-        popup = pf.getPopup(page, panel, page.positionX_profileP() - 70, page.positionY_profileP() + 140 );
+        this.determineCoordinate();
         
         popup.show();//Display the pop up
     }
@@ -71,9 +75,7 @@ public class Pop{
     private ArrayList<String> infoNoti(){
         
         ArrayList<String> notiInfo = new ArrayList<String>();
-        
-        
-        
+         
         return notiInfo;
     }
     
