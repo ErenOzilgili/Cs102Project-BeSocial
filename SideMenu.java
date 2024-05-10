@@ -3,6 +3,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -66,12 +67,14 @@ public class SideMenu extends JPanel {
 
         button3 = new JButton("Go to Profile Page");
         button3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button3.setBorder(new EtchedBorder(Color.ORANGE, Color.BLACK));
         button3.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button3.setBackground(n);
         button3.setFont(new Font(button3.getText(), Font.PLAIN, 20));
 
         button4 = new JButton("Friends");
         button4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button4.setBorder(new EtchedBorder(Color.ORANGE, Color.BLACK));
         button4.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button4.setBackground(n);
         button4.setFont(new Font(button3.getText(), Font.PLAIN, 20));
@@ -79,6 +82,7 @@ public class SideMenu extends JPanel {
 
         button5 = new JButton("Calendar");
         button5.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button5.setBorder(new EtchedBorder(Color.ORANGE, Color.BLACK));
         button5.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button5.setBackground(n);
         button5.setFont(new Font(button3.getText(), Font.PLAIN, 20));
@@ -86,6 +90,7 @@ public class SideMenu extends JPanel {
 
         button6 = new JButton("Log Out");
         button6.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button6.setBorder(new EtchedBorder(Color.ORANGE, Color.BLACK));
         button6.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button6.setBackground(n);
         button6.setFont(new Font(button3.getText(), Font.PLAIN, 20));
@@ -93,6 +98,7 @@ public class SideMenu extends JPanel {
 
         button7 = new JButton("Add/Remove Friends");
         button7.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button7.setBorder(new EtchedBorder(Color.ORANGE, Color.BLACK));
         button7.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button7.setBackground(n);
         button7.setFont(new Font(button3.getText(), Font.PLAIN, 20));
