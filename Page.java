@@ -27,6 +27,7 @@ public class Page extends javax.swing.JFrame {
     //Variables for notification purposes
     public boolean isNotiDisplayed;
     private Pop noti;
+    private SideMenu menuPanel;
 
     public Page() {
         this.isNotiDisplayed = false;
@@ -128,7 +129,7 @@ public class Page extends javax.swing.JFrame {
         rightPanelBottomP = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        menuPanel = new javax.swing.JPanel();
+        menuPanel = new SideMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -445,9 +446,37 @@ public class Page extends javax.swing.JFrame {
         wholePanel.add(mainPanel, java.awt.BorderLayout.CENTER);
 
         menuPanel.setBackground(new java.awt.Color(0, 204, 204));
-        menuPanel.setMinimumSize(new java.awt.Dimension(100, 600));
-        menuPanel.setPreferredSize(new java.awt.Dimension(100, 600));
-        menuPanel.setLayout(new java.awt.GridBagLayout());
+
+        menuPanel.getFriendsButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+            }
+        });
+
+        menuPanel.getGoToPPButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+            }
+        });
+        
+        menuPanel.getLogOutButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                System.exit(0);
+            }
+        });
+
+        menuPanel.getCalendarButton().addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e){
+                calendarFrameActionPerformed(e);
+            }
+        });
+
+        menuPanel.getAddOrRemoveFriendsButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
+
         wholePanel.add(menuPanel, java.awt.BorderLayout.WEST);
 
         getContentPane().add(wholePanel, java.awt.BorderLayout.CENTER);
@@ -520,7 +549,7 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel menuPanel;
+    //private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel middlePanel;
     private javax.swing.JPanel panelToDisplay;
     private javax.swing.JPanel profileSettingsPanel;

@@ -1,24 +1,21 @@
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 /**
  * SideMenu
  */
-public class SideMenu extends JFrame {
+public class SideMenu extends JPanel {
 
     private JPanel mainPanel;
     private JPanel sidePanel;
@@ -32,6 +29,9 @@ public class SideMenu extends JFrame {
 
     private final int WIDTH = 600;
     private final int HEIGHT = 600;
+
+    private final int BUTTON_WIDTH = 400;
+    private final int BUTTON_HEIGHT = 70;
 
     public SideMenu(){
         initComponents();
@@ -49,6 +49,7 @@ public class SideMenu extends JFrame {
         ButtonListener l = new ButtonListener();
         button.addActionListener(l);
         mainPanel.add(button, BorderLayout.WEST);
+        button.setBorderPainted(false);
         mainPanel.add(new JPanel(), BorderLayout.EAST);
         mainPanel.add(new JPanel(), BorderLayout.NORTH);
         mainPanel.add(new JPanel(), BorderLayout.SOUTH); 
@@ -60,12 +61,43 @@ public class SideMenu extends JFrame {
     }
 
     private void initButtons(){
-        initButton2();
+        Color n  =new Color(0,204,204);
+        initButton2(n);
+
         button3 = new JButton("Go to Profile Page");
+        button3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button3.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        button3.setBackground(n);
+        button3.setFont(new Font(button3.getText(), Font.PLAIN, 20));
+
         button4 = new JButton("Friends");
+        button4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button4.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        button4.setBackground(n);
+        button4.setFont(new Font(button3.getText(), Font.PLAIN, 20));
+
+
         button5 = new JButton("Calendar");
+        button5.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button5.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        button5.setBackground(n);
+        button5.setFont(new Font(button3.getText(), Font.PLAIN, 20));
+
+
         button6 = new JButton("Log Out");
+        button6.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button6.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        button6.setBackground(n);
+        button6.setFont(new Font(button3.getText(), Font.PLAIN, 20));
+
+
         button7 = new JButton("Add/Remove Friends");
+        button7.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button7.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        button7.setBackground(n);
+        button7.setFont(new Font(button3.getText(), Font.PLAIN, 20));
+
+
 
     }
 
@@ -85,16 +117,16 @@ public class SideMenu extends JFrame {
         sidePanel.add(button5);
         sidePanel.add(Box.createVerticalGlue());
         
-        sidePanel.add(button6);
+        sidePanel.add(button7);
         sidePanel.add(Box.createVerticalGlue());
 
-        sidePanel.add(button7);
+        sidePanel.add(button6);
         sidePanel.add(Box.createVerticalGlue());   
     }
 
-    private void initButton2(){
+    private void initButton2(Color n){
         button2 = new JButton("BE SOCIAL");
-        button2.setBackground(Color.CYAN);
+        button2.setBackground(n);
         button2.setPreferredSize(new Dimension(300,70));
         button2.setBorderPainted(false);
         button2.setFont(new Font(button2.getText(), Font.BOLD, 25));
@@ -103,10 +135,12 @@ public class SideMenu extends JFrame {
     public void setSidePanelVisible(){
         if(sidePanel.isVisible()==false){
             sidePanel.setVisible(true);
-            sidePanel.setBackground(Color.CYAN);
+            sidePanel.setBackground(new Color(0,204,204));
+            button.setText("<-");
         }
         else{
             sidePanel.setVisible(false);
+            button.setText("->");
         }
     }
 
@@ -116,11 +150,24 @@ public class SideMenu extends JFrame {
         }
     }
 
+    public JButton getGoToPPButton(){
+        return button3;
+    }
 
-    public static void main(String[] args) {
-        JFrame frame = new SideMenu();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+    public JButton getFriendsButton(){
+        return button4;
+    }
+
+    public JButton getCalendarButton(){
+        return button5;
+    }
+
+    public JButton getLogOutButton(){
+        return button6;
+    }
+
+    public JButton getAddOrRemoveFriendsButton(){
+        return button7;
     }
 
 
