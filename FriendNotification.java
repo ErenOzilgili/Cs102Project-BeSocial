@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 import java.awt.Dimension;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -10,10 +13,13 @@ import java.awt.Dimension;
  */
 public class FriendNotification extends javax.swing.JPanel {
 
+    private Account sender;
     /**
      * Creates new form FriendNotification
      */
-    public FriendNotification() {
+    public FriendNotification(Account account) {
+        sender = account;
+
         initComponents();
         addToInitComponents();
     }
@@ -34,21 +40,29 @@ public class FriendNotification extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        deny = new javax.swing.JButton();
+        accept = new javax.swing.JButton();
 
-        jLabel1.setText("I");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jTextField1.setEditable(false);
 
-        jButton1.setText("I");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        //jLabel1.setText("I");
+        ImageIcon profilePhoto = new ImageIcon("photos/PP" +sender.getID()%5 +".jpeg");
+        Image ppImage = profilePhoto.getImage();
+        Image newPPImg = ppImage.getScaledInstance(20,20 , Image.SCALE_SMOOTH);
+        ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
+        jLabel1.setIcon(scaledProfileIcon);
+
+        //jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        deny.setText("I");
+        deny.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("I");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        accept.setText("I");
+        accept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
@@ -64,9 +78,9 @@ public class FriendNotification extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(accept, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deny, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -76,8 +90,8 @@ public class FriendNotification extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deny, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accept, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
@@ -92,8 +106,8 @@ public class FriendNotification extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton deny;
+    private javax.swing.JButton accept;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration                   

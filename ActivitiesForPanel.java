@@ -54,7 +54,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 224, 202));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         nameL.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -68,7 +68,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         descriptionSP.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         descriptionSP.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        descriptionP.setBackground(new java.awt.Color(0, 224, 224));
+        descriptionP.setBackground(new java.awt.Color(255,240,219));
 
         javax.swing.GroupLayout descriptionPLayout = new javax.swing.GroupLayout(descriptionP);
         descriptionP.setLayout(descriptionPLayout);
@@ -96,7 +96,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
             }
         });
 
-        joinB.setBackground(new java.awt.Color(0, 224, 224));
+        joinB.setBackground(new java.awt.Color(255,240,219));
         joinB.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         joinB.setText("Join");
         joinB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));

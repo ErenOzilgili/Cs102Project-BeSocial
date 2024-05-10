@@ -155,7 +155,7 @@ public class Page extends javax.swing.JFrame {
         });
         calendarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         calendarLabel.setText("Calendar");
-        CalendarPanel calendarMini = new CalendarPanel();
+        calendarMini = new CalendarPanel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(calendarPanel);
         calendarPanel.setLayout(jPanel2Layout);
@@ -215,6 +215,7 @@ public class Page extends javax.swing.JFrame {
                 
         );
 
+        jPanel8.setBackground(new Color(215, 235, 215));
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -284,6 +285,7 @@ public class Page extends javax.swing.JFrame {
 
         //SearchPage searchBar = new SearchPage();
 
+        searchPanel.setBackground(new Color(215, 235, 215));
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
         searchPanelLayout.setHorizontalGroup(
@@ -327,6 +329,7 @@ public class Page extends javax.swing.JFrame {
 
         middlePanel.add(scrollPane, java.awt.BorderLayout.CENTER);
 
+        jPanel9.setBackground(new Color(215, 235, 215));
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -363,6 +366,7 @@ public class Page extends javax.swing.JFrame {
             }
         });
 
+        profileSettingsPanel.setBackground(new Color(215, 235, 215));
         javax.swing.GroupLayout profileSettingsPanelLayout = new javax.swing.GroupLayout(profileSettingsPanel);
         profileSettingsPanel.setLayout(profileSettingsPanelLayout);
         profileSettingsPanelLayout.setHorizontalGroup(
@@ -418,6 +422,7 @@ public class Page extends javax.swing.JFrame {
             .addGap(0, 233, Short.MAX_VALUE)
         );
 
+        rightPanelBottomP.setBackground(new Color(215, 235, 215));
         javax.swing.GroupLayout rightPanelBottomPLayout = new javax.swing.GroupLayout(rightPanelBottomP);
         rightPanelBottomP.setLayout(rightPanelBottomPLayout);
         rightPanelBottomPLayout.setHorizontalGroup(
@@ -519,6 +524,12 @@ public class Page extends javax.swing.JFrame {
         enActivityWithScroll.add(new EnrolledActivityMiniPanel(activity, enActivityWithScroll, this));
         enActivityWithScroll.revalidate();
         enActivityWithScroll.repaint();
+        updateCalendar();
+    }
+
+    public void updateCalendar()
+    {
+        calendarMini.update();
     }
 
     /**
@@ -559,5 +570,6 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JPanel searchPanel;
     private javax.swing.JPanel wholePanel;
     private javax.swing.JPanel enActivityWithScroll;
+    private CalendarPanel calendarMini;
     // End of variables declaration                   
 }

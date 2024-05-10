@@ -54,6 +54,7 @@ public class EnrolledActivityMiniPanel extends JPanel {
         ePanel.remove(this);
         ePanel.revalidate();
         ePanel.repaint();
+        MainManager.mainPage.updateCalendar();
     }
 
     private void nameLabelActionPerformed()

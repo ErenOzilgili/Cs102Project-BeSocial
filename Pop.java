@@ -62,7 +62,7 @@ public class Pop{
         panel.getDisplayNotisP().removeAll();
         
         for(int i = 0; i < 10 ; i++){
-            panel.getDisplayNotisP().add(new FriendNotification());
+            panel.getDisplayNotisP().add(new FriendNotification(MainManager.allAccounts.get(2)));
         }
         
         //Resolve the position issue;
