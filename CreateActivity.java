@@ -567,7 +567,7 @@ public class CreateActivity extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        this.dispose();
+        //this.dispose();
         MainManager.openMainPage(this);
     }          
     private Tag find_tag()
