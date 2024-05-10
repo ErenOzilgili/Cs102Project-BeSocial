@@ -102,9 +102,6 @@ public class SideMenu extends JPanel {
         button7.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button7.setBackground(n);
         button7.setFont(new Font(button3.getText(), Font.PLAIN, 20));
-
-
-
     }
 
     private void addButtons(){

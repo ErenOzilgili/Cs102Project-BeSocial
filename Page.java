@@ -2,6 +2,8 @@ import javax.swing.Popup;
 import javax.swing.PopupFactory;
 import javax.swing.border.LineBorder;
 
+import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -17,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -460,13 +463,17 @@ public class Page extends javax.swing.JFrame {
 
         menuPanel.getGoToPPButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-
+                profileButtonActionPerformed(e);
             }
         });
         
         menuPanel.getLogOutButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                System.exit(0);
+                int opt = JOptionPane.showConfirmDialog(wholePanel, "Are You Sure?");
+                if(opt==JOptionPane.YES_OPTION){
+                    Page.this.dispose();
+                    MainManager.main(null);
+                }
             }
         });
 
@@ -478,7 +485,10 @@ public class Page extends javax.swing.JFrame {
 
         menuPanel.getAddOrRemoveFriendsButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                
+                Page.this.dispose();
+                AR_Friends friends = new AR_Friends();
+                friends.setVisible(true);
+                friends.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         });
 
