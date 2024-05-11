@@ -97,7 +97,7 @@ public class AR_Friends extends javax.swing.JFrame {
 
         search_homePanel.setOpaque(false);
 
-        searchBar.setText("jTextField1");
+        searchBar.setText("Search users");
 
         searchIcon.setText("jButton1");
 

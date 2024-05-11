@@ -400,7 +400,7 @@ public class Page extends javax.swing.JFrame {
         JLabel recommended_for_you_label = new JLabel("Recommended To You",SwingConstants.CENTER);
         JPanel recommendedActivities = new JPanel(new GridLayout(0,1));
         ArrayList<Activity> activities2 = MainManager.user.getRecommendedActivities();
-        for(int i = 0; i<5;i++){
+        for(int i = 0; i<Math.min(5,activities2.size());i++){
             RecommendeForYouMiniPanel newPanel = new RecommendeForYouMiniPanel(activities2.get(i), recommendedActivities, this);
             recommendedActivities.add(newPanel);
         }
