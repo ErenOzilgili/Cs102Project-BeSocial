@@ -136,8 +136,8 @@ public class Account{
                 break;
             }
         }
-        MainManager.user.constructAccountRelations(MainManager.user);
         MainManager.allAccounts = allAccounts;
+        MainManager.user.constructAccountRelations(MainManager.user);      
         return allAccounts;
     }
 
@@ -154,6 +154,11 @@ public class Account{
     public String getUserName()
     {
         return this.userName;
+    }
+
+    public ArrayList<Account> getFriends()
+    {
+        return this.friends;
     }
 
     public boolean equals(Object obj){
