@@ -144,7 +144,7 @@ public class Activity implements Comparable<Activity>{
     public double getPoints(HashMap <Tag.TagType, Double> tagWeights){
         double like = this.likeNum;
         double dislike = this.dislikeNum;
-        return tagWeights.get(this.tag.getType())*(likeNum/(likeNum+dislikeNum)-0.5);
+        return tagWeights.get(this.tag.getType())*(1+likeNum/(likeNum+dislikeNum));
     }
 
 }
