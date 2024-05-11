@@ -172,9 +172,16 @@ public class Account{
         }
     }
 
+    public boolean checkAlreadyInActivity(Activity activity){
+        if(this.enrolledActivities.contains(activity))
+        return true;
+        //Else
+        return false;
+    }
+
     public void joinActivity(Activity activity)
     {
-        if(this.enrolledActivities.contains(activity))
+        if(checkAlreadyInActivity(activity))
         {
             JOptionPane.showMessageDialog(MainManager.mainPage, "You are already in this activity.", "Can not join!", JOptionPane.WARNING_MESSAGE);
         }
