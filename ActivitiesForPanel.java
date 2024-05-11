@@ -1,19 +1,25 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import java.awt.font.TextAttribute;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
 
 public class ActivitiesForPanel extends javax.swing.JPanel {
     private Activity activity;
 
     public ActivitiesForPanel(Activity activity) {
+        this.activity = activity; 
         initComponents();
         addToInitComponents();
 
-        this.activity = activity; 
+        
         //Set the information specific to activity for this panel
 
         //Name of the activity
@@ -45,16 +51,37 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         //Buttons
         //-------
         
-        //LikeButton
-        /*
-        ImageIcon icon = new ImageIcon("indir.jpeg");
-        Image img = icon.getImage() ;  
-        Image newimg = img.getScaledInstance( likeB.getWidth(), likeB.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;  
-        icon = new ImageIcon( newimg );
-        //likeB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mainmanager/indir.jpeg")));
-        likeB.setIcon(icon);
-        */ 
-        
+        //likeB.setBackground(new java.awt.Color(255, 255,255));
+        ImageIcon likePhoto = new ImageIcon("photos/indir.jpeg");
+        Image likeImage = likePhoto.getImage();
+        Image newlikeImage = likeImage.getScaledInstance(25,25, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(newlikeImage);
+        likeB.setIcon(scaledIcon);
+    
+        if(MainManager.user.likedActivities.contains(this.activity))
+        {
+            likeB.setBackground(Color.BLUE);
+        }
+        else
+        {
+            likeB.setBackground(Color.WHITE);
+        }
+
+        ImageIcon dislikePhoto = new ImageIcon("photos/dislike.jpg");
+        Image dislikeImage = dislikePhoto.getImage();
+        Image newdislikeImage = dislikeImage.getScaledInstance(23,23, Image.SCALE_SMOOTH);
+        ImageIcon scaleddisIcon = new ImageIcon(newdislikeImage);
+        dislikeB.setIcon(scaleddisIcon);
+
+        if(MainManager.user.dislikedActivities.contains(this.activity))
+        {
+            dislikeB.setBackground(Color.RED);
+        }
+        else
+        {
+            dislikeB.setBackground(Color.WHITE);
+        }
+
         //ScrollBarUI
         descriptionSP.getVerticalScrollBar().setUI(new NewScrollBarUI());
 
@@ -257,16 +284,113 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
     private void likeBActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
+        for(Activity ac : MainManager.user.likedActivities)
+        {
+            System.out.println(ac.getName());
+        }
+        if(MainManager.user.likedActivities.contains(this.activity))
+        {
+            likeRemove();
+        }
+        else
+        {
+            likeAdd();
+            if(MainManager.user.dislikedActivities.contains(this.activity))
+            {
+                dislikeRemove();
+            }
+        }
     }                                     
 
     private void dislikeBActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        if(MainManager.user.dislikedActivities.contains(this.activity))
+        {
+            dislikeRemove();
+        }
+        else
+        {
+            dislikeAdd();
+            if(MainManager.user.likedActivities.contains(this.activity))
+            {
+                likeRemove();
+            }
+        }
+    }
+    
+    private void likeAdd()
+    {
+        likeB.setBackground(Color.BLUE);
+        //likeB.setBorder(new EtchedBorder());
+        MainManager.user.likedActivities.add(activity);
+        activity.changeLikeNum(1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("INSERT INTO likedActivities ( userID , actID ) VALUES ( " + MainManager.user.userID + " , " + activity.getActivityID() + " )");
+            System.out.println("yoktu var oldu");
+        }
+        catch(SQLException e){
     }    
     
     private void nameLMouseClicked(java.awt.event.MouseEvent evt) {                                   
         ActivityPage frame = new ActivityPage(activity);
         frame.setVisible(true);
     }    
+
+        }
+    }
+
+    private void likeRemove()
+    {
+        likeB.setBackground(Color.WHITE);
+        //likeB.setBorderPainted(false);
+        MainManager.user.likedActivities.remove(activity);
+        activity.changeLikeNum(-1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("DELETE FROM likedActivities WHERE userID = " + MainManager.user.userID + " and actID = " + activity.getActivityID());
+            System.out.println("vardı yok oldu");
+        }
+        catch(SQLException e){
+
+        }
+    }
+
+    private void dislikeAdd()
+    {
+        dislikeB.setBackground(Color.RED);
+        //dislikeB.setBorder(new EtchedBorder());
+        MainManager.user.dislikedActivities.add(activity);
+        activity.changeDislikeNum(1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("INSERT INTO dislikedActivities ( activityID , userID ) VALUES ( " + activity.getActivityID() + " , " + MainManager.user.userID + " )");
+            System.out.println("yoktu var oldu dis");
+        }
+        catch(SQLException e){
+
+        }
+    }
+
+    private void dislikeRemove()
+    {
+        dislikeB.setBackground(Color.WHITE);
+        //dislikeB.setBorderPainted(false);
+        MainManager.user.dislikedActivities.remove(activity);
+        activity.changeDislikeNum(-1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("DELETE FROM dislikedActivities WHERE userID = " + MainManager.user.userID + " and activityID = " + activity.getActivityID());
+            System.out.println("vardı yok oldu dis");
+        }
+        catch(SQLException e){
+
+        }
+    }
 
 
     // Variables declaration - do not modify                     

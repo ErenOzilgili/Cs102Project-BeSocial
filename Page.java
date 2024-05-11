@@ -281,7 +281,7 @@ public class Page extends javax.swing.JFrame {
         });
 
         //to show when there is no activity to display 
-        panelToDisplay.setBackground(Color.CYAN);
+        panelToDisplay.setBackground(new Color(215, 235, 215));
 
         //SearchPage searchBar = new SearchPage();
 

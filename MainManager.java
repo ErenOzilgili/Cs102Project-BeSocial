@@ -46,5 +46,15 @@ public class MainManager {
         mainPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
         MainManager.mainPage = mainPage;
         frame.dispose();
+
+        for(Activity ac : MainManager.user.likedActivities)
+        {
+            System.out.println( "---------" + ac.getName());
+        }
+
+        for(Activity ac : MainManager.user.dislikedActivities)
+        {
+            System.out.println( "---------" + ac.getName());
+        }
     }
 }
