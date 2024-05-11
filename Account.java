@@ -9,9 +9,9 @@ import java.sql.*;
 
 public class Account{
     public String userName;
-    private String userPassword, aboutMe;
+    public String userPassword, aboutMe;
     public int userID;
-    private ArrayList<Tag> tags;
+    public ArrayList<Tag> tags;
     public ArrayList<Activity> likedActivities, dislikedActivities, enrolledActivities, myActivities;
     private ArrayList<Account> friends;
     private ArrayList<Notification> notifications;

@@ -6,6 +6,7 @@ import java.sql.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,6 +19,35 @@ public class ProfilePage extends javax.swing.JFrame {
      */
     public ProfilePage() {
         initComponents();
+        this.jTextField2.setText(MainManager.currUserName);
+        this.jTextField1.setText(MainManager.user.aboutMe);
+        for(int i = 0; i < MainManager.user.tags.size(); i++)
+        {
+        if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHESS))
+        {
+            jRadioButton1.setSelected(true);
+        }
+        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.SPORTS))
+        {
+            SPORTS.setSelected(true);
+        }
+        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHAT))
+        {
+            jRadioButton3.setSelected(true);
+        }
+        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.VIDEOGAME))
+        {
+            jRadioButton4.setSelected(true);
+        }
+        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CINEMA))
+        {
+            jRadioButton5.setSelected(true);
+        }
+        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.DANCE))
+        {
+            jRadioButton6.setSelected(true);
+        }
+        }              
     }
 
     /**
@@ -292,6 +322,53 @@ public class ProfilePage extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         // save button
+        String tags = "";
+        String name = jTextField2.getText();
+        String about_me =  jTextField1.getText();
+        if(jRadioButton1.isSelected())
+        {
+            jRadioButton1.setSelected(true);
+            tags += "<CHESS>";
+        }
+        else if(SPORTS.isSelected())
+        {
+            SPORTS.setSelected(true);
+            tags += "<SPORTS>";
+        }
+        else if(jRadioButton3.isSelected())
+        {
+            jRadioButton3.setSelected(true);
+            tags += "<CHAT>";
+        }
+        else if(jRadioButton4.isSelected())
+        {
+            jRadioButton4.setSelected(true);
+            tags += "<VIDEOGAME>";
+        }
+        else if(jRadioButton5.isSelected())
+        {
+            jRadioButton5.setSelected(true);
+            tags += "<CINEMA>";
+        }
+        else if(jRadioButton6.isSelected())
+        {
+            jRadioButton6.setSelected(true);
+            tags += "<DANCE>";
+        }
+        try {
+            Statement stm = MainManager.db.getCon().createStatement();
+            //String update = "UPDATE account SET username = '" + name + "' WHERE username = '" + MainManager.currUserName + "'";
+            String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE username = '" + MainManager.user.aboutMe + "'";
+            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE username = '" + MainManager.user.tags + "'";
+            //stm.executeUpdate(update);
+            stm.executeUpdate(update2);
+            stm.executeUpdate(update3);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
