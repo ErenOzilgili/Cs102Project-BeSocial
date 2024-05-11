@@ -517,13 +517,14 @@ public class Page extends javax.swing.JFrame {
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-        this.dispose();
-        JFrame profileFrame = new JFrame();
-        profileFrame.add(new ProfilePage());
-        profileFrame.pack();
-        profileFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        profileFrame.setVisible(true);
-        profileFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.dispose();
+        //JFrame profileFrame = new JFrame();
+        //profileFrame.add(new ProfilePage());
+        //profileFrame.pack();
+        //profileFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //profileFrame.setVisible(true);
+        //profileFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ProfilePage.createProfilePage();
     }                 
     
     public void updateEnrolledPanel(Activity activity)
