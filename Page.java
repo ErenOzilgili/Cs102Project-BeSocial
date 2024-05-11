@@ -1,5 +1,6 @@
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
@@ -396,17 +397,31 @@ public class Page extends javax.swing.JFrame {
 
         rightPanel.add(profileSettingsPanel, java.awt.BorderLayout.NORTH);
 
+        JLabel recommended_for_you_label = new JLabel("Recommended To You",SwingConstants.CENTER);
+        JPanel recommendedActivities = new JPanel(new GridLayout(0,1));
+        ArrayList<Activity> activities2 = MainManager.user.getRecommendedActivities();
+        for(int i = 0; i<5;i++){
+            RecommendeForYouMiniPanel newPanel = new RecommendeForYouMiniPanel(activities2.get(i), recommendedActivities, this);
+            recommendedActivities.add(newPanel);
+        }
+
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addComponent(recommended_for_you_label, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+            .addComponent(recommendedActivities)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 224, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(recommended_for_you_label, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(recommendedActivities, javax.swing.GroupLayout.PREFERRED_SIZE, 205, Short.MAX_VALUE)//changed max
+                .addContainerGap()//deleted variables
+                )
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
