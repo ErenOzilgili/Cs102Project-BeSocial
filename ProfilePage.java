@@ -1,7 +1,11 @@
+import java.sql.*;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -266,7 +270,6 @@ public class ProfilePage extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -288,6 +291,20 @@ public class ProfilePage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        // change password
+        String update;
+        String newPassword = JOptionPane.showInputDialog("Type your new passsord");
+        try {
+            Statement stm = MainManager.db.getCon().createStatement();
+                    // SQL query to update the username
+                    update = "UPDATE account SET userPassword = '" + newPassword + "' WHERE username = '" + MainManager.currUserName + "'";
+                    // Executing the update statement
+                    stm.executeUpdate(update);                
+                   
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -320,7 +337,9 @@ public class ProfilePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfilePage().setVisible(true);
+               ProfilePage a =  new ProfilePage();
+               a.setExtendedState(JFrame.MAXIMIZED_BOTH);
+               a.setVisible(true);
             }
         });
     }
