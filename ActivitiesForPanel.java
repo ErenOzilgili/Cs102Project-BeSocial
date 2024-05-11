@@ -331,15 +331,13 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
             System.out.println("yoktu var oldu");
         }
         catch(SQLException e){
-    }    
+    }   
+    }
     
     private void nameLMouseClicked(java.awt.event.MouseEvent evt) {                                   
         ActivityPage frame = new ActivityPage(activity);
         frame.setVisible(true);
     }    
-
-        }
-    }
 
     private void likeRemove()
     {
