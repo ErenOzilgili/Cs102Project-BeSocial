@@ -159,7 +159,7 @@ public class Activity implements Comparable<Activity>{
             for(int i = 0 ; i < 3-result.size() ; i++)
             {
                 JPanel empty = new JPanel();
-                empty.setBackground(new java.awt.Color(0, 224, 224));
+                empty.setBackground(new java.awt.Color(255, 224, 202));
                 panelToDisplay.add(empty);
             }
         }

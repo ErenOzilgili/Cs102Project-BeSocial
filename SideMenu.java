@@ -51,9 +51,15 @@ public class SideMenu extends JPanel {
         button.addActionListener(l);
         mainPanel.add(button, BorderLayout.WEST);
         button.setBorderPainted(false);
-        mainPanel.add(new JPanel(), BorderLayout.EAST);
-        mainPanel.add(new JPanel(), BorderLayout.NORTH);
-        mainPanel.add(new JPanel(), BorderLayout.SOUTH); 
+        JPanel p1 = new JPanel();
+        p1.setBackground(new Color(215, 235, 215));
+        JPanel p2 = new JPanel();
+        p2.setBackground(new Color(215, 235, 215));
+        JPanel p3 = new JPanel();
+        p3.setBackground(new Color(215, 235, 215));
+        mainPanel.add(p1, BorderLayout.EAST);
+        mainPanel.add(p2, BorderLayout.NORTH);
+        mainPanel.add(p3, BorderLayout.SOUTH); 
         initButtons();
         addButtons();
         sidePanel.setPreferredSize(new Dimension(200, 200));
