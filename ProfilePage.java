@@ -357,12 +357,12 @@ public class ProfilePage extends javax.swing.JFrame {
         }
         try {
             Statement stm = MainManager.db.getCon().createStatement();
-            //String update = "UPDATE account SET username = '" + name + "' WHERE username = '" + MainManager.currUserName + "'";
-            String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE username = '" + MainManager.user.aboutMe + "'";
-            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE username = '" + MainManager.user.tags + "'";
-            //stm.executeUpdate(update);
-            stm.executeUpdate(update2);
-            stm.executeUpdate(update3);
+            String update = "UPDATE account SET username = '" + name + "' WHERE username = '" + MainManager.currUserName + "'";
+            String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE username = '" + MainManager.currUserName + "'";
+            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE username = '" + MainManager.currUserName + "'";
+            stm.execute(update);
+            stm.execute(update2);
+            stm.execute(update3);
 
         } catch (Exception e) {
             e.printStackTrace();
