@@ -232,12 +232,12 @@ public class Account{
 
        for(Activity act: likedActivities)
        {
-           tagWeights.put(act.getTag().getType(), tagWeights.get(act.getTag().getType()) + 1.0/total);
+           tagWeights.put(act.getTag().getType(), tagWeights.get(act.getTag().getType()) + 1.0/(total+0.001));
        }
 
         for(Activity act: dislikedActivities)
         {
-            tagWeights.put(act.getTag().getType(), tagWeights.get(act.getTag().getType()) - 1.0/total);
+            tagWeights.put(act.getTag().getType(), tagWeights.get(act.getTag().getType()) - 1.0/(total+0.001));
         }
 
         for(Tag tag: tags)

@@ -41,6 +41,14 @@ public class Activity implements Comparable<Activity>{
             place = rs.getString(6);
             description = rs.getString(7);
             currQuota = rs.getInt(9);
+            Statement st2 = MainManager.db.getCon().createStatement();
+            ResultSet rs2 = st2.executeQuery("SELECT COUNT(*) FROM likedActivities WHERE actID = %d;".formatted(id));
+            rs2.next();
+            likeNum = rs2.getInt(1);
+            Statement st3 = MainManager.db.getCon().createStatement();
+            ResultSet rs3 = st3.executeQuery("SELECT COUNT(*) FROM dislikedActivities WHERE activityID = %d;".formatted(id));
+            rs3.next();
+            dislikeNum = rs3.getInt(1);
         }
         catch(SQLException e){
             System.out.println(e);
@@ -144,7 +152,7 @@ public class Activity implements Comparable<Activity>{
     public double getPoints(HashMap <Tag.TagType, Double> tagWeights){
         double like = this.likeNum;
         double dislike = this.dislikeNum;
-        return tagWeights.get(this.tag.getType())*(1+likeNum/(likeNum+dislikeNum));
+        return tagWeights.get(this.tag.getType())*(1+like/(like+dislike+0.001));
     }
 
 }
