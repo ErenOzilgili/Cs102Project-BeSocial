@@ -279,6 +279,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         //Join the activity
         //Different situations are dealt within the method                                   
         MainManager.user.joinActivity(activity);
+        quotaTF.setText(this.activity.getCurrQuota() + " / " + this.activity.getQuota());
        
     }                                     
 
@@ -328,6 +329,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("INSERT INTO likedActivities ( userID , actID ) VALUES ( " + MainManager.user.userID + " , " + activity.getActivityID() + " )");
+            st.execute("UPDATE activities SET likeCount = " + activity.getLikeCount() + " where activityID = " + activity.getActivityID());
             System.out.println("yoktu var oldu");
         }
         catch(SQLException e){
@@ -349,6 +351,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("DELETE FROM likedActivities WHERE userID = " + MainManager.user.userID + " and actID = " + activity.getActivityID());
+            st.execute("UPDATE activities SET likeCount = " + activity.getLikeCount() + " where activityID = " + activity.getActivityID());
             System.out.println("vardı yok oldu");
         }
         catch(SQLException e){
@@ -366,6 +369,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("INSERT INTO dislikedActivities ( activityID , userID ) VALUES ( " + activity.getActivityID() + " , " + MainManager.user.userID + " )");
+            st.execute("UPDATE activities SET dislikeCount = " + activity.getDislikeCount() + " where activityID = " + activity.getActivityID());
             System.out.println("yoktu var oldu dis");
         }
         catch(SQLException e){
@@ -383,6 +387,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("DELETE FROM dislikedActivities WHERE userID = " + MainManager.user.userID + " and activityID = " + activity.getActivityID());
+            st.execute("UPDATE activities SET dislikeCount = " + activity.getDislikeCount() + " where activityID = " + activity.getActivityID());
             System.out.println("vardı yok oldu dis");
         }
         catch(SQLException e){

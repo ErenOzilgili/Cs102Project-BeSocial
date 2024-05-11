@@ -141,7 +141,7 @@ public class Account{
         return allAccounts;
     }
 
-    public ArrayList<Notification> getNotifications()
+    public ArrayList<Notification> gettNotifications()
     {
         return notifications;
     }
@@ -149,7 +149,7 @@ public class Account{
     public int getID()
     {
         return this.userID;
-    }    
+    }
 
     public String getUserName()
     {

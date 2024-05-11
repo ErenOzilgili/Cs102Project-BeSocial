@@ -517,7 +517,7 @@ public class Page extends javax.swing.JFrame {
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-        //this.dispose();
+        this.dispose();
         //JFrame profileFrame = new JFrame();
         //profileFrame.add(new ProfilePage());
         //profileFrame.pack();
@@ -550,6 +550,11 @@ public class Page extends javax.swing.JFrame {
     
     public int positionY_profileP(){
         return profileSettingsPanel.getY();
+    }
+
+    public JPanel getPanelToDisplay()
+    {
+        return this.panelToDisplay;
     }
 
     // Variables declaration - do not modify                     

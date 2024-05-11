@@ -102,6 +102,8 @@ public class Activity implements Comparable<Activity>{
     public Date getDate(){ return this.date; }
     public int getQuota(){ return this.quota; }
     public int getCurrQuota(){ return this.currQuota;}
+    public int getLikeCount(){ return this.likeNum;}
+    public int getDislikeCount(){ return this.dislikeNum;}
 
     //Setter Methods
     public void changeDislikeNum(int change){ this.dislikeNum += change; }
