@@ -71,6 +71,8 @@ public class FullScreenCalendar extends JFrame {
     this.add(new JPanel());
     this.updateMonth();
     this.setVisible(true);
+    /*System.out.println(MainManager.user.enrolledActivities.size());
+    System.out.println(MainManager.user.likedActivities.size());*/
   }
  
   public void updateMonth() {

@@ -41,19 +41,29 @@ public class Activity implements Comparable<Activity>{
             place = rs.getString(6);
             description = rs.getString(7);
             currQuota = rs.getInt(9);
-            Statement st2 = MainManager.db.getCon().createStatement();
-            ResultSet rs2 = st2.executeQuery("SELECT COUNT(*) FROM likedActivities WHERE actID = %d;".formatted(id));
-            rs2.next();
-            likeNum = rs2.getInt(1);
-            Statement st3 = MainManager.db.getCon().createStatement();
-            ResultSet rs3 = st3.executeQuery("SELECT COUNT(*) FROM dislikedActivities WHERE activityID = %d;".formatted(id));
-            rs3.next();
-            dislikeNum = rs3.getInt(1);
+            likeNum = rs.getInt(10);
+            dislikeNum = rs.getInt(11);
+            //System.out.println(System.currentTimeMillis() + " " + date.getTime());
         }
         catch(SQLException e){
             System.out.println(e);
         }
     }
+
+    public Activity(String name,Tag tag, int quota, Date date, Time time, String Place, String Description, int id, int currentQuota,int likeNum, int dislikeNum){
+        this.name = name;
+        this.tag = tag;
+        this.quota = quota;
+        this.date = date;
+        this.time = time;
+        this.place = place;
+        this.description = description;
+        this.activityID= id;
+        this.currQuota = currentQuota;
+        this.likeNum = likeNum;
+        this.dislikeNum = dislikeNum;
+    }
+    
 
     /*
      * This method will be used whenever
@@ -99,7 +109,7 @@ public class Activity implements Comparable<Activity>{
     public void changeCurrQuota(int change){this.currQuota+=change;};
 
     public static ArrayList<Activity> getAllActivities(){
-        ArrayList<Activity> allActivities = new ArrayList<Activity>();
+        /*ArrayList<Activity> allActivities = new ArrayList<Activity>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT activityID FROM activities;");
@@ -109,6 +119,20 @@ public class Activity implements Comparable<Activity>{
         }
         catch(SQLException e){
 
+        }
+        return allActivities;*/
+
+        ArrayList<Activity> allActivities = new ArrayList<Activity>();
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM activities;");
+            while(rs.next()){
+                Activity act = new Activity(rs.getString(1),new Tag(Tag.TagType.valueOf(rs.getString(2))),rs.getInt(3),rs.getDate(4),rs.getTime(5),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11));
+                allActivities.add(act);
+            }
+        }
+        catch(SQLException e){
+            System.out.println(e);
         }
         return allActivities;
     }
@@ -150,8 +174,8 @@ public class Activity implements Comparable<Activity>{
     }
 
     public double getPoints(HashMap <Tag.TagType, Double> tagWeights){
-        double like = this.likeNum;
-        double dislike = this.dislikeNum;
+        double like = (double)this.likeNum;
+        double dislike = (double)this.dislikeNum;
         return tagWeights.get(this.tag.getType())*(1+like/(like+dislike+0.001));
     }
 
