@@ -33,6 +33,15 @@ public class Account{
         }
     }
 
+    Account(int userID, String userName, String userPassword, String aboutMe, String tags,String email)
+    {
+        this.userID = userID;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.aboutMe = aboutMe;
+        this.tags = Tag.detectTags(this);
+    }
+
     public void constructAccountRelations(Account acc){
         likedActivities = new ArrayList<Activity>();
         dislikedActivities = new ArrayList<Activity>();
@@ -109,26 +118,27 @@ public class Account{
 
     public static ArrayList<Account> getAllAccounts()
     {
-        MainManager.allAccounts = new ArrayList<Account>();
+        ArrayList<Account> allAccounts = new ArrayList<Account>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
-            ResultSet rs = st.executeQuery("SELECT username FROM account;");
+            ResultSet rs = st.executeQuery("SELECT * FROM account;");
             while(rs.next()){
-                MainManager.allAccounts.add(new Account(rs.getString(1)));
+                allAccounts.add(new Account(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
             }
         }
         
         catch(SQLException e){
 
         }
-        for(Account acc: MainManager.allAccounts){
+        for(Account acc: allAccounts){
             if(acc.userName.equals(MainManager.currUserName)){
                 MainManager.user = acc;
                 break;
             }
         }
         MainManager.user.constructAccountRelations(MainManager.user);
-        return MainManager.allAccounts;
+        MainManager.allAccounts = allAccounts;
+        return allAccounts;
     }
 
     public ArrayList<Notification> getNotifications()
