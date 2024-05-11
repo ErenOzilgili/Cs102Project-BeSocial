@@ -2,8 +2,6 @@ import javax.swing.Popup;
 import javax.swing.PopupFactory;
 import javax.swing.border.LineBorder;
 
-import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -23,7 +21,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-
 
 public class Page extends javax.swing.JFrame {
 
@@ -507,9 +504,9 @@ public class Page extends javax.swing.JFrame {
     }  
 
     //Listener for notifications
-    private void notiButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-        noti.decideAction();//To decide whether to show the popup or hide it;
+    private void notiButtonActionPerformed(java.awt.event.ActionEvent evt){   
+        //To decide whether to show the popup or hide it;
+        noti.decideAction();
     } 
 
     private void createActivityButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     

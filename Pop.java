@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import java.awt.Dimension;
 import java.awt.Panel;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -32,7 +33,11 @@ public class Pop{
     
     public void decideAction(){
         if(!page.isNotiDisplayed){
-            createPopup();
+            //Get the recent notis from database
+            ArrayList<Notification> actNotis = Notification.getNotiActivity();
+            ArrayList<Notification> friendNotis = Notification.getNotiFriend();
+
+            createPopup(actNotis, friendNotis);
             page.isNotiDisplayed = true;
         }
         else{
@@ -51,18 +56,25 @@ public class Pop{
         popup = pf.getPopup(page, panel, page.getX() + page.getWidth() + page.positionX_profileP() - 390, page.getY() + page.positionY_profileP() + 130 );
     }
     
-    private void createPopup(){
-        
-        //Panele p ye info ekle
-        //---------------------
-        //Databaseden gelen infoyu for loop ile ya activity notificationa Stringi koy ya da friend notificationa koy
-        //Sonrasında bu panelleri ( activity notfication ve friend notification) this.panel (panel) in içine yerleştir)
-        ArrayList<String> infoNoti = this.infoNoti();//Bilgiyi yukardaki gibi işle
+    private void createPopup(ArrayList<Notification> actNotis, ArrayList<Notification> friendNotis){  
+        final int Needed = 4;
+        int count = 0;
         
         panel.getDisplayNotisP().removeAll();
         
-        for(int i = 0; i < 10 ; i++){
-            panel.getDisplayNotisP().add(new FriendNotification(MainManager.allAccounts.get(2)));
+        for(Notification toDisp : actNotis){
+            panel.getDisplayNotisP().add(new ActivityNotification(toDisp));
+            ++count;
+        }
+        for(Notification toDisp : friendNotis){
+            panel.getDisplayNotisP().add(new FriendNotification(toDisp));
+            ++count;
+        }
+
+        for(int i = Needed - count; i > 0; i--){
+            JPanel toDisplay = new JPanel();
+            toDisplay.setPreferredSize(new Dimension(300, 60));
+            panel.getDisplayNotisP().add(toDisplay);
         }
         
         //Resolve the position issue;
@@ -70,13 +82,6 @@ public class Pop{
         
         popup.show();//Display the pop up
     }
-    
-    
-    private ArrayList<String> infoNoti(){
-        
-        ArrayList<String> notiInfo = new ArrayList<String>();
-         
-        return notiInfo;
-    }
+
     
 }

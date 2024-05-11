@@ -1,5 +1,9 @@
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
+import java.awt.font.TextAttribute;
+import java.util.Map;
+
 import javax.swing.ImageIcon;
 
 public class ActivitiesForPanel extends javax.swing.JPanel {
@@ -11,13 +15,30 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
         this.activity = activity; 
         //Set the information specific to activity for this panel
-        nameL.setText(this.activity.getName());//Name of the activity
+
+        //Name of the activity
+        nameL.setText(this.activity.getName());
+        Font font = nameL.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        nameL.setFont(font.deriveFont(attributes));
+
         // TODO add your handling code here:
         //quotaTextField text should be in the from of 10/20; Need currentQuota
         quotaTF.setText(this.activity.getCurrQuota() + " / " + this.activity.getQuota());//Quota of the activity
 
         this.setVisible(true);
         this.setPreferredSize(new Dimension(275, 200));
+
+        /*
+         * 
+         * 
+         * JLabel label = new JLabel("Underlined Label");
+            Font font = label.getFont();
+            Map attributes = font.getAttributes();
+            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+            label.setFont(font.deriveFont(attributes));
+         */
     }
 
     private void addToInitComponents(){
@@ -58,7 +79,12 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         nameL.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        nameL.setText("Activity Name");
+        nameL.setText("");
+        nameL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameLMouseClicked(evt);
+            }
+        });
 
         descriptionL.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         descriptionL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -218,9 +244,15 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }                                       
 
-    private void joinBActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        // TODO add your handling code here:
+    private void joinBActionPerformed(java.awt.event.ActionEvent evt) {   
+        //Below is added to send notification to database;
+        //If not already enrolled to activity
+        //send a notification
+        if(!(MainManager.user.checkAlreadyInActivity(activity))){ Notification.sendNotiActivity(activity); }
+        //Join the activity
+        //Different situations are dealt within the method                                   
         MainManager.user.joinActivity(activity);
+       
     }                                     
 
     private void likeBActionPerformed(java.awt.event.ActionEvent evt) {                                      
@@ -229,7 +261,12 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
     private void dislikeBActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+    }    
+    
+    private void nameLMouseClicked(java.awt.event.MouseEvent evt) {                                   
+        ActivityPage frame = new ActivityPage(activity);
+        frame.setVisible(true);
+    }    
 
 
     // Variables declaration - do not modify                     

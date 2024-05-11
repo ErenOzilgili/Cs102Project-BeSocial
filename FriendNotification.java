@@ -4,21 +4,16 @@
  */
 import java.awt.Dimension;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author ereno
- */
 public class FriendNotification extends javax.swing.JPanel {
 
+    private Notification notification;
     private Account sender;
-    /**
-     * Creates new form FriendNotification
-     */
-    public FriendNotification(Account account) {
-        sender = account;
+
+    public FriendNotification(Notification notification) {
+        this.notification = notification;
+        sender = notification.getSenderAccount();
 
         initComponents();
         addToInitComponents();
@@ -37,6 +32,8 @@ public class FriendNotification extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+        //Set the line border
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
