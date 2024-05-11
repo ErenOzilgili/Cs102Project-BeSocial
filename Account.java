@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -102,24 +104,7 @@ public class Account{
         catch (SQLException e) {
             System.out.println(e);
         }
-        /* 
-        try{
-            Statement st = MainManager.db.getCon().createStatement();
-            ResultSet rs = st.executeQuery("SELECT activityID FROM dislikedActivities WHERE userID = %d;".formatted(this.userID));
-            while(rs.next()){
-                int activityID = rs.getInt(1);
-                for(Activity act: MainManager.allActivities){
-                    if(act.getActivityID() == activityID){
-                        this.dislikedActivities.add(act);
-                        break;
-                    }
-                }
-            }    
-        }
-        catch (SQLException e) {
-            System.out.println(e);
-        }
-        */
+        
     }
 
     public static ArrayList<Account> getAllAccounts()
@@ -215,4 +200,49 @@ public class Account{
             }
         }
     }
+
+    public ArrayList<Activity> getRecommendedActivities()
+    {
+       ArrayList<Activity> temp = new ArrayList<Activity>();
+       for(Activity act: MainManager.allActivities)
+       {
+           temp.add(act);
+       } 
+       for(Activity act: enrolledActivities)
+       {
+           temp.remove(act);
+       }
+        for(Activity act: dislikedActivities)
+        {
+            temp.remove(act);
+        }
+       HashMap <Tag.TagType,Double> tagWeights = new HashMap<Tag.TagType,Double>();
+       int total = likedActivities.size() + dislikedActivities.size();
+       for(Tag.TagType tag: Tag.TagType.values())
+       {
+           tagWeights.put(tag, 1.0);
+       }
+
+       for(Activity act: likedActivities)
+       {
+           tagWeights.put(act.getTag().getType(), tagWeights.get(act.getTag().getType()) + 1.0/total);
+       }
+
+        for(Activity act: dislikedActivities)
+        {
+            tagWeights.put(act.getTag().getType(), tagWeights.get(act.getTag().getType()) - 1.0/total);
+        }
+
+        for(Tag tag: tags)
+        {
+            tagWeights.put(tag.getType(), tagWeights.get(tag.getType()) + 1.0);
+        }
+
+        temp.sort((a1,a2) -> {
+            double score1 = a1.getPoints(tagWeights);
+            double score2 = a2.getPoints(tagWeights);
+            return Double.compare(score2, score1);
+        });
+        return temp;
+    }   
 }

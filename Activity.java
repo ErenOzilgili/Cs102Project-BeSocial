@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 
@@ -75,19 +76,11 @@ public class Activity implements Comparable<Activity>{
 
     public void activityDisliked(User user){ user.removeActDisliked(this); }
 
-    public int compareTo(Activity activity){
-        //Comparing activities according to their activity number (activityID).
-        if(this.activityID == activity.getActivityID()){ return 0; }
-        else if(this.activityID > activity.getActivityID()){ return 1; }
-        else{ return -1; }
-
-    }
-
     //GetterMethods
     public int getActivityID(){ return this.activityID; }
     public String getName(){ return this.name; }
     public String getDescription(){ return this.description; }
-    public ArrayList<Tag> getTags(){ return this.tags; }
+    public Tag getTag(){ return this.tag; }
     public Date getDate(){ return this.date; }
     public int getQuota(){ return this.quota; }
     public int getCurrQuota(){ return this.currQuota;}
@@ -142,6 +135,16 @@ public class Activity implements Comparable<Activity>{
         //Lastly repaint and revalidete the panel;
         panelToDisplay.revalidate();
         panelToDisplay.repaint();
+    }
+
+    public int compareTo(Activity act){
+        return 0;
+    }
+
+    public double getPoints(HashMap <Tag.TagType, Double> tagWeights){
+        double like = this.likeNum;
+        double dislike = this.dislikeNum;
+        return tagWeights.get(this.tag.getType())*(likeNum/(likeNum+dislikeNum)-0.5);
     }
 
 }
