@@ -253,9 +253,9 @@ public class SignUp extends javax.swing.JFrame  {
                 try 
                 {
                     Statement stm = MainManager.db.getCon().createStatement();
-                    ResultSet resultset = stm.executeQuery("SELECT COUNT(userID) FROM account");
+                    ResultSet resultset = stm.executeQuery("SELECT MAX(userID) as maxID FROM account");
                     resultset.next();
-                    int ID = resultset.getInt("COUNT(userID)") + 1;
+                    int ID = resultset.getInt("maxID") + 1;
                     String add = "INSERT INTO account(username, aboutMe, userPassword, userId, email) VALUES ('" + name + "' , '" + "Hi! I want to be social." + "','" + password + "','" + ID + "','" + email + "' ) ";
                     //INSERT INTO student(name, major) VALUES('Jack', 'Biology');                
                     // ınsert the data 
