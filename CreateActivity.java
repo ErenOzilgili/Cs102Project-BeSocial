@@ -568,6 +568,22 @@ public class CreateActivity extends javax.swing.JFrame {
     }
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         //this.dispose();
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         MainManager.openMainPage(this);
     }          
     private Tag find_tag()
@@ -638,12 +654,14 @@ public class CreateActivity extends javax.swing.JFrame {
             {
                 ID = resultset.getInt("maxID") + 1;
             }        
-            String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activityID,current_quota) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" + date2 + "' , '" + time_of_activity + "','" + activity_place + "','" + activity_definition+ "','" + ID +"','"+ 1 +"' ) ";
+            String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activityID,current_quota,likeCount,dislikeCount) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" + date2 + "' , '" + time_of_activity + "','" + activity_place + "','" + activity_definition+ "','" + ID +"','"+ 1 + "','" + 0 + "','" + 0 + "' ) ";
             String add2 = "INSERT INTO enrolledActivities(userID, actID) VALUES ('"+ MainManager.user.getID() + "' , '" + ID  +"') ";
             stm.execute(add);
             stm.execute(add2);
             stm.close();
-            
+            Activity newActivity = new Activity(ID);
+            MainManager.allActivities.add(newActivity);
+            MainManager.user.enrolledActivities.add(newActivity);
         } catch (SQLException ex) {
             // TODO: handle exception
             Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
@@ -661,22 +679,22 @@ public class CreateActivity extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        // try {
-        //     for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-        //         if ("Nimbus".equals(info.getName())) {
-        //             javax.swing.UIManager.setLookAndFeel(info.getClassName());
-        //             break;
-        //         }
-        //     }
-        // } catch (ClassNotFoundException ex) {
-        //     java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        // } catch (InstantiationException ex) {
-        //     java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        // } catch (IllegalAccessException ex) {
-        //     java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        // } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        //     java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        // }
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CreateActivity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         //</editor-fold>
 
         /* Create and display the form */
