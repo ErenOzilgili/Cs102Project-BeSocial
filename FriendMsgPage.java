@@ -8,15 +8,22 @@ public class FriendMsgPage extends JFrame {
     private final boolean type = false;
 
     public FriendMsgPage(Account account) {
-        
+        this.account = account;
+
         initComponents();
         addToInitComponents();
 
+        //Set visible
+        this.setVisible(true);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        //Set the name of who is user chatting to
         receiverNameL.setText(account.getUserName());  
 
+        //Create a new friend chat;
         friendChat = new FriendChat(account.getID(), account.getUserName());
-        this.account = account;
 
+        //Adjust timers for refreshing the chat
         Refresh.adjustTimerForFriendChat(false, friendChat, account, chatPanel);
     }
     

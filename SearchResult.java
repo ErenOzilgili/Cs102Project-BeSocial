@@ -1,4 +1,6 @@
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -23,21 +25,38 @@ public class SearchResult extends javax.swing.JPanel {
     private void addToInitComponents()
     {
         if(type){
-            button.setText("Message");
+            button.setText("Chat");
         }
         else{
-            if(isFriend){
-                button.setText("Remove");
-            }
-            else{
-                if(!Account.isFriend(account)){
-                    button.setText("Waiting");
+            ResultSet rs = null;
+            int reciverID = 0;
+            int senderID = 0;
+            try{
+                if(isFriend){
+                    button.setText("Remove");
                 }
                 else{
-                    button.setText("Add");
-                }
+                    Statement st = MainManager.db.getCon().createStatement();
+                    rs= st.executeQuery("SELECT * FROM notifications WHERE NOT type AND (receiverID = %d OR senderID = %d)".formatted(MainManager.user.getID(), MainManager.user.getID()));
+                    if(rs.next()){
+                        reciverID = rs.getInt("receiverID");
+                        senderID = rs.getInt("senderID");
+                        if((account.getID() == reciverID) || (account.getID() == senderID)){
+                            button.setText("Waiting");
+                        }
+                        else{
+                            button.setText("Add"); 
+                        }
+                    }
+                    else{
+                        button.setText("Add"); 
+                    }
+                }       
             }
-        
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+
         }
 
         nameText.setText(account.getUserName());

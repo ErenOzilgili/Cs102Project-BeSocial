@@ -19,16 +19,7 @@ public class AR_Friends extends javax.swing.JFrame {
         //SearchBar TextField is set to "" for start
         searchBar.setText("");
 
-
-        //Panel for Display implementation example
-        //panelForDisplay.setLayout(new GridLayout(0, 1));
-        
-        //for(int i = 0; i < 10; i++){
-          //  panelForDisplay.add(new SearchResult());
-        //}
         Account.insertAccounts(false, panelForDisplay, MainManager.allAccounts);
-
-
     }
                       
     private void initComponents() {

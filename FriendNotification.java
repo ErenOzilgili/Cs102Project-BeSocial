@@ -22,6 +22,8 @@ public class FriendNotification extends javax.swing.JPanel {
     private void addToInitComponents(){
         this.setPreferredSize(new Dimension(300, 60));
        
+        //Get the description of notification
+        this.jTextField1.setText(notification.getDescription());
     }
                       
     private void initComponents() {
