@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import java.sql.*;
 
-public class Account{
+public class Account implements Comparable<Account>{
     public String userName;
     public String userPassword, aboutMe;
     public int userID;
@@ -31,6 +31,26 @@ public class Account{
         catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public static Account foundUser(int search){
+        int start = 0;
+        int end = MainManager.allAccounts.size() - 1;
+
+        while(start <= end){
+            int mid = (start + end) / 2;
+
+            if(MainManager.allAccounts.get(mid).getID() == search){
+                return MainManager.allAccounts.get(mid);
+            }
+            else if(MainManager.allAccounts.get(mid).getID() > search){
+                end = mid - 1;
+            }
+            else{
+                start = mid + 1;
+            }
+        }
+        return null;
     }
 
     Account(int userID, String userName, String userPassword, String aboutMe, String tags,String email)
@@ -139,6 +159,80 @@ public class Account{
         MainManager.allAccounts = allAccounts;
         MainManager.user.constructAccountRelations(MainManager.user);      
         return allAccounts;
+    }
+
+    //Use in friends pages
+    public static boolean isFriend(Account isFriend){
+        if(MainManager.user.getFriends().contains(isFriend)){ return true; }
+        return false;
+    }
+
+    public static void addFriend(Account toAdd){
+        //Send notification to toAdd --> meaning send it to database
+        //From there, toAdd will be able to see this notification
+        Notification.sendNotiFriend(toAdd);
+
+        //Note:
+        //Actual adding will be done whenever notification has been excepted by user toAdd
+    }
+
+    public static void removeFriend(Account toRemove){
+        //We are not sending notification for removing;
+        //Delete two way frienship
+        try{
+            //(1)
+            String st = "DELETE FROM friends WHERE userID = ? AND receiverID = ?";
+            PreparedStatement ps = MainManager.db.getCon().prepareStatement(st.toString());
+
+            //Placeholders (?) are assigned values
+            ps.setInt(1, toRemove.getID());
+            ps.setInt(2, MainManager.user.getID());
+
+            ps.executeUpdate();
+
+            //(2)
+            PreparedStatement ps1 = MainManager.db.getCon().prepareStatement(st.toString());
+
+            //Placeholders (?) are assigned values
+            ps.setInt(1, MainManager.user.getID());
+            ps.setInt(2, toRemove.getID());
+
+            ps1.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Couldn't add the friend");
+        }
+    }
+
+    public static void acceptFriendReq(Notification notification){
+        try{
+            //Connect the friends two way
+            //(1)
+            String st = "INSERT INTO friends (userID, friendID) VALUES (?, ?)";
+            PreparedStatement ps = MainManager.db.getCon().prepareStatement(st.toString());
+
+            //Placeholders (?) are assigned values
+            ps.setInt(1, notification.getSenderAccount().getID());
+            ps.setInt(2, notification.getReceiverAccount().getID());
+
+            ps.executeUpdate();
+
+            //(2)
+            String st1 = "INSERT INTO friends (userID, friendID) VALUES (?, ?)";
+            PreparedStatement ps1 = MainManager.db.getCon().prepareStatement(st1.toString());
+
+            //Placeholders (?) are assigned values
+            ps1.setInt(1, notification.getReceiverAccount().getID());
+            ps1.setInt(2, notification.getSenderAccount().getID());
+
+            ps1.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Couldn't add the friend");
+        }
+
     }
 
     public ArrayList<Notification> getNotifications()
@@ -266,5 +360,11 @@ public class Account{
             return Double.compare(score2, score1);
         });
         return temp;
-    }   
+    }  
+    
+    public int compareTo(Account acc){
+        if(this.userID < acc.getID()){ return -1; }
+        else if(this.userID == acc.getID()){ return 0; }
+        return 1;
+    }
 }
