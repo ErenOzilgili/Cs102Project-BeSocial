@@ -59,11 +59,23 @@ public class ProfilePage extends javax.swing.JFrame {
             }
         }              
 
-        ImageIcon homeicon = new ImageIcon("photos/25694.png");
-        Image homeimage = homeicon.getImage(); // transform it 
-        Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-        homeicon = new ImageIcon(newHomeImage);  // transform it back
-        homeButton.setIcon(homeicon);
+        if(this.profile == MainManager.user)
+        {
+            ImageIcon homeicon = new ImageIcon("photos/25694.png");
+            Image homeimage = homeicon.getImage(); // transform it 
+            Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            homeicon = new ImageIcon(newHomeImage);  // transform it back
+            homeButton.setIcon(homeicon);
+        }
+        else
+        {
+            ImageIcon homeicon = new ImageIcon("photos/return.png");
+            Image homeimage = homeicon.getImage(); // transform it 
+            Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            homeicon = new ImageIcon(newHomeImage);  // transform it back
+            homeButton.setIcon(homeicon);
+        }
+        
 
         //profile picture adding part
         //jPanel3.setBackground(new java.awt.Color(255, 102, 102));

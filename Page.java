@@ -60,6 +60,12 @@ public class Page extends javax.swing.JFrame {
         ImageIcon scaledNotiIcon = new ImageIcon(newnotiImg);
         notiButton.setIcon(scaledNotiIcon);
 
+        ImageIcon setIcon = new ImageIcon("photos/renew.png");
+        Image setImage = setIcon.getImage(); // transform it 
+        Image newSetImage = setImage.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        setIcon = new ImageIcon(newSetImage);  // transform it back
+        settingsButton.setIcon(setIcon);
+
         //Notifications
         noti = new Pop(this);
 
@@ -363,7 +369,7 @@ public class Page extends javax.swing.JFrame {
             }
         });
 
-        settingsButton.setText("notiButton");
+        //settingsButton.setText("notiButton");
 
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
