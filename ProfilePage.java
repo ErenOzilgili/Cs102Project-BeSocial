@@ -24,33 +24,35 @@ public class ProfilePage extends javax.swing.JFrame {
     /**
      * Creates new form ProfiePage
      */
-    public ProfilePage() {
+    private Account profile;
+
+    public ProfilePage(Account profile) {
         initComponents();
-        this.jTextField2.setText(MainManager.user.userName);
-        this.jTextField1.setText(MainManager.user.aboutMe);
-        for(int i = 0; i < MainManager.user.tags.size(); i++)
+        this.jTextField2.setText(profile.userName);
+        this.jTextField1.setText(profile.aboutMe);
+        for(int i = 0; i < profile.tags.size(); i++)
         {
-            if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHESS))
+            if(profile.tags.get(i).getType().equals(Tag.TagType.CHESS))
             {
                 jRadioButton1.setSelected(true);
             }
-            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.SPORTS))
+            else if(profile.tags.get(i).getType().equals(Tag.TagType.SPORTS))
             {
                 SPORTS.setSelected(true);
             }
-            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHAT))
+            else if(profile.tags.get(i).getType().equals(Tag.TagType.CHAT))
             {
                 jRadioButton3.setSelected(true);
             }
-            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.VIDEOGAME))
+            else if(profile.tags.get(i).getType().equals(Tag.TagType.VIDEOGAME))
             {
                 jRadioButton4.setSelected(true);
             }
-            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CINEMA))
+            else if(profile.tags.get(i).getType().equals(Tag.TagType.CINEMA))
             {
                 jRadioButton5.setSelected(true);
             }
-            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.DANCE))
+            else if(profile.tags.get(i).getType().equals(Tag.TagType.DANCE))
             {
                 jRadioButton6.setSelected(true);
             }
@@ -63,8 +65,9 @@ public class ProfilePage extends javax.swing.JFrame {
         homeButton.setIcon(homeicon);
 
         //profile picture adding part
-        jPanel3.setBackground(new java.awt.Color(255, 102, 102));
-        ImageIcon profilePhoto = new ImageIcon("photos/PP" +MainManager.user.getID()%5 +".jpeg");
+        //jPanel3.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel3.setOpaque(false);
+        ImageIcon profilePhoto = new ImageIcon("photos/PP" +profile.getID()%5 +".jpeg");
         Image ppImage = profilePhoto.getImage();
         Image newPPImg = ppImage.getScaledInstance(200,200, Image.SCALE_SMOOTH);
         ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
@@ -73,6 +76,23 @@ public class ProfilePage extends javax.swing.JFrame {
         jPanel3.add(ppLabel);
 
         jPanel4.setOpaque(false);
+
+        if(profile != MainManager.user)
+        {
+            jTextField1.setEditable(false);
+            jTextField2.setEditable(false);
+            jRadioButton1.setEnabled(false);
+            jRadioButton3.setEnabled(false);
+            jRadioButton4.setEnabled(false);
+            jRadioButton5.setEnabled(false);
+            jRadioButton6.setEnabled(false);
+            SPORTS.setEnabled(false);
+            jButton1.setEnabled(false);
+            jButton4.setEnabled(false);
+
+            jButton1.setVisible(false);
+            jButton4.setVisible(false);
+        }
     }
 
     /**
@@ -393,9 +413,9 @@ public class ProfilePage extends javax.swing.JFrame {
         }
         try {
             Statement stm = MainManager.db.getCon().createStatement();
-            String update = "UPDATE account SET username = '" + name + "' WHERE username = '" + MainManager.user.getUserName() + "'";
-            String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE username = '" + MainManager.user.getUserName() + "'";
-            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE username = '" + MainManager.user.getUserName()+ "'";              
+            String update = "UPDATE account SET username = '" + name + "' WHERE userID = '" + MainManager.user.getID() + "'";
+            String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE userID = '" + MainManager.user.getID() + "'";
+            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE userID = '" + MainManager.user.getID() + "'";              
             stm.execute(update);
             stm.execute(update2);
             stm.execute(update3);
@@ -460,7 +480,7 @@ public class ProfilePage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void createProfilePage() {
+    public static void createProfilePage(Account ac) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -487,7 +507,7 @@ public class ProfilePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               ProfilePage a =  new ProfilePage();
+               ProfilePage a =  new ProfilePage(ac);
                a.setExtendedState(JFrame.MAXIMIZED_BOTH);
                a.setVisible(true);
             }
