@@ -182,7 +182,7 @@ public class Account implements Comparable<Account>{
 
     public static void removeFriend(Account toRemove){
         //We are not sending notification for removing;
-        //Delete two way frienship
+        //Delete two way frienship from database, afterwards delete friend from local
         try{
             //(1)
             String st = "DELETE FROM friends WHERE userID = ? AND receiverID = ?";
@@ -202,6 +202,14 @@ public class Account implements Comparable<Account>{
             ps.setInt(2, toRemove.getID());
 
             ps1.executeUpdate();
+
+            //Delete friend from local
+            for(Account acc : MainManager.user.getFriends()){
+                if(acc.compareTo(toRemove) == 0){
+                    MainManager.user.getFriends().remove(toRemove);
+                    break;
+                }
+            }
         }
         catch(Exception e){
             System.out.println(e.getMessage());
