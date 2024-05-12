@@ -22,10 +22,17 @@ public class SearchResult extends javax.swing.JPanel {
             button.setText("Message");
         }
         else{
-            if(isFriend)
-            button.setText("Remove");
-            else
-            button.setText("Add");
+            if(isFriend){
+                button.setText("Remove");
+            }
+            else{
+                if(!Account.isFriend(account)){
+                    button.setText("Waiting");
+                }
+                else{
+                    button.setText("Add");
+                }
+            }
         
         }
 
@@ -100,20 +107,20 @@ public class SearchResult extends javax.swing.JPanel {
         );
     }// </editor-fold>    
     
-    private void buttonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void buttonActionPerformed(java.awt.event.ActionEvent evt) {                                       
         if(button.getText().equals("Remove")){
             Account.removeFriend(account);
             button.setText("Add");
         }
         else if(button.getText().equals("Add")){
             Account.addFriend(account);
-            //TODO
-            button.setText("Remove");
+            button.setText("Waiting");
         }
-        else{
+        else if(button.getText().equals("Chat")){
             //Opens new chat page, used in your friends page
             FriendMsgPage msgPage = new FriendMsgPage(account);
         }
+        else{}//Do nothing --> Button is on "Waiting" form
     } 
 
     private void profileIconButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
