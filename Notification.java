@@ -20,6 +20,7 @@ public class Notification {
         this.receiverAccount = receiverAccount;
     }
 
+    /* 
     public static void getNotification(){
         ArrayList<Notification> toAdd = new ArrayList<Notification>();
 
@@ -43,19 +44,9 @@ public class Notification {
 
         addNotifications(MainManager.user, toAdd);
     }
+    */
 
-    public static void deleteNotification(){
-        /*
-         *  try{
-
-            }
-            catch(SQLException ex){
-                ex.getMessage();
-            }
-         */
-
-    }
-
+    /* 
     public static void addNotifications(Account account, ArrayList<Notification> notis){
         account.getNotifications().clear();
 
@@ -64,6 +55,7 @@ public class Notification {
         }
         
     }
+    */
 
     //type column in notification table is boolean
     //if type = 1 this means it is true
@@ -98,16 +90,34 @@ public class Notification {
         }
     }
 
-    public static void sendNotiFriend(Account friend){
-        // TODO add your handling code here:
+    public static void leaveActivityNoti(Activity activity){
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            //rs will return the row no in below way
+            ResultSet rs = st.executeQuery("SELECT MAX(notiID) AS maxID FROM notifications");
 
-    }
+            //If next is not entered, we have this as the first noti;
+            int ID = 1;
+            if(rs.next()){
+                ID = rs.getInt("maxID") + 1; 
+            }
 
-    public static ArrayList<Notification> getNotiFriend(){
-        // TODO add your handling code here:
+            //Adding the notification of the left activity to database;
+            String stMain = "INSERT INTO notifications (notiID, type, description, senderID, receiverID) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = MainManager.db.getCon().prepareStatement(stMain.toString());
 
-        //For now
-        return new ArrayList<Notification>();
+            ps.setInt(1, ID);
+            ps.setBoolean(2, true);
+            ps.setString(3, "Left the activity: " + activity.getName());
+            ps.setInt(4, MainManager.user.getID());
+            ps.setInt(5, MainManager.user.getID());
+
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            System.out.println("Couldn't send to database a noti for joined activity");
+            System.out.println(e.getMessage());
+        }
     }
 
     public static ArrayList<Notification> getNotiActivity(){
@@ -133,6 +143,34 @@ public class Notification {
             System.out.println(e.getMessage());
             //Return empty arrayList
             return new ArrayList<Notification>();
+        }
+    }
+
+    public static void sendNotiFriend(Account friend){
+        // TODO add your handling code here:
+    }
+
+    public static ArrayList<Notification> getNotiFriend(){
+        // TODO add your handling code here:
+
+        //For now
+        return new ArrayList<Notification>();
+    }
+
+    public static void deleteNotification(Notification notification){
+        try{
+            //Delete the corresponding notification from database
+            String st = "DELETE FROM notifications WHERE notiID = ?";
+            PreparedStatement ps = MainManager.db.getCon().prepareStatement(st.toString());
+
+            //Placeholders (?) are assigned values
+            ps.setInt(1, notification.getNotiID());
+
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            System.out.println("Couldn't delete the nofication");
+            System.out.println(e.getMessage());
         }
     }
 

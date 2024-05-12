@@ -141,7 +141,7 @@ public class Account{
         return allAccounts;
     }
 
-    public ArrayList<Notification> gettNotifications()
+    public ArrayList<Notification> getNotifications()
     {
         return notifications;
     }

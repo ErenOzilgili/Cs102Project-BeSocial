@@ -1,10 +1,12 @@
 public class ActivityNotification extends javax.swing.JPanel {
     private Notification notification;
+    private Page page;
 
-    public ActivityNotification(Notification notification) {
+    public ActivityNotification(Notification notification, Page page) {
         initComponents();
 
         //Set the notification belonging to this little panel
+        this.page = page;
         this.notification = notification;
         addInfo(notification.getDescription());
     }
@@ -43,7 +45,7 @@ public class ActivityNotification extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(activityDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(accepNotification))
@@ -52,8 +54,11 @@ public class ActivityNotification extends javax.swing.JPanel {
     }// </editor-fold>                        
 
     private void accepNotificationActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        Notification.deleteNotification(this.notification);
         
-
+        //First close the popup then reopen it
+        page.getNoti().decideAction();
+        page.getNoti().decideAction();
     }                                                 
 
 

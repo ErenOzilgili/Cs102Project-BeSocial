@@ -14,9 +14,9 @@ public class EnrolledActivityMiniPanel extends JPanel {
     private JLabel nameLabel;
     private JButton leaveButton;
     private JPanel ePanel;
-    private JFrame mainFrame;
+    private Page mainFrame;
 
-    public EnrolledActivityMiniPanel(Activity activity , JPanel aPanel , JFrame aMainFrame)
+    public EnrolledActivityMiniPanel(Activity activity , JPanel aPanel , Page aMainFrame)
     {
         this.eActivity = activity;
         this.ePanel = aPanel;
@@ -56,6 +56,14 @@ public class EnrolledActivityMiniPanel extends JPanel {
         ePanel.repaint();
         MainManager.mainPage.updateCalendar();
         Activity.insertActivities(MainManager.mainPage.getPanelToDisplay() , MainManager.allActivities);
+        
+        //Send a notification saying that u left the activity;
+        Notification.leaveActivityNoti(eActivity);
+        //When leaving, show instanteniously
+        if(mainFrame.isNotiDisplayed){
+            mainFrame.getNoti().decideAction();
+            mainFrame.getNoti().decideAction();
+        }
     }
 
     private void nameLabelActionPerformed()
