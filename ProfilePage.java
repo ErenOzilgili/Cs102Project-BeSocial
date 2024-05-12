@@ -1,10 +1,13 @@
+import java.awt.Image;
 import java.sql.*;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -48,6 +51,24 @@ public class ProfilePage extends javax.swing.JFrame {
             jRadioButton6.setSelected(true);
         }
         }              
+
+        ImageIcon homeicon = new ImageIcon("photos/25694.png");
+        Image homeimage = homeicon.getImage(); // transform it 
+        Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        homeicon = new ImageIcon(newHomeImage);  // transform it back
+        homeButton.setIcon(homeicon);
+
+        //profile picture adding part
+        jPanel3.setBackground(new java.awt.Color(255, 102, 102));
+        ImageIcon profilePhoto = new ImageIcon("photos/PP" +MainManager.user.getID()%5 +".jpeg");
+        Image ppImage = profilePhoto.getImage();
+        Image newPPImg = ppImage.getScaledInstance(200,200, Image.SCALE_SMOOTH);
+        ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
+        JLabel ppLabel = new JLabel();
+        ppLabel.setIcon(scaledProfileIcon);
+        jPanel3.add(ppLabel);
+
+        jPanel4.setBackground(new java.awt.Color(255, 102, 102));
     }
 
     /**
@@ -75,23 +96,23 @@ public class ProfilePage extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 196, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        // javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        // jPanel3.setLayout(jPanel3Layout);
+        // jPanel3Layout.setHorizontalGroup(
+        //     jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        //     .addGap(0, 196, Short.MAX_VALUE)
+        // );
+        // jPanel3Layout.setVerticalGroup(
+        //     jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        //     .addGap(0, 0, Short.MAX_VALUE)
+        // );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("About Me");
@@ -108,21 +129,27 @@ public class ProfilePage extends javax.swing.JFrame {
 
         jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton1.setText("CHESS");
+        jRadioButton1.setOpaque(false);
 
         SPORTS.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SPORTS.setText("SPORTS");
+        SPORTS.setOpaque(false);
 
         jRadioButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton3.setText("CHAT");
+        jRadioButton3.setOpaque(false);
 
         jRadioButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton4.setText("VIDEOGAME");
+        jRadioButton4.setOpaque(false);
 
         jRadioButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton5.setText("CINEMA");
+        jRadioButton5.setOpaque(false);
 
         jRadioButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton6.setText("DANCE");
+        jRadioButton6.setOpaque(false);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton1.setText("Change Password");
@@ -178,9 +205,9 @@ public class ProfilePage extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton3.setText("Home");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        homeButton.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        //homeButton.setText("Home");
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
@@ -235,7 +262,7 @@ public class ProfilePage extends javax.swing.JFrame {
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
@@ -254,7 +281,7 @@ public class ProfilePage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -377,6 +404,8 @@ public class ProfilePage extends javax.swing.JFrame {
         // change password
         String update;
         String newPassword = JOptionPane.showInputDialog("Type your new passsord");
+       if(newPassword != null)
+       {
         try {
             Statement stm = MainManager.db.getCon().createStatement();
                     // SQL query to update the username
@@ -387,6 +416,7 @@ public class ProfilePage extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+       }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -430,7 +460,7 @@ public class ProfilePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton SPORTS;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton homeButton;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

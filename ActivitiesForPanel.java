@@ -60,22 +60,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         Image newlikeImage = likeImage.getScaledInstance(25,25, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(newlikeImage);
         likeB.setIcon(scaledIcon);
-    
-        // if(MainManager.user.likedActivities.contains(this.activity))
-        // {
-        //     System.out.println("------" + activity.getName());
-        // }
-
-        for(Activity ac : MainManager.user.likedActivities)
-        {
-            if(ac.getName().equals(activity.getName()))
-        {
-            System.out.println("-----İsinler aynı");
-            System.out.println(ac.getName());
-            System.out.println(activity.getName());
-            System.out.println("-----------------");
-        }
-        }
 
         if(MainManager.user.likedActivities.contains(this.activity))
         {
