@@ -413,12 +413,17 @@ public class ProfilePage extends javax.swing.JFrame {
             tags += "<DANCE>";
         }
         try {
+            boolean found = false;
             Statement stm = MainManager.db.getCon().createStatement();
-            ResultSet resultset1 = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE username = '" + MainManager.user.getName() + "') as hasName");
-            resultset1.next();
-            int check = resultset1.getInt("hasName");
-            
-            if(check != 1)
+            ResultSet resultset1 = stm.executeQuery("SELECT * FROM account");
+            while(resultset1.next())
+            {
+                if(resultset1.getString("username").equals(jTextField2.getText()) && resultset1.getInt("userID") != MainManager.user.getID())
+                {
+                    found = true;
+                }
+            }            
+            if(!found)
             {
                 String update = "UPDATE account SET username = '" + name + "' WHERE userID = '" + MainManager.user.getID() + "'";
                 stm.execute(update);
