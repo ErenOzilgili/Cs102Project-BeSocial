@@ -615,6 +615,11 @@ public class Page extends javax.swing.JFrame {
         return this.panelToDisplay;
     }
 
+    public void clearTextArea()
+    {
+        this.jTextField1.setText("");
+    }
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton createActivityButton;
     private javax.swing.JButton profileButton;

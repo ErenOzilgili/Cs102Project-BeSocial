@@ -54,6 +54,8 @@ public class RecommendeForYouMiniPanel extends javax.swing.JPanel{
         ePanel.revalidate();
         ePanel.repaint();
         MainManager.mainPage.updateCalendar();
+        Activity.insertActivities(MainManager.mainPage.getPanelToDisplay(), MainManager.allActivities);
+        MainManager.mainPage.clearTextArea();
     }
 
     private void nameLabelActionPerformed()

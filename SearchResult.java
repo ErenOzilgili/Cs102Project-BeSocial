@@ -1,3 +1,6 @@
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class SearchResult extends javax.swing.JPanel {
@@ -17,7 +20,8 @@ public class SearchResult extends javax.swing.JPanel {
         addToInitComponents();
     }
 
-    private void addToInitComponents(){
+    private void addToInitComponents()
+    {
         if(type){
             button.setText("Message");
         }
@@ -40,6 +44,11 @@ public class SearchResult extends javax.swing.JPanel {
 
         // TODO add your handling code here:
         //Add profile pic according to the account
+        ImageIcon profilePhoto = new ImageIcon("photos/PP" +account.getID()%5 +".jpeg");
+        Image ppImage = profilePhoto.getImage();
+        Image newPPImg = ppImage.getScaledInstance(76, 76, Image.SCALE_SMOOTH);
+        ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
+        profileIconButton.setIcon(scaledProfileIcon);
     }
 
     /**
@@ -58,7 +67,7 @@ public class SearchResult extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 255, 204));
         setPreferredSize(new java.awt.Dimension(400, 100));
 
-        profileIconButton.setText("jButton1");
+        //profileIconButton.setText("jButton1");
         profileIconButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileIconButtonActionPerformed(evt);

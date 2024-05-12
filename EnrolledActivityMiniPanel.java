@@ -56,6 +56,7 @@ public class EnrolledActivityMiniPanel extends JPanel {
         ePanel.repaint();
         MainManager.mainPage.updateCalendar();
         Activity.insertActivities(MainManager.mainPage.getPanelToDisplay() , MainManager.allActivities);
+        MainManager.mainPage.clearTextArea();
         
         //Send a notification saying that u left the activity;
         Notification.leaveActivityNoti(eActivity);
