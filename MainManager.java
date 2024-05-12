@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -9,6 +10,7 @@ public class MainManager {
     public static ArrayList<Account> allAccounts;
     public static ArrayList<Activity>allActivities;
     public static Page mainPage;
+    //public static final Color Green = new Color(204, 255, 204);
     public static void main(String[] args){
         
         db = new Database();        
@@ -47,14 +49,14 @@ public class MainManager {
         MainManager.mainPage = mainPage;
         frame.dispose();
 
-        for(Activity ac : MainManager.user.likedActivities)
-        {
-            System.out.println( "---------" + ac.getName());
-        }
+        // for(Activity ac : MainManager.user.likedActivities)
+        // {
+        //     System.out.println( "---------" + ac.getName());
+        // }
 
-        for(Activity ac : MainManager.user.dislikedActivities)
-        {
-            System.out.println( "---------" + ac.getName());
-        }
+        // for(Activity ac : MainManager.user.dislikedActivities)
+        // {
+        //     System.out.println( "---------" + ac.getName());
+        // }
     }
 }
