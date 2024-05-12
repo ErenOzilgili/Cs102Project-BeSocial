@@ -377,6 +377,8 @@ public class ProfilePage extends javax.swing.JFrame {
         // change password
         String update;
         String newPassword = JOptionPane.showInputDialog("Type your new passsord");
+       if(newPassword != null)
+       {
         try {
             Statement stm = MainManager.db.getCon().createStatement();
                     // SQL query to update the username
@@ -387,6 +389,7 @@ public class ProfilePage extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+       }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
