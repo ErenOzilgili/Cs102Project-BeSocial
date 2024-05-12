@@ -27,6 +27,7 @@ public class ProfilePage extends javax.swing.JFrame {
     private Account profile;
 
     public ProfilePage(Account profile) {
+        this.profile = profile;
         initComponents();
         this.jTextField2.setText(profile.userName);
         this.jTextField1.setText(profile.aboutMe);
@@ -413,13 +414,27 @@ public class ProfilePage extends javax.swing.JFrame {
         }
         try {
             Statement stm = MainManager.db.getCon().createStatement();
-            String update = "UPDATE account SET username = '" + name + "' WHERE userID = '" + MainManager.user.getID() + "'";
+            ResultSet resultset1 = stm.executeQuery("SELECT EXISTS(SELECT * FROM account WHERE username = '" + MainManager.user.getName() + "') as hasName");
+            resultset1.next();
+            int check = resultset1.getInt("hasName");
+            
+            if(check != 1)
+            {
+                String update = "UPDATE account SET username = '" + name + "' WHERE userID = '" + MainManager.user.getID() + "'";
+                stm.execute(update);
+                MainManager.user.setUserName(name);
+            }
+            else
+            {
+                this.jTextField2.setText(profile.getName());
+                JOptionPane.showMessageDialog(this, "This username is already used.", "Change Username", JOptionPane.WARNING_MESSAGE);
+
+            }
+                       
             String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE userID = '" + MainManager.user.getID() + "'";
-            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE userID = '" + MainManager.user.getID() + "'";              
-            stm.execute(update);
+            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE userID = '" + MainManager.user.getID() + "'";            
             stm.execute(update2);
-            stm.execute(update3);
-            MainManager.user.setUserName(name);
+            stm.execute(update3);            
             MainManager.user.setAboutMe(about_me);
             MainManager.user.tags.clear();
             if(jRadioButton1.isSelected())
@@ -446,6 +461,7 @@ public class ProfilePage extends javax.swing.JFrame {
             {
                 MainManager.user.tags.add(new Tag(Tag.TagType.DANCE));
             }
+            MainManager.openMainPage(this);
             
 
         } catch (Exception e) {
