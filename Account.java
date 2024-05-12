@@ -398,7 +398,7 @@ public class Account implements Comparable<Account>{
             panelDisp.setLayout(new BorderLayout());
             panelDisp.setBackground(Color.WHITE);
             //Fill those individual panels with single activity
-            panelDisp.add(new SearchResult(type, Account.isFriend(account)));
+            panelDisp.add(new SearchResult(account, type, Account.isFriend(account)));
                     
             //Put individual panels into the main panel for display
             panelToDisplay.add(panelDisp);  

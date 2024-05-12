@@ -1,5 +1,8 @@
 import java.awt.GridLayout;
 
+import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
+import javax.swing.JPanel;
+
 public class AR_Friends extends javax.swing.JFrame {
 
     /** Creates new form AR_Friends */
@@ -18,11 +21,14 @@ public class AR_Friends extends javax.swing.JFrame {
 
 
         //Panel for Display implementation example
-        panelForDisplay.setLayout(new GridLayout(0, 1));
+        //panelForDisplay.setLayout(new GridLayout(0, 1));
         
-        for(int i = 0; i < 10; i++){
-            panelForDisplay.add(new SearchResult());
-        }
+        //for(int i = 0; i < 10; i++){
+          //  panelForDisplay.add(new SearchResult());
+        //}
+        Account.insertAccounts(false, panelForDisplay, MainManager.allAccounts);
+
+
     }
                       
     private void initComponents() {
@@ -157,7 +163,11 @@ public class AR_Friends extends javax.swing.JFrame {
 
     private void descriptionActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }                                           
+    }          
+    
+    public JPanel getPanelForDisplay(){
+        return panelForDisplay;
+    }
 
 
     // Variables declaration - do not modify                     

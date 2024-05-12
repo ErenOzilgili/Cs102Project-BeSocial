@@ -1,19 +1,33 @@
+import javax.swing.JPanel;
+
 public class SearchResult extends javax.swing.JPanel {
     private boolean type;
     private boolean isFriend;
+    private Account account;
 
 
     //If type = true --> friends page - Your_Friends
     //If type = false --> add remove page - AR_Friends page
-    public SearchResult(boolean type, boolean isFriend) {
+    public SearchResult(Account account, boolean type, boolean isFriend) {
         this.type = type;
         this.isFriend = isFriend;
+        this.account = account;
 
         initComponents();
+        addToInitComponents();
     }
 
     private void addToInitComponents(){
+        if(type){
+            button.setText("Message");
+        }
+        else{
+            if(isFriend)
+            button.setText("Remove");
+            else
+            button.setText("Add");
         
+        }
     }
 
     /**
@@ -27,7 +41,7 @@ public class SearchResult extends javax.swing.JPanel {
         profileIconButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         nameText = new javax.swing.JTextField();
-        addRemButton = new javax.swing.JButton();
+        button = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 255, 204));
         setPreferredSize(new java.awt.Dimension(400, 100));
@@ -44,10 +58,10 @@ public class SearchResult extends javax.swing.JPanel {
 
         nameText.setText("jTextField1");
 
-        addRemButton.setText("jButton2");
-        addRemButton.addActionListener(new java.awt.event.ActionListener() {
+        button.setText("jButton2");
+        button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addRemButtonActionPerformed(evt);
+                buttonActionPerformed(evt);
             }
         });
 
@@ -64,7 +78,7 @@ public class SearchResult extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                        .addComponent(addRemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -74,15 +88,26 @@ public class SearchResult extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(profileIconButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addRemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>    
     
-    private void addRemButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
+    private void buttonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        if(button.getText().equals("Remove")){
+            Account.removeFriend(account);
+            button.setText("Add");
+        }
+        else if(button.getText().equals("Add")){
+            Account.addFriend(account);
+            button.setText("Remove");
+        }
+        else{
+            //Opens new chat page, used in your friends page
+            FriendMsgPage msgPage = new FriendMsgPage(account);
+        }
     } 
 
     private void profileIconButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
@@ -90,7 +115,7 @@ public class SearchResult extends javax.swing.JPanel {
     } 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton addRemButton;
+    private javax.swing.JButton button;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField nameText;
     private javax.swing.JButton profileIconButton;
