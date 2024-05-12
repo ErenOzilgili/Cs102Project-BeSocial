@@ -16,10 +16,10 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
     public ActivitiesForPanel(Activity activity) {
         this.activity = activity; 
+
         initComponents();
         addToInitComponents();
 
-        
         //Set the information specific to activity for this panel
 
         //Name of the activity
@@ -28,6 +28,9 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         nameL.setFont(font.deriveFont(attributes));
+
+        //Description
+        
 
         // TODO add your handling code here:
         //quotaTextField text should be in the from of 10/20; Need currentQuota
@@ -58,6 +61,22 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         ImageIcon scaledIcon = new ImageIcon(newlikeImage);
         likeB.setIcon(scaledIcon);
     
+        // if(MainManager.user.likedActivities.contains(this.activity))
+        // {
+        //     System.out.println("------" + activity.getName());
+        // }
+
+        for(Activity ac : MainManager.user.likedActivities)
+        {
+            if(ac.getName().equals(activity.getName()))
+        {
+            System.out.println("-----İsinler aynı");
+            System.out.println(ac.getName());
+            System.out.println(activity.getName());
+            System.out.println("-----------------");
+        }
+        }
+
         if(MainManager.user.likedActivities.contains(this.activity))
         {
             likeB.setBackground(Color.BLUE);
@@ -275,12 +294,19 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         //Below is added to send notification to database;
         //If not already enrolled to activity
         //send a notification
-        if(!(MainManager.user.checkAlreadyInActivity(activity))){ Notification.sendNotiActivity(activity); }
+        if(!(MainManager.user.checkAlreadyInActivity(activity))){ 
+            Notification.sendNotiActivity(activity);
+            //When joining, show instanteniously
+            if(MainManager.mainPage.isNotiDisplayed){
+                MainManager.mainPage.getNoti().decideAction();
+                MainManager.mainPage.getNoti().decideAction();
+            }
+        }
+
         //Join the activity
         //Different situations are dealt within the method                                   
         MainManager.user.joinActivity(activity);
-        quotaTF.setText(this.activity.getCurrQuota() + " / " + this.activity.getQuota());
-       
+        quotaTF.setText(this.activity.getCurrQuota() + " / " + this.activity.getQuota());   
     }                                     
 
     private void likeBActionPerformed(java.awt.event.ActionEvent evt) {                                      

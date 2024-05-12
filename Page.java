@@ -56,6 +56,14 @@ public class Page extends javax.swing.JFrame {
         ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
         profileButton.setIcon(scaledProfileIcon);
 
+        //noti picture adding part
+        //notiButton.setBackground(new java.awt.Color(255, 102, 102));
+        ImageIcon notiPhoto = new ImageIcon("photos/noti2.png");
+        Image notiImage = notiPhoto.getImage();
+        Image newnotiImg = notiImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon scaledNotiIcon = new ImageIcon(newnotiImg);
+        notiButton.setIcon(scaledNotiIcon);
+
         //Notifications
         noti = new Pop(this);
 
@@ -125,7 +133,7 @@ public class Page extends javax.swing.JFrame {
         rightPanel = new javax.swing.JPanel();
         profileSettingsPanel = new javax.swing.JPanel();
         notiButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        settingsButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         rightPanelBottomP = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -352,14 +360,14 @@ public class Page extends javax.swing.JFrame {
         rightPanel.setPreferredSize(new java.awt.Dimension(220, 600));
         rightPanel.setLayout(new java.awt.BorderLayout());
 
-        notiButton.setText("notiButton");
+        //notiButton.setText("notiButton");
         notiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 notiButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("notiButton");
+        settingsButton.setText("notiButton");
 
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,14 +386,14 @@ public class Page extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(profileSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(notiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
         profileSettingsPanelLayout.setVerticalGroup(
             profileSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileSettingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(notiButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addContainerGap())
@@ -400,7 +408,7 @@ public class Page extends javax.swing.JFrame {
         JLabel recommended_for_you_label = new JLabel("Recommended To You",SwingConstants.CENTER);
         JPanel recommendedActivities = new JPanel(new GridLayout(0,1));
         ArrayList<Activity> activities2 = MainManager.user.getRecommendedActivities();
-        for(int i = 0; i<5;i++){
+        for(int i = 0; i<Math.min(5,activities2.size());i++){
             RecommendeForYouMiniPanel newPanel = new RecommendeForYouMiniPanel(activities2.get(i), recommendedActivities, this);
             recommendedActivities.add(newPanel);
         }
@@ -426,15 +434,37 @@ public class Page extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
+        //add friends to a new panel
+        JPanel friendsWithScroll = new JPanel();
+        JScrollPane friendScrollPane = new JScrollPane();
+        friendsWithScroll.setLayout(new GridLayout(0,1));
+        friendsWithScroll.setBorder(new LineBorder(Color.CYAN));
+        for(Account friend : MainManager.user.getFriends())
+        {
+            friendsWithScroll.add(new FriendMiniPanel(friend , friendsWithScroll , this));
+        }
+        friendScrollPane.setViewportView(friendsWithScroll);
+
+        JLabel friendsLabel = new JLabel();
+        friendsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        friendsLabel.setText("Friends");
+        friendsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(friendsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+            .addComponent(friendScrollPane)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 233, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(friendsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(friendScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 205, Short.MAX_VALUE)//changed max
+                .addContainerGap()//deleted variables
+                )
         );
 
         rightPanelBottomP.setBackground(new Color(215, 235, 215));
@@ -559,6 +589,10 @@ public class Page extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
+    public Pop getNoti(){
+        return this.noti;
+    }
+
     public int positionX_profileP(){
         return profileSettingsPanel.getX();
     }
@@ -576,7 +610,7 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JButton createActivityButton;
     private javax.swing.JButton profileButton;
     private javax.swing.JButton notiButton;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton settingsButton;
     private javax.swing.JLabel calendarLabel;
     private javax.swing.JLabel enrolledActivityLabel;
     private javax.swing.JPanel enrolledActivityPanel;
@@ -601,3 +635,4 @@ public class Page extends javax.swing.JFrame {
     private CalendarPanel calendarMini;
     // End of variables declaration                   
 }
+

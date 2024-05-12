@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -22,6 +24,7 @@ public class NotificationPopUp extends javax.swing.JPanel {
     private void addToInitComponents(){
         //this.jPanel1.setPreferredSize(new Dimension(350, 250));
         this.jPanel1.setLayout(new java.awt.GridLayout(0, 1));
+        jScrollPane1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
     }
 
     /**

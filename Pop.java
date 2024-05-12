@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Panel;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -11,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -27,6 +30,8 @@ public class Pop{
     public Pop(Page f){ 
         pf = new PopupFactory();
         panel = new NotificationPopUp();
+        panel.getDisplayNotisP().setLayout(new GridLayout(0, 1));
+        panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
         page = f;
 
     }
@@ -57,13 +62,13 @@ public class Pop{
     }
     
     private void createPopup(ArrayList<Notification> actNotis, ArrayList<Notification> friendNotis){  
-        final int Needed = 4;
+        final int Needed = 10;
         int count = 0;
         
         panel.getDisplayNotisP().removeAll();
         
         for(Notification toDisp : actNotis){
-            panel.getDisplayNotisP().add(new ActivityNotification(toDisp));
+            panel.getDisplayNotisP().add(new ActivityNotification(toDisp, page));
             ++count;
         }
         for(Notification toDisp : friendNotis){

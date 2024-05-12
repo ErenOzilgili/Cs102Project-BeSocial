@@ -330,27 +330,27 @@ public class ProfilePage extends javax.swing.JFrame {
             jRadioButton1.setSelected(true);
             tags += "<CHESS>";
         }
-        else if(SPORTS.isSelected())
+        if(SPORTS.isSelected())
         {
             SPORTS.setSelected(true);
             tags += "<SPORTS>";
         }
-        else if(jRadioButton3.isSelected())
+        if(jRadioButton3.isSelected())
         {
             jRadioButton3.setSelected(true);
             tags += "<CHAT>";
         }
-        else if(jRadioButton4.isSelected())
+        if(jRadioButton4.isSelected())
         {
             jRadioButton4.setSelected(true);
             tags += "<VIDEOGAME>";
         }
-        else if(jRadioButton5.isSelected())
+        if(jRadioButton5.isSelected())
         {
             jRadioButton5.setSelected(true);
             tags += "<CINEMA>";
         }
-        else if(jRadioButton6.isSelected())
+        if(jRadioButton6.isSelected())
         {
             jRadioButton6.setSelected(true);
             tags += "<DANCE>";
