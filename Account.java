@@ -185,7 +185,7 @@ public class Account implements Comparable<Account>{
         //Delete two way frienship from database, afterwards delete friend from local
         try{
             //(1)
-            String st = "DELETE FROM friends WHERE userID = ? AND receiverID = ?";
+            String st = "DELETE FROM friends WHERE userID = ? AND friendID = ?";
             PreparedStatement ps = MainManager.db.getCon().prepareStatement(st.toString());
 
             //Placeholders (?) are assigned values
@@ -198,8 +198,8 @@ public class Account implements Comparable<Account>{
             PreparedStatement ps1 = MainManager.db.getCon().prepareStatement(st.toString());
 
             //Placeholders (?) are assigned values
-            ps.setInt(1, MainManager.user.getID());
-            ps.setInt(2, toRemove.getID());
+            ps1.setInt(1, MainManager.user.getID());
+            ps1.setInt(2, toRemove.getID());
 
             ps1.executeUpdate();
 
