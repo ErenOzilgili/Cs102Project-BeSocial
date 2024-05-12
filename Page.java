@@ -36,10 +36,6 @@ public class Page extends javax.swing.JFrame {
         initComponents();
         addToInitComponents();
 
-        //Get all the activities from database --> Optional I (Eren) don't know
-        //if we did or did not do this earlier ;
-        //MainManager.allActivities = Activity.getAllActivities();
-
         //Load all the activities;
         Activity.insertActivities(panelToDisplay , MainManager.allActivities);
     }

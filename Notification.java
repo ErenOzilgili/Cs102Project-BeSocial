@@ -124,14 +124,14 @@ public class Notification {
         ArrayList<Notification> notiActivity = new ArrayList<>();
         try{
             Statement st = MainManager.db.getCon().createStatement();
-            //rs will iterate through where receiver is current user and will get notifications of type activity --> type = true = 1
+            //rs will iterate through where receiver is current user and will get notifications of type activity --> type = false = 0
             ResultSet rs = st.executeQuery("SELECT * FROM notifications WHERE type AND receiverID = %d".formatted(MainManager.user.getID()));
 
             while(rs.next()){
                 int notiID = rs.getInt("notiID");
                 Type type = rs.getBoolean("type") ? Type.ACTIVITY : Type.FRIEND;
                 String description = rs.getString("description");
-                
+
                 Notification toDisplayAct = new Notification(notiID, type, description, MainManager.user, MainManager.user);
                 notiActivity.add(toDisplayAct);
             }
@@ -148,13 +148,61 @@ public class Notification {
 
     public static void sendNotiFriend(Account friend){
         // TODO add your handling code here:
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            //rs will return the row no in below way
+            ResultSet rs = st.executeQuery("SELECT MAX(notiID) AS maxID FROM notifications");
+
+            //If next is not entered, we have this as the first noti;
+            int ID = 1;
+            if(rs.next()){
+                ID = rs.getInt("maxID") + 1; 
+            }
+
+            //Adding the notification of the friend invitation
+            String stMain = "INSERT INTO notifications (notiID, type, description, senderID, receiverID) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = MainManager.db.getCon().prepareStatement(stMain.toString());
+
+            ps.setInt(1, ID);
+            ps.setBoolean(2, false);
+            ps.setString(3, friend.getUserName() + " wants to be your friend!");
+            ps.setInt(4, MainManager.user.getID());
+            ps.setInt(5, friend.getID());
+
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            System.out.println("Couldn't send to database a friend noti");
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static ArrayList<Notification> getNotiFriend(){
-        // TODO add your handling code here:
+        ArrayList<Notification> notiFriend = new ArrayList<>();
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            //rs will iterate through where receiver is current user and will get notifications of type activity --> type = true = 1
+            ResultSet rs = st.executeQuery("SELECT * FROM notifications WHERE NOT type AND receiverID = %d".formatted(MainManager.user.getID()));
 
-        //For now
-        return new ArrayList<Notification>();
+            while(rs.next()){
+                int notiID = rs.getInt("notiID");
+                Type type = rs.getBoolean("type") ? Type.ACTIVITY : Type.FRIEND;
+                String description = rs.getString("description");
+                Account getSender = Account.foundUser(rs.getInt("senderID"));
+                
+                Notification toDisplayFriend = new Notification(notiID, type, description, getSender, MainManager.user);
+                notiFriend.add(toDisplayFriend);
+            }
+
+            return notiFriend;
+        }
+        catch(SQLException e){
+            System.out.println("Couldn't retrieve noti for friend invitation");
+            System.out.println(e.getMessage());
+            //Return empty arrayList
+            return new ArrayList<Notification>();
+        }
     }
 
     public static void deleteNotification(Notification notification){

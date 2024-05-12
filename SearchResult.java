@@ -1,10 +1,19 @@
 public class SearchResult extends javax.swing.JPanel {
+    private boolean type;
+    private boolean isFriend;
 
-    /**
-     * Creates new form SearchResult
-     */
-    public SearchResult() {
+
+    //If type = true --> friends page - Your_Friends
+    //If type = false --> add remove page - AR_Friends page
+    public SearchResult(boolean type, boolean isFriend) {
+        this.type = type;
+        this.isFriend = isFriend;
+
         initComponents();
+    }
+
+    private void addToInitComponents(){
+        
     }
 
     /**
@@ -24,6 +33,11 @@ public class SearchResult extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(400, 100));
 
         profileIconButton.setText("jButton1");
+        profileIconButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileIconButtonActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setBackground(new java.awt.Color(0, 51, 204));
         jSeparator1.setForeground(new java.awt.Color(0, 51, 153));
@@ -31,6 +45,11 @@ public class SearchResult extends javax.swing.JPanel {
         nameText.setText("jTextField1");
 
         addRemButton.setText("jButton2");
+        addRemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRemButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,7 +79,15 @@ public class SearchResult extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-    }// </editor-fold>                        
+    }// </editor-fold>    
+    
+    private void addRemButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    } 
+
+    private void profileIconButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    } 
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton addRemButton;

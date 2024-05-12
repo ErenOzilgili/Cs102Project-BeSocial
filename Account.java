@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.sql.*;
 
 public class Account implements Comparable<Account>{
@@ -227,6 +231,9 @@ public class Account implements Comparable<Account>{
             ps1.setInt(2, notification.getSenderAccount().getID());
 
             ps1.executeUpdate();
+
+            //Now add to local friends
+            MainManager.user.getFriends().add(notification.getSenderAccount());
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -253,20 +260,6 @@ public class Account implements Comparable<Account>{
     public ArrayList<Account> getFriends()
     {
         return this.friends;
-    }
-
-    public void setUserName(String name)
-    {
-        this.userName = name;
-    }
-    
-    public void setAboutMe(String aboutme)
-    {
-        this.aboutMe = aboutme;
-    }
-    public String getName()
-    {
-        return this.userName;
     }
 
     public boolean equals(Object obj){
@@ -374,8 +367,47 @@ public class Account implements Comparable<Account>{
             return Double.compare(score2, score1);
         });
         return temp;
-    }  
-    
+    }
+
+    //Will be used in AddRemove Friends page --> AR_Friends page
+    //Will be used in YourFriends page --> Your_Friends
+    public static void insertAccounts(boolean type, JPanel panelToDisplay, ArrayList<Account> accounts){
+        final int NEEDED = 10;
+
+        //Remove old contents before getting the newest friends;
+        panelToDisplay.removeAll();
+        panelToDisplay.setLayout(new GridLayout(0, 1));
+
+        for(Account account : accounts){
+            //Set the individual panels
+            JPanel panelDisp = new JPanel();
+            panelDisp.setLayout(new BorderLayout());
+            panelDisp.setBackground(Color.WHITE);
+            //Fill those individual panels with single activity
+            panelDisp.add(new SearchResult(type, Account.isFriend(account)));
+                    
+            //Put individual panels into the main panel for display
+            panelToDisplay.add(panelDisp);  
+        }
+
+        if(MainManager.user.getFriends().size() < NEEDED)
+        {
+            for(int i = 0 ; i < NEEDED - accounts.size() ; i++)
+            {
+                JPanel empty = new JPanel();
+                empty.setBackground(new java.awt.Color(255, 255, 255));
+                panelToDisplay.add(empty);
+            }
+        }
+
+        //Lastly repaint and revalidete the panel;
+        panelToDisplay.revalidate();
+        panelToDisplay.repaint();
+
+
+
+    }
+
     public int compareTo(Account acc){
         if(this.userID < acc.getID()){ return -1; }
         else if(this.userID == acc.getID()){ return 0; }
