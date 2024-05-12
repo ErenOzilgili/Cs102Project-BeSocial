@@ -357,52 +357,7 @@ public class ProfilePage extends javax.swing.JFrame {
         );
 
         SideMenu sideMenu = new SideMenu();
-
-        sideMenu.getFriendsButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                ProfilePage.this.dispose();
-                Your_Friends friendPage = new Your_Friends();
-                friendPage.pack();
-                friendPage.setVisible(true);
-                friendPage.setLocationRelativeTo(null); //center
-                friendPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                friendPage.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            }
-        });
-
-        sideMenu.getGoToPPButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                ProfilePage.this.dispose();
-                ProfilePage.createProfilePage(MainManager.user);
-            }
-        });
-        
-        sideMenu.getLogOutButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                int opt = JOptionPane.showConfirmDialog(null, "Are You Sure?");
-                if(opt==JOptionPane.YES_OPTION){
-                    ProfilePage.this.dispose();
-                    MainManager.main(null);
-                }
-            }
-        });
-
-        sideMenu.getCalendarButton().addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e){
-                ProfilePage.this.dispose();
-                FullScreenCalendar fullScreenCalendar = new FullScreenCalendar();
-            }
-        });
-
-        sideMenu.getAddOrRemoveFriendsButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                ProfilePage.this.dispose();
-                AR_Friends friends = new AR_Friends();
-                friends.setVisible(true);
-                friends.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                friends.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            }
-        });
+        sideMenu.setActionPerformers(this);
 
         this.setLayout(new BorderLayout());
         this.add(sideMenu, BorderLayout.WEST);

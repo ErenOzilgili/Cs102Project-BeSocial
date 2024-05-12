@@ -499,49 +499,7 @@ public class Page extends javax.swing.JFrame {
 
         menuPanel.setBackground(new java.awt.Color(0, 204, 204));
 
-        menuPanel.getFriendsButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                Page.this.dispose();
-                Your_Friends friendPage = new Your_Friends();
-                friendPage.pack();
-                friendPage.setVisible(true);
-                friendPage.setLocationRelativeTo(null); //center
-                friendPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                friendPage.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            }
-        });
-
-        menuPanel.getGoToPPButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                profileButtonActionPerformed(e);
-            }
-        });
-        
-        menuPanel.getLogOutButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                int opt = JOptionPane.showConfirmDialog(wholePanel, "Are You Sure?");
-                if(opt==JOptionPane.YES_OPTION){
-                    Page.this.dispose();
-                    MainManager.main(null);
-                }
-            }
-        });
-
-        menuPanel.getCalendarButton().addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e){
-                calendarFrameActionPerformed(e);
-            }
-        });
-
-        menuPanel.getAddOrRemoveFriendsButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                Page.this.dispose();
-                AR_Friends friends = new AR_Friends();
-                friends.setVisible(true);
-                friends.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                friends.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            }
-        });
+        menuPanel.setActionPerformers(this);
 
         wholePanel.add(menuPanel, java.awt.BorderLayout.WEST);
 

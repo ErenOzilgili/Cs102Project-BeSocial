@@ -66,5 +66,35 @@ public class Tag{
         return this.type;
     }
 
-    
+    public String getName()
+    {
+        if(this.type == TagType.CHESS)
+        {
+            return "Chess";
+        }
+        if(this.type == TagType.SPORTS)
+        {
+            return "Sports";
+        }
+        if(this.type == TagType.CHAT)
+        {
+            return "Chat";
+        }
+        if(this.type == TagType.VIDEOGAME)
+        {
+            return "Videogame";
+        }
+        if(this.type == TagType.CINEMA)
+        {
+            return "Cinema";
+        }
+        if(this.type == TagType.FOOTBALL)
+        {
+            return "Football";
+        }
+        else
+        {
+            return "Dance";
+        }
+    }
 }

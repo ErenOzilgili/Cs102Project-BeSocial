@@ -2,8 +2,11 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +14,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 /**
@@ -179,5 +184,53 @@ public class SideMenu extends JPanel {
         return button7;
     }
 
+    public void setActionPerformers(JFrame frame)
+    {
+        this.getFriendsButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                frame.dispose();
+                Your_Friends friendPage = new Your_Friends();
+                friendPage.pack();
+                friendPage.setVisible(true);
+                friendPage.setLocationRelativeTo(null); //center
+                friendPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                friendPage.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            }
+        });
 
+        this.getGoToPPButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                frame.dispose();
+                ProfilePage.createProfilePage(MainManager.user);
+            }
+        });
+        
+        this.getLogOutButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                int opt = JOptionPane.showConfirmDialog(null, "Are You Sure?");
+                if(opt==JOptionPane.YES_OPTION){
+                    frame.dispose();
+                    MainManager.main(null);
+                }
+            }
+        });
+
+        this.getCalendarButton().addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e){
+                frame.dispose();
+                FullScreenCalendar fullScreenCalendar = new FullScreenCalendar();
+            }
+        });
+
+        this.getAddOrRemoveFriendsButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                frame.dispose();
+                AR_Friends friends = new AR_Friends();
+                friends.setVisible(true);
+                friends.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                friends.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            }
+        });
+
+    }
 }

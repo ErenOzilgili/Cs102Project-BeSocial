@@ -300,10 +300,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
     private void likeBActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
-        for(Activity ac : MainManager.user.likedActivities)
-        {
-            System.out.println(ac.getName());
-        }
+
         if(MainManager.user.likedActivities.contains(this.activity))
         {
             likeRemove();
@@ -354,6 +351,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
     private void nameLMouseClicked(java.awt.event.MouseEvent evt) {                                   
         ActivityPage frame = new ActivityPage(activity);
         frame.setVisible(true);
+        MainManager.mainPage.dispose();
     }    
 
     private void likeRemove()
