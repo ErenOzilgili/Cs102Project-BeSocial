@@ -28,6 +28,11 @@ public class SearchResult extends javax.swing.JPanel {
             button.setText("Add");
         
         }
+
+        nameText.setText(account.getUserName());
+
+        // TODO add your handling code here:
+        //Add profile pic according to the account
     }
 
     /**
@@ -102,6 +107,7 @@ public class SearchResult extends javax.swing.JPanel {
         }
         else if(button.getText().equals("Add")){
             Account.addFriend(account);
+            //TODO
             button.setText("Remove");
         }
         else{
@@ -111,7 +117,7 @@ public class SearchResult extends javax.swing.JPanel {
     } 
 
     private void profileIconButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
+        ProfilePage.createProfilePage(account);
     } 
 
     // Variables declaration - do not modify                     
