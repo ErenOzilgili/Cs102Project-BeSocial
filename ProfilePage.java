@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.sql.*;
 /*
@@ -68,7 +70,7 @@ public class ProfilePage extends javax.swing.JFrame {
         ppLabel.setIcon(scaledProfileIcon);
         jPanel3.add(ppLabel);
 
-        jPanel4.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel4.setOpaque(false);
     }
 
     /**
@@ -313,20 +315,25 @@ public class ProfilePage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
-        );
+        SideMenu sideMenu = new SideMenu();
+        this.setLayout(new BorderLayout());
+        this.add(sideMenu, BorderLayout.WEST);
+        this.add(jPanel1 , BorderLayout.CENTER);
+
+        // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        // getContentPane().setLayout(layout);
+        // layout.setHorizontalGroup(
+        //     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        //     .addGroup(layout.createSequentialGroup()
+        //         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        //         .addGap(0, 0, 0))
+        // );
+        // layout.setVerticalGroup(
+        //     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        //     .addGroup(layout.createSequentialGroup()
+        //         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        //         .addGap(0, 0, 0))
+        // );
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
