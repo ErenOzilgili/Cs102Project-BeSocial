@@ -499,7 +499,13 @@ public class Page extends javax.swing.JFrame {
 
         menuPanel.getFriendsButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-
+                Page.this.dispose();
+                Your_Friends friendPage = new Your_Friends();
+                friendPage.pack();
+                friendPage.setVisible(true);
+                friendPage.setLocationRelativeTo(null); //center
+                friendPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                friendPage.setDefaultCloseOperation(EXIT_ON_CLOSE);
             }
         });
 
@@ -531,6 +537,7 @@ public class Page extends javax.swing.JFrame {
                 AR_Friends friends = new AR_Friends();
                 friends.setVisible(true);
                 friends.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                friends.setDefaultCloseOperation(EXIT_ON_CLOSE);
             }
         });
 
