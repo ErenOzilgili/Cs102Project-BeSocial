@@ -438,9 +438,7 @@ public class Account implements Comparable<Account>{
         //Lastly repaint and revalidete the panel;
         panelToDisplay.revalidate();
         panelToDisplay.repaint();
-
-
-
+        
     }
 
     public int compareTo(Account acc){

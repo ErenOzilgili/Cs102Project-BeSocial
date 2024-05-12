@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -89,10 +90,32 @@ public class Refresh{
 
     public static void renewActivities(){
         System.out.println("RenewActivities");
-        //MainManager.allActivities = Activity.getAllActivities();
-        //yeni oluşturmayalım, üzerine ekleyelim
+ 
+        ArrayList<Activity> newestForm = Activity.getAllActivities();
+        int toBeAddedFrom = MainManager.allActivities.size();
+        //Add the missing newest activities
+        for(int i = toBeAddedFrom; i < newestForm.size(); i++){
+            Activity toAdd = newestForm.get(i);
+            MainManager.allActivities.add(toAdd);
+        }
     }
 
-    
+    public static void renewAccounts(){
+        System.out.println("RenewAccounts");
+
+        ArrayList<Account> newestForm = Account.getAllAccounts();
+        int toBeAddedFrom = MainManager.allAccounts.size();
+        //Add the missing newest accounts
+        for(int i = toBeAddedFrom; i < newestForm.size(); i++){
+            Account toAdd = newestForm.get(i);
+            MainManager.allAccounts.add(toAdd);
+        }
+    }
+
+    public static void renewFriends(){
+
+
+
+    }
     
 }
