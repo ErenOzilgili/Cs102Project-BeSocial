@@ -262,6 +262,20 @@ public class Account implements Comparable<Account>{
         return this.friends;
     }
 
+    public void setUserName(String name)
+    {
+        this.userName = name;
+    }
+    
+    public void setAboutMe(String aboutme)
+    {
+        this.aboutMe = aboutme;
+    }
+    public String getName()
+    {
+        return this.userName;
+    }
+
     public boolean equals(Object obj){
         Account accToCheck = (Account)obj;
         if(accToCheck.getID() == this.getID()){ return true; }
