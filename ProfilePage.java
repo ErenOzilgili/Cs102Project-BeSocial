@@ -373,7 +373,15 @@ public class ProfilePage extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        MainManager.openMainPage(this);
+        if(this.profile == MainManager.user)
+        {
+            MainManager.openMainPage(this);
+        }
+        else
+        {
+            this.dispose();
+            AR_Friends arFriendsPage = new AR_Friends();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

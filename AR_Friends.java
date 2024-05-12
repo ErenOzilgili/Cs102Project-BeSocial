@@ -118,7 +118,12 @@ public class AR_Friends extends javax.swing.JFrame {
             }
         });
 
-        homeButton.setText("jButton1");
+        homeButton.setText("Home");
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e){
+                homeButtonaActionPerformed(e);
+            }
+        });
 
         javax.swing.GroupLayout search_homePanelLayout = new javax.swing.GroupLayout(search_homePanel);
         search_homePanel.setLayout(search_homePanelLayout);
@@ -169,6 +174,10 @@ public class AR_Friends extends javax.swing.JFrame {
         return panelForDisplay;
     }
 
+    public void homeButtonaActionPerformed(java.awt.event.ActionEvent e){
+        MainManager.openMainPage(this);
+    }
+
 
     // Variables declaration - do not modify                     
     private javax.swing.JTextField description;
@@ -181,7 +190,6 @@ public class AR_Friends extends javax.swing.JFrame {
     private javax.swing.JButton searchIcon;
     private javax.swing.JPanel search_homePanel;
     private javax.swing.JPanel wholePagePanel;
-    private javax.swing.JPanel backButton;
     // End of variables declaration                   
 
 }
