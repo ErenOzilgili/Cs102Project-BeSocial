@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+
+
 /**
  *
  * @author HP
@@ -22,34 +24,34 @@ public class ProfilePage extends javax.swing.JFrame {
      */
     public ProfilePage() {
         initComponents();
-        this.jTextField2.setText(MainManager.currUserName);
+        this.jTextField2.setText(MainManager.user.userName);
         this.jTextField1.setText(MainManager.user.aboutMe);
         for(int i = 0; i < MainManager.user.tags.size(); i++)
         {
-        if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHESS))
-        {
-            jRadioButton1.setSelected(true);
-        }
-        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.SPORTS))
-        {
-            SPORTS.setSelected(true);
-        }
-        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHAT))
-        {
-            jRadioButton3.setSelected(true);
-        }
-        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.VIDEOGAME))
-        {
-            jRadioButton4.setSelected(true);
-        }
-        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CINEMA))
-        {
-            jRadioButton5.setSelected(true);
-        }
-        else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.DANCE))
-        {
-            jRadioButton6.setSelected(true);
-        }
+            if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHESS))
+            {
+                jRadioButton1.setSelected(true);
+            }
+            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.SPORTS))
+            {
+                SPORTS.setSelected(true);
+            }
+            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CHAT))
+            {
+                jRadioButton3.setSelected(true);
+            }
+            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.VIDEOGAME))
+            {
+                jRadioButton4.setSelected(true);
+            }
+            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.CINEMA))
+            {
+                jRadioButton5.setSelected(true);
+            }
+            else if(MainManager.user.tags.get(i).getType().equals(Tag.TagType.DANCE))
+            {
+                jRadioButton6.setSelected(true);
+            }
         }              
 
         ImageIcon homeicon = new ImageIcon("photos/25694.png");
@@ -384,12 +386,40 @@ public class ProfilePage extends javax.swing.JFrame {
         }
         try {
             Statement stm = MainManager.db.getCon().createStatement();
-            String update = "UPDATE account SET username = '" + name + "' WHERE username = '" + MainManager.currUserName + "'";
-            String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE username = '" + MainManager.currUserName + "'";
-            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE username = '" + MainManager.currUserName + "'";
+            String update = "UPDATE account SET username = '" + name + "' WHERE username = '" + MainManager.user.getUserName() + "'";
+            String update2 = "UPDATE account SET aboutMe = '" + about_me + "' WHERE username = '" + MainManager.user.getUserName() + "'";
+            String update3 = "UPDATE account SET tags = '" + tags + "' WHERE username = '" + MainManager.user.getUserName()+ "'";              
             stm.execute(update);
             stm.execute(update2);
             stm.execute(update3);
+            MainManager.user.setUserName(name);
+            MainManager.user.setAboutMe(about_me);
+            MainManager.user.tags.clear();
+            if(jRadioButton1.isSelected())
+            {
+                MainManager.user.tags.add(new Tag(Tag.TagType.CHESS));
+            }
+            if(SPORTS.isSelected())
+            {
+                MainManager.user.tags.add(new Tag(Tag.TagType.SPORTS));
+            }
+            if(jRadioButton3.isSelected())
+            {
+                MainManager.user.tags.add(new Tag(Tag.TagType.CHAT));
+            }
+            if(jRadioButton4.isSelected())
+            {
+                MainManager.user.tags.add(new Tag(Tag.TagType.VIDEOGAME));
+            }
+            if(jRadioButton5.isSelected())
+            {
+                MainManager.user.tags.add(new Tag(Tag.TagType.CINEMA));
+            }
+            if(jRadioButton6.isSelected())
+            {
+                MainManager.user.tags.add(new Tag(Tag.TagType.DANCE));
+            }
+            
 
         } catch (Exception e) {
             e.printStackTrace();
