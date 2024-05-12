@@ -181,6 +181,7 @@ public class AR_Friends extends javax.swing.JFrame {
     private javax.swing.JButton searchIcon;
     private javax.swing.JPanel search_homePanel;
     private javax.swing.JPanel wholePagePanel;
+    private javax.swing.JPanel backButton;
     // End of variables declaration                   
 
 }
