@@ -589,6 +589,10 @@ public class Page extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
+    public Pop getNoti(){
+        return this.noti;
+    }
+
     public int positionX_profileP(){
         return profileSettingsPanel.getX();
     }
@@ -631,3 +635,4 @@ public class Page extends javax.swing.JFrame {
     private CalendarPanel calendarMini;
     // End of variables declaration                   
 }
+
