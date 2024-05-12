@@ -89,8 +89,8 @@ public class Refresh{
 
     public static void renewActivities(){
         System.out.println("RenewActivities");
-        MainManager.allActivities = Activity.getAllActivities();
-
+        //MainManager.allActivities = Activity.getAllActivities();
+        //yeni oluşturmayalım, üzerine ekleyelim
     }
 
     
