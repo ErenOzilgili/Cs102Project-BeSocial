@@ -9,6 +9,7 @@ import java.awt.font.TextAttribute;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
 public class ActivitiesForPanel extends javax.swing.JPanel {
@@ -126,17 +127,21 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
         descriptionP.setBackground(new java.awt.Color(255,240,219));
 
+        JLabel desLabel = new JLabel("     " + this.activity.getDescription());
+
         javax.swing.GroupLayout descriptionPLayout = new javax.swing.GroupLayout(descriptionP);
         descriptionP.setLayout(descriptionPLayout);
         descriptionPLayout.setHorizontalGroup(
             descriptionPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desLabel)
             .addGap(0, 360, Short.MAX_VALUE)
         );
         descriptionPLayout.setVerticalGroup(
             descriptionPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desLabel)
             .addGap(0, 363, Short.MAX_VALUE)
         );
-
+        
         descriptionSP.setViewportView(descriptionP);
 
         quotaL.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N

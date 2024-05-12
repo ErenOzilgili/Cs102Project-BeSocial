@@ -56,8 +56,8 @@ public class Activity implements Comparable<Activity>{
         this.quota = quota;
         this.date = date;
         this.time = time;
-        this.place = place;
-        this.description = description;
+        this.place = Place;
+        this.description = Description;
         this.activityID= id;
         this.currQuota = currentQuota;
         this.likeNum = likeNum;
