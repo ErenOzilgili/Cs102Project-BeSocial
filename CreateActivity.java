@@ -7,6 +7,7 @@ import java.sql.*;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 
@@ -620,27 +621,72 @@ public class CreateActivity extends javax.swing.JFrame {
         }
         return activityTag;                
     }
+    //JOptionPane.showMessageDialog(this, "You should enter an integer", "Invalid input", JOptionPane.WARNING_MESSAGE);
 
     private void CreatingActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatingActivityActionPerformed
         // TODO add your handling code here:
         String name = GetName.getText();
-        int Quota = Integer.parseInt(GetQuota.getText());
+        int Quota = 0;
+        int Day = 0;
+        int Month = 0;
+        int Year = 0;
+        int Hour = 0;
+        int Minute = 0;
         Tag activity_tag = find_tag();
         Tag.TagType tagType = activity_tag.getType();
-        //TagType tag_of_activity = 
-        int Day = Integer.parseInt(GetDay.getText());
-        int Month =Integer.parseInt(GetMonth.getText());
-        int Year = Integer.parseInt(GetYear.getText());
-        String str= ""+ Year+ "-"+ Month + "-" + Day;
-        Date date2 = Date.valueOf(str);//converting string into sql date
+        //TagType tag_of_activity =        
+        String str ="";
         //Date date_of_activity = new Date(Year,Month,Day);
-        int Hour = Integer.parseInt(GetHour.getText()) ;
-        int Minute = Integer.parseInt(GetMinute.getText());
+        Hour = 0 ;
+        Minute = 0;
         String Time = Hour + ":" + Minute + ":00"; 
         Time time_of_activity =  java.sql.Time.valueOf(Time);// solve this problem
         String activity_place = GetPlace.getText();
         String activity_definition = GetDescription.getText();
         try {
+            Quota = Integer.parseInt(GetQuota.getText());
+            if(Quota < 1)
+            {
+                JOptionPane.showMessageDialog(this, "Qouta must be bigger than 1", "Invalid input", JOptionPane.WARNING_MESSAGE);
+                throw new IllegalArgumentException("Qouta must be bigger than 1");
+            }
+            Day = Integer.parseInt(GetDay.getText());
+            if(Day > 31 || Day < 0)
+            {
+                JOptionPane.showMessageDialog(this, "Day is not valid", "Invalid input", JOptionPane.WARNING_MESSAGE);
+                throw new IllegalArgumentException("Day is not valid");
+            }
+            Month =Integer.parseInt(GetMonth.getText());
+            if(Month > 12 || Month < 0)
+            {
+                JOptionPane.showMessageDialog(this, "Month is not valid", "Invalid input", JOptionPane.WARNING_MESSAGE);
+                throw new IllegalArgumentException("Month is not valid");
+            }
+            Year = Integer.parseInt(GetYear.getText());
+            if(Year < 0)
+            {
+                JOptionPane.showMessageDialog(this, "Year is not valid", "Invalid input", JOptionPane.WARNING_MESSAGE);
+                throw new IllegalArgumentException("Year is not valid");
+            }
+            Hour = Integer.parseInt(GetHour.getText()) ;
+            if(Hour < 0 || Hour > 24)
+            {
+                JOptionPane.showMessageDialog(this, "Hour is not valid", "Invalid input", JOptionPane.WARNING_MESSAGE);
+                throw new IllegalArgumentException("Hour is not valid");
+            }
+            Minute = Integer.parseInt(GetMinute.getText());
+            if(Minute < 0|| Minute > 60)
+            {
+                JOptionPane.showMessageDialog(this, "Minute is not valid", "Invalid input", JOptionPane.WARNING_MESSAGE);
+                throw new IllegalArgumentException("Minute is not valid");
+            }
+            str= ""+ Year+ "-"+ Month + "-" + Day;
+            Date date2 = Date.valueOf(str);//converting string into sql date
+        //Date date_of_activity = new Date(Year,Month,Day);
+            Time = Hour + ":" + Minute + ":00"; 
+            time_of_activity =  java.sql.Time.valueOf(Time);// solve this problem
+            activity_place = GetPlace.getText();
+            activity_definition = GetDescription.getText();
             Statement stm = MainManager.db.getCon().createStatement();
             //ResultSet resultset2 = stm.executeQuery("SELECT COUNT(actID) FROM acitivities");
             //resultset2.next();
@@ -659,12 +705,25 @@ public class CreateActivity extends javax.swing.JFrame {
             Activity newActivity = new Activity(ID);
             MainManager.allActivities.add(newActivity);
             MainManager.user.enrolledActivities.add(newActivity);
+            this.turnTheTheme();
+            MainManager.openMainPage(this);
         } catch (SQLException ex) {
             // TODO: handle exception
             Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.turnTheTheme();
-        MainManager.openMainPage(this);
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "İnvalid input", "Invalid input", JOptionPane.WARNING_MESSAGE);
+        }
+        catch(IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "İnvalid input", "Invalid input", JOptionPane.WARNING_MESSAGE);
+        }
+
 
         
     }//GEN-LAST:event_CreatingActivityActionPerformed
