@@ -437,14 +437,11 @@ public class Page extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         //add friends to a new panel
-        JPanel friendsWithScroll = new JPanel();
+        friendsWithScroll = new JPanel();
         JScrollPane friendScrollPane = new JScrollPane();
         friendsWithScroll.setLayout(new GridLayout(0,1));
         friendsWithScroll.setBorder(new LineBorder(Color.CYAN));
-        for(Account friend : MainManager.user.getFriends())
-        {
-            friendsWithScroll.add(new FriendMiniPanel(friend , friendsWithScroll , this));
-        }
+        refreshFriendsPanel();
         friendScrollPane.setViewportView(friendsWithScroll);
 
         JLabel friendsLabel = new JLabel();
@@ -584,6 +581,17 @@ public class Page extends javax.swing.JFrame {
         this.jTextField1.setText("");
     }
 
+    public void refreshFriendsPanel()
+    {
+        friendsWithScroll.removeAll();
+        for(Account friend : MainManager.user.getFriends())
+        {
+            friendsWithScroll.add(new FriendMiniPanel(friend , friendsWithScroll , this));
+        }
+        friendsWithScroll.revalidate();
+        friendsWithScroll.repaint();
+    }
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton createActivityButton;
     private javax.swing.JButton profileButton;
@@ -611,6 +619,7 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JPanel wholePanel;
     private javax.swing.JPanel enActivityWithScroll;
     private CalendarPanel calendarMini;
+    private JPanel friendsWithScroll;
     // End of variables declaration                   
 }
 

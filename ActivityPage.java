@@ -98,11 +98,11 @@ public class ActivityPage extends javax.swing.JFrame {
 
         ImageIcon ppicon = new ImageIcon("photos/PP" +MainManager.user.getID()%5 +".jpeg");
         Image ppimage = ppicon.getImage(); // transform it 
-        Image newppimg = ppimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        Image newppimg = ppimage.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         ppicon = new ImageIcon(newppimg);  // transform it back
-        jButton2.setIcon(ppicon);
+        jButton1.setIcon(ppicon);
 
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ActivityPage.this.dispose();
                 ProfilePage.createProfilePage(MainManager.user);

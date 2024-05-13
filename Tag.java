@@ -10,7 +10,6 @@ public class Tag{
         CHAT,
         VIDEOGAME,
         CINEMA,
-        FOOTBALL,
         DANCE;
     }
 
@@ -87,10 +86,6 @@ public class Tag{
         if(this.type == TagType.CINEMA)
         {
             return "Cinema";
-        }
-        if(this.type == TagType.FOOTBALL)
-        {
-            return "Football";
         }
         else
         {
