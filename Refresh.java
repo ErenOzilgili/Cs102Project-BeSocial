@@ -1,3 +1,6 @@
+import java.sql.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +23,19 @@ public class Refresh{
             } 
 		};
         t1.scheduleAtFixedRate(task1, 0, interval);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
+
+        //Will call the method renewAccounts() and renewFriends() repeatedly
+        t2 = new Timer();
+        task2 = new TimerTask() {
+            @Override
+            public void run() {
+                renewAccounts();
+                renewFriends();
+                MainManager.mainPage.refreshFriendsPanel();
+            } 
+		};
+        t2.scheduleAtFixedRate(task2, 0, 10000);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
+
 
         //Will call the method renewActivities() repeatedly
         t4 = new Timer();
@@ -89,10 +105,47 @@ public class Refresh{
 
     public static void renewActivities(){
         System.out.println("RenewActivities");
-        //MainManager.allActivities = Activity.getAllActivities();
-        //yeni oluşturmayalım, üzerine ekleyelim
+ 
+        ArrayList<Activity> newestForm = Activity.getAllActivities();
+        int toBeAddedFrom = MainManager.allActivities.size();
+        //Add the missing newest activities
+        for(int i = toBeAddedFrom; i < newestForm.size(); i++){
+            Activity toAdd = newestForm.get(i);
+            MainManager.allActivities.add(toAdd);
+        }
     }
 
-    
+    public static void renewAccounts(){
+        System.out.println("RenewAccounts");
+
+        ArrayList<Account> newestForm = Account.getAllAccounts();
+        int toBeAddedFrom = MainManager.allAccounts.size();
+        //Add the missing newest accounts
+        for(int i = toBeAddedFrom; i < newestForm.size(); i++){
+            Account toAdd = newestForm.get(i);
+            MainManager.allAccounts.add(toAdd);
+        }
+    }
+
+    public static void renewFriends(){
+        MainManager.user.getFriends().clear();
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(MainManager.user.getID()));
+            while(rs.next()){
+                int friendID = rs.getInt(1);
+                for(Account act: MainManager.allAccounts){
+                    if(act.userID == friendID){
+                        MainManager.user.getFriends().add(act);
+                        break;
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
     
 }

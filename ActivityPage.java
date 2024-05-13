@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -34,8 +37,13 @@ public class ActivityPage extends javax.swing.JFrame {
         //Clear the text in the chatInput
         chatInput.setText("");
 
-        //Set the acitivities name
+        //Set the acitivities informations
         this.activityNameL.setText(activity.getName());
+        this.descriptionDesc.setText(activity.getDescription());
+        this.tagDesc.setText(activity.getTag().getName());
+        this.timeDesc.setText(activity.getTime().toString());
+        this.dateDesc.setText(activity.getDate().toString());
+        this.placeDesc.setText(activity.getPlace());
 
         //After everything is set
         //Adjust the aditional GUI
@@ -85,6 +93,62 @@ public class ActivityPage extends javax.swing.JFrame {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mainPageButtonActionPerformed();
+            }
+        });
+
+        ImageIcon ppicon = new ImageIcon("photos/PP" +MainManager.user.getID()%5 +".jpeg");
+        Image ppimage = ppicon.getImage(); // transform it 
+        Image newppimg = ppimage.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        ppicon = new ImageIcon(newppimg);  // transform it back
+        jButton1.setIcon(ppicon);
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActivityPage.this.dispose();
+                ProfilePage.createProfilePage(MainManager.user);
+            }
+        });
+
+        //like dislike buttons
+        ImageIcon likePhoto = new ImageIcon("photos/indir.jpeg");
+        Image likeImage = likePhoto.getImage();
+        Image newlikeImage = likeImage.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(newlikeImage);
+        likeB.setIcon(scaledIcon);
+
+        if(MainManager.user.likedActivities.contains(this.activity))
+        {
+            likeB.setBackground(Color.BLUE);
+        }
+        else
+        {
+            likeB.setBackground(Color.WHITE);
+        }
+
+        likeB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                likeBActionPerformed(evt);
+            }
+        });
+
+        ImageIcon dislikePhoto = new ImageIcon("photos/dislike.jpg");
+        Image dislikeImage = dislikePhoto.getImage();
+        Image newdislikeImage = dislikeImage.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        ImageIcon scaleddisIcon = new ImageIcon(newdislikeImage);
+        dislikeB.setIcon(scaleddisIcon);
+
+        if(MainManager.user.dislikedActivities.contains(this.activity))
+        {
+            dislikeB.setBackground(Color.RED);
+        }
+        else
+        {
+            dislikeB.setBackground(Color.WHITE);
+        }
+
+        dislikeB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dislikeBActionPerformed(evt);
             }
         });
 
@@ -432,9 +496,11 @@ public class ActivityPage extends javax.swing.JFrame {
             .addGap(0, 736, Short.MAX_VALUE)
         );
 
-        jPanel1.add(menuPanel, java.awt.BorderLayout.WEST);
+        SideMenu sideMenu = new SideMenu();
+        sideMenu.setActionPerformers(this);
+        jPanel1.add(sideMenu, java.awt.BorderLayout.WEST);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>                        
@@ -461,6 +527,106 @@ public class ActivityPage extends javax.swing.JFrame {
     private void mainPageButtonActionPerformed()
     {
         MainManager.openMainPage(this);
+    }
+
+    private void likeBActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+
+        if(MainManager.user.likedActivities.contains(this.activity))
+        {
+            likeRemove();
+        }
+        else
+        {
+            likeAdd();
+            if(MainManager.user.dislikedActivities.contains(this.activity))
+            {
+                dislikeRemove();
+            }
+        }
+    }                                     
+
+    private void dislikeBActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        if(MainManager.user.dislikedActivities.contains(this.activity))
+        {
+            dislikeRemove();
+        }
+        else
+        {
+            dislikeAdd();
+            if(MainManager.user.likedActivities.contains(this.activity))
+            {
+                likeRemove();
+            }
+        }
+    }
+    
+    private void likeAdd()
+    {
+        likeB.setBackground(Color.BLUE);
+        //likeB.setBorder(new EtchedBorder());
+        MainManager.user.likedActivities.add(activity);
+        activity.changeLikeNum(1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("INSERT INTO likedActivities ( userID , actID ) VALUES ( " + MainManager.user.userID + " , " + activity.getActivityID() + " )");
+            st.execute("UPDATE activities SET likeCount = " + activity.getLikeCount() + " where activityID = " + activity.getActivityID());
+        }
+        catch(SQLException e){
+    }   
+    }
+
+    private void likeRemove()
+    {
+        likeB.setBackground(Color.WHITE);
+        //likeB.setBorderPainted(false);
+        MainManager.user.likedActivities.remove(activity);
+        activity.changeLikeNum(-1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("DELETE FROM likedActivities WHERE userID = " + MainManager.user.userID + " and actID = " + activity.getActivityID());
+            st.execute("UPDATE activities SET likeCount = " + activity.getLikeCount() + " where activityID = " + activity.getActivityID());
+        }
+        catch(SQLException e){
+
+        }
+    }
+
+    private void dislikeAdd()
+    {
+        dislikeB.setBackground(Color.RED);
+        //dislikeB.setBorder(new EtchedBorder());
+        MainManager.user.dislikedActivities.add(activity);
+        activity.changeDislikeNum(1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("INSERT INTO dislikedActivities ( activityID , userID ) VALUES ( " + activity.getActivityID() + " , " + MainManager.user.userID + " )");
+            st.execute("UPDATE activities SET dislikeCount = " + activity.getDislikeCount() + " where activityID = " + activity.getActivityID());
+        }
+        catch(SQLException e){
+
+        }
+    }
+
+    private void dislikeRemove()
+    {
+        dislikeB.setBackground(Color.WHITE);
+        //dislikeB.setBorderPainted(false);
+        MainManager.user.dislikedActivities.remove(activity);
+        activity.changeDislikeNum(-1);
+        try
+        {
+            Statement st = MainManager.db.getCon().createStatement();
+            st.execute("DELETE FROM dislikedActivities WHERE userID = " + MainManager.user.userID + " and activityID = " + activity.getActivityID());
+            st.execute("UPDATE activities SET dislikeCount = " + activity.getDislikeCount() + " where activityID = " + activity.getActivityID());
+        }
+        catch(SQLException e){
+
+        }
     }
                                                              
     // Variables declaration - do not modify                     

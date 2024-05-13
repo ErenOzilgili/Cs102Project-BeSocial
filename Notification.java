@@ -165,7 +165,7 @@ public class Notification {
 
             ps.setInt(1, ID);
             ps.setBoolean(2, false);
-            ps.setString(3, friend.getUserName() + " wants to be your friend!");
+            ps.setString(3, MainManager.user.getUserName() + " wants to be your friend!");
             ps.setInt(4, MainManager.user.getID());
             ps.setInt(5, friend.getID());
 

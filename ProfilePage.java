@@ -1,6 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.*;
 import java.sql.*;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+
 
 
 
@@ -59,11 +65,23 @@ public class ProfilePage extends javax.swing.JFrame {
             }
         }              
 
-        ImageIcon homeicon = new ImageIcon("photos/25694.png");
-        Image homeimage = homeicon.getImage(); // transform it 
-        Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-        homeicon = new ImageIcon(newHomeImage);  // transform it back
-        homeButton.setIcon(homeicon);
+        if(this.profile == MainManager.user)
+        {
+            ImageIcon homeicon = new ImageIcon("photos/25694.png");
+            Image homeimage = homeicon.getImage(); // transform it 
+            Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            homeicon = new ImageIcon(newHomeImage);  // transform it back
+            homeButton.setIcon(homeicon);
+        }
+        else
+        {
+            ImageIcon homeicon = new ImageIcon("photos/return.png");
+            Image homeimage = homeicon.getImage(); // transform it 
+            Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            homeicon = new ImageIcon(newHomeImage);  // transform it back
+            homeButton.setIcon(homeicon);
+        }
+        
 
         //profile picture adding part
         //jPanel3.setBackground(new java.awt.Color(255, 102, 102));
@@ -339,6 +357,8 @@ public class ProfilePage extends javax.swing.JFrame {
         );
 
         SideMenu sideMenu = new SideMenu();
+        sideMenu.setActionPerformers(this);
+
         this.setLayout(new BorderLayout());
         this.add(sideMenu, BorderLayout.WEST);
         this.add(jPanel1 , BorderLayout.CENTER);

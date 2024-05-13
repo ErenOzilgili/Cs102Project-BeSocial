@@ -57,7 +57,7 @@ public class Account implements Comparable<Account>{
         return null;
     }
 
-    Account(int userID, String userName, String userPassword, String aboutMe, String tags,String email)
+    Account(int userID, String userName, String userPassword, String aboutMe, String tags, String email)
     {
         this.userID = userID;
         this.userName = userName;
@@ -242,6 +242,7 @@ public class Account implements Comparable<Account>{
 
             //Now add to local friends
             MainManager.user.getFriends().add(notification.getSenderAccount());
+            MainManager.mainPage.refreshFriendsPanel();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -394,6 +395,7 @@ public class Account implements Comparable<Account>{
     //Will be used in AddRemove Friends page --> AR_Friends page
     //Will be used in YourFriends page --> Your_Friends
     public static void insertAccounts(boolean type, JPanel panelToDisplay, ArrayList<Account> accounts){
+        boolean passedUser = false;//For efficiency, and also, to not add user to add remove page
         final int NEEDED = 10;
 
         //Remove old contents before getting the newest friends;
@@ -402,14 +404,26 @@ public class Account implements Comparable<Account>{
 
         for(Account account : accounts){
             //Set the individual panels
+
             JPanel panelDisp = new JPanel();
             panelDisp.setLayout(new BorderLayout());
             panelDisp.setBackground(Color.WHITE);
-            //Fill those individual panels with single activity
-            panelDisp.add(new SearchResult(account, type, Account.isFriend(account)));
-                    
-            //Put individual panels into the main panel for display
-            panelToDisplay.add(panelDisp);  
+            if(!passedUser){
+                if(account.compareTo(MainManager.user) == 0){ passedUser = true; }
+                else{
+                    //Fill those individual panels with single activity
+                    panelDisp.add(new SearchResult(account, type, Account.isFriend(account)));     
+                    //Put individual panels into the main panel for display
+                    panelToDisplay.add(panelDisp);
+                }
+            }
+            else{
+                //Fill those individual panels with single activity
+                panelDisp.add(new SearchResult(account, type, Account.isFriend(account)));      
+                //Put individual panels into the main panel for display
+                panelToDisplay.add(panelDisp);
+            }
+              
         }
 
         if(MainManager.user.getFriends().size() < NEEDED)
@@ -425,8 +439,6 @@ public class Account implements Comparable<Account>{
         //Lastly repaint and revalidete the panel;
         panelToDisplay.revalidate();
         panelToDisplay.repaint();
-
-
 
     }
 
