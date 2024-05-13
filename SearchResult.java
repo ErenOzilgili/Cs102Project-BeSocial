@@ -149,6 +149,7 @@ public class SearchResult extends javax.swing.JPanel {
         else if(button.getText().equals("Chat")){
             //Opens new chat page, used in your friends page
             FriendMsgPage msgPage = new FriendMsgPage(account);
+            frame.dispose();
         }
         else{}//Do nothing --> Button is on "Waiting" form
     } 

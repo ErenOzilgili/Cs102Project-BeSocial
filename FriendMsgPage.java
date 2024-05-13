@@ -1,7 +1,13 @@
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class FriendMsgPage extends JFrame {
 
@@ -18,6 +24,7 @@ public class FriendMsgPage extends JFrame {
         //Set visible
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //Set the name of who is user chatting to
         receiverNameL.setText(account.getUserName());  
@@ -32,6 +39,37 @@ public class FriendMsgPage extends JFrame {
     private void addToInitComponents(){
         //Scroll Bar UI
         chatPane.getVerticalScrollBar().setUI(new NewScrollBarUI());
+
+        //home button
+        ImageIcon homeicon = new ImageIcon("photos/return.png");
+        Image homeimage = homeicon.getImage(); // transform it 
+        Image newHomeImage = homeimage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        homeicon = new ImageIcon(newHomeImage);  // transform it back
+        homeButton.setIcon(homeicon);
+
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Your_Friends friendsPage = new Your_Friends();
+                friendsPage.pack();
+                friendsPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                friendsPage.setVisible(true);
+                FriendMsgPage.this.dispose();
+            }
+        });
+
+        //profile photo
+        ImageIcon ppicon = new ImageIcon("photos/PP" +this.account.getID()%5 +".jpeg");
+        Image ppimage = ppicon.getImage(); // transform it 
+        Image newppimg = ppimage.getScaledInstance(150, 150,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        ppicon = new ImageIcon(newppimg);  // transform it back
+        pictureButton.setIcon(ppicon);
+
+        receiverNameL.setBorder(new LineBorder(Color.BLACK));
+        receiverNameL.setFont(new java.awt.Font("Segoe UI", 1, 36));
+
+        // SideMenu side = new SideMenu();
+        // side.setActionPerformers(this);
+        // this.add(side , BorderLayout.WEST);
     }
 
     /**
@@ -112,7 +150,7 @@ public class FriendMsgPage extends JFrame {
             .addGap(0, 75, Short.MAX_VALUE)
         );
 
-        pictureButton.setText("Pic");
+        //pictureButton.setText("Pic");
         pictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pictureButtonActionPerformed(evt);
@@ -127,9 +165,9 @@ public class FriendMsgPage extends JFrame {
             pic_NamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pic_NamePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pictureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pictureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(receiverNameL, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(receiverNameL, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
@@ -142,9 +180,9 @@ public class FriendMsgPage extends JFrame {
                 .addGroup(pic_NamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pic_NamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(receiverNameL, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pictureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(receiverNameL, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pictureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -213,6 +251,8 @@ public class FriendMsgPage extends JFrame {
             //Adjust scrollbar's position to bottom after sending message;
             // TODO add your handling code here:
             chatPane.getVerticalScrollBar().setValue(chatPane.getVerticalScrollBar().getMaximum());
+
+            chatInput.setText("");
             // TODO add your handling code here:
             // Get Messages
             // Date should not be null;
@@ -221,6 +261,8 @@ public class FriendMsgPage extends JFrame {
     
     private void pictureButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
+        this.dispose();
+        new ProfilePage(this.account , true);
     }                                             
 
     /**
