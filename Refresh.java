@@ -128,6 +128,7 @@ public class Refresh{
     }
 
     public static void renewFriends(){
+        MainManager.user.getFriends().clear();
         try{
             Statement st = MainManager.db.getCon().createStatement();
             ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(MainManager.user.getID()));
