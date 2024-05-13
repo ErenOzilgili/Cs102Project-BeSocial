@@ -533,7 +533,7 @@ public class Page extends javax.swing.JFrame {
         //profileFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         //profileFrame.setVisible(true);
         //profileFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        ProfilePage.createProfilePage(MainManager.user);
+        new ProfilePage(MainManager.user , false);
     }    
     
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         

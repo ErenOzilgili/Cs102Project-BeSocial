@@ -201,7 +201,7 @@ public class SideMenu extends JPanel {
         this.getGoToPPButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 frame.dispose();
-                ProfilePage.createProfilePage(MainManager.user);
+                new ProfilePage(MainManager.user , false);
             }
         });
         

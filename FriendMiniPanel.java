@@ -44,10 +44,9 @@ public class FriendMiniPanel extends JPanel {
     private void nameLabelActionPerformed()
     {
         mainFrame.dispose();
-        // FriendMsgPage frPage = new FriendMsgPage(friend);
-        // frPage.setLocationRelativeTo(null);
-        // frPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // frPage.setVisible(true);
-        ProfilePage.createProfilePage(friend);
+        FriendMsgPage frPage = new FriendMsgPage(friend);
+        frPage.setLocationRelativeTo(null);
+        frPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frPage.setVisible(true);
     }
 }

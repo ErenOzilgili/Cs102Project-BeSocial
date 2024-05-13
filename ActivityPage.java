@@ -84,6 +84,7 @@ public class ActivityPage extends javax.swing.JFrame {
         //2 samples added 1 left aligned 1 right aligned
         //-----------------------------
 
+        //home button
         ImageIcon icon = new ImageIcon("photos/25694.png");
         Image image = icon.getImage(); // transform it 
         Image newimg = image.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
@@ -96,6 +97,7 @@ public class ActivityPage extends javax.swing.JFrame {
             }
         });
 
+        //profile photo
         ImageIcon ppicon = new ImageIcon("photos/PP" +MainManager.user.getID()%5 +".jpeg");
         Image ppimage = ppicon.getImage(); // transform it 
         Image newppimg = ppimage.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
@@ -105,7 +107,20 @@ public class ActivityPage extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ActivityPage.this.dispose();
-                ProfilePage.createProfilePage(MainManager.user);
+                new ProfilePage(MainManager.user , false);
+            }
+        });
+
+        //join button
+        ImageIcon joinIcon = new ImageIcon("photos/join.png");
+        Image joinImage = joinIcon.getImage(); // transform it 
+        Image newJoinImg = joinImage.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        joinIcon = new ImageIcon(newJoinImg);  // transform it back
+        jButton2.setIcon(joinIcon);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainManager.user.joinActivity(activity);
+                quotaDesc.setText(activity.getCurrQuota() + " / " + activity.getQuota());
             }
         });
 
@@ -137,7 +152,7 @@ public class ActivityPage extends javax.swing.JFrame {
         ImageIcon scaleddisIcon = new ImageIcon(newdislikeImage);
         dislikeB.setIcon(scaleddisIcon);
 
-        if(MainManager.user.dislikedActivities.contains(this.activity))
+        if(MainManager.user.dislikedActivities.contains(ActivityPage.this.activity))
         {
             dislikeB.setBackground(Color.RED);
         }
@@ -245,7 +260,7 @@ public class ActivityPage extends javax.swing.JFrame {
         tagDesc.setPreferredSize(new java.awt.Dimension(40, 20));
 
         quotaDesc.setBackground(new java.awt.Color(204, 204, 255));
-        quotaDesc.setText(activity.getQuota() + "");
+        quotaDesc.setText(activity.getCurrQuota() + " / " + activity.getQuota());
         quotaDesc.setMaximumSize(new java.awt.Dimension(60, 30));
         quotaDesc.setMinimumSize(new java.awt.Dimension(40, 20));
         quotaDesc.setName(""); // NOI18N

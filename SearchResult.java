@@ -3,20 +3,22 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class SearchResult extends javax.swing.JPanel {
     private boolean type;
     private boolean isFriend;
     private Account account;
-
+    private JFrame frame;
 
     //If type = true --> friends page - Your_Friends
     //If type = false --> add remove page - AR_Friends page
-    public SearchResult(Account account, boolean type, boolean isFriend) {
-        this.type = type;
+    public SearchResult(Account account, boolean aType, boolean isFriend, JFrame aFrame) {
+        this.type = aType;
         this.isFriend = isFriend;
         this.account = account;
+        this.frame = aFrame;
 
         initComponents();
         addToInitComponents();
@@ -152,7 +154,8 @@ public class SearchResult extends javax.swing.JPanel {
     } 
 
     private void profileIconButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        ProfilePage.createProfilePage(account);
+        new ProfilePage(account , type);
+        frame.dispose();
     } 
 
     // Variables declaration - do not modify                     

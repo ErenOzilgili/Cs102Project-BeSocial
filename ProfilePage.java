@@ -31,9 +31,11 @@ public class ProfilePage extends javax.swing.JFrame {
      * Creates new form ProfiePage
      */
     private Account profile;
+    private boolean type;
 
-    public ProfilePage(Account profile) {
+    public ProfilePage(Account profile , boolean aType) {
         this.profile = profile;
+        this.type = aType;
         initComponents();
         this.jTextField2.setText(profile.userName);
         this.jTextField1.setText(profile.aboutMe);
@@ -65,7 +67,7 @@ public class ProfilePage extends javax.swing.JFrame {
             }
         }              
 
-        if(this.profile == MainManager.user)
+        if(this.profile.getID() == MainManager.user.getID())
         {
             ImageIcon homeicon = new ImageIcon("photos/25694.png");
             Image homeimage = homeicon.getImage(); // transform it 
@@ -96,7 +98,7 @@ public class ProfilePage extends javax.swing.JFrame {
 
         jPanel4.setOpaque(false);
 
-        if(profile != MainManager.user)
+        if(profile.getID() != MainManager.user.getID())
         {
             jTextField1.setEditable(false);
             jTextField2.setEditable(false);
@@ -112,6 +114,9 @@ public class ProfilePage extends javax.swing.JFrame {
             jButton1.setVisible(false);
             jButton4.setVisible(false);
         }
+
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setVisible(true);
     }
 
     /**
@@ -393,14 +398,29 @@ public class ProfilePage extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(this.profile == MainManager.user)
+        if(this.profile.getID() == MainManager.user.getID())
         {
             MainManager.openMainPage(this);
         }
         else
         {
-            this.dispose();
-            AR_Friends arFriendsPage = new AR_Friends();
+            if(type)
+            {
+                Your_Friends friendsPage = new Your_Friends();
+                friendsPage.pack();
+                friendsPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                friendsPage.setVisible(true);
+                this.dispose();
+            }
+            else
+            {
+                AR_Friends arFriendsPage = new AR_Friends();
+                arFriendsPage.pack();
+                arFriendsPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                arFriendsPage.setVisible(true);
+                this.dispose();
+            }
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -529,39 +549,39 @@ public class ProfilePage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void createProfilePage(Account ac) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        /*try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    // public static void createProfilePage(Account ac , boolean type) {
+    //     /* Set the Nimbus look and feel */
+    //     //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    //     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    //      * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    //      */
+    //     /*try {
+    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+    //             if ("Nimbus".equals(info.getName())) {
+    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    //                 break;
+    //             }
+    //         }
+    //     } catch (ClassNotFoundException ex) {
+    //         java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (InstantiationException ex) {
+    //         java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (IllegalAccessException ex) {
+    //         java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    //         java.util.logging.Logger.getLogger(ProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     }
+    //     //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-               ProfilePage a =  new ProfilePage(ac);
-               a.setExtendedState(JFrame.MAXIMIZED_BOTH);
-               a.setVisible(true);
-            }
-        });
-    }
+    //     /* Create and display the form */
+    //     java.awt.EventQueue.invokeLater(new Runnable() {
+    //         public void run() {
+    //            ProfilePage a =  new ProfilePage(ac , t);
+    //            a.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    //            a.setVisible(true);
+    //         }
+    //     });
+    // }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton SPORTS;

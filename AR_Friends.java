@@ -19,7 +19,7 @@ public class AR_Friends extends javax.swing.JFrame {
         //SearchBar TextField is set to "" for start
         searchBar.setText("");
 
-        Account.insertAccounts(false, panelForDisplay, MainManager.allAccounts);
+        Account.insertAccounts(false, panelForDisplay, MainManager.allAccounts , this);
     }
                       
     private void initComponents() {

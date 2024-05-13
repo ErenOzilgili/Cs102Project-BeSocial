@@ -16,7 +16,7 @@ public class Your_Friends extends javax.swing.JFrame {
         //SearchBar TextField is set to "" for start
         searchBar.setText("");
         
-        Account.insertAccounts(true, panelForDisplay, MainManager.user.getFriends());
+        Account.insertAccounts(true, panelForDisplay, MainManager.user.getFriends() , this);
     }
                          
     private void initComponents() {

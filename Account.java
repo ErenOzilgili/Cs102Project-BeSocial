@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -394,7 +395,7 @@ public class Account implements Comparable<Account>{
 
     //Will be used in AddRemove Friends page --> AR_Friends page
     //Will be used in YourFriends page --> Your_Friends
-    public static void insertAccounts(boolean type, JPanel panelToDisplay, ArrayList<Account> accounts){
+    public static void insertAccounts(boolean type, JPanel panelToDisplay, ArrayList<Account> accounts ,JFrame frame){
         boolean passedUser = false;//For efficiency, and also, to not add user to add remove page
         final int NEEDED = 10;
 
@@ -412,14 +413,14 @@ public class Account implements Comparable<Account>{
                 if(account.compareTo(MainManager.user) == 0){ passedUser = true; }
                 else{
                     //Fill those individual panels with single activity
-                    panelDisp.add(new SearchResult(account, type, Account.isFriend(account)));     
+                    panelDisp.add(new SearchResult(account, type, Account.isFriend(account) , frame));     
                     //Put individual panels into the main panel for display
                     panelToDisplay.add(panelDisp);
                 }
             }
             else{
                 //Fill those individual panels with single activity
-                panelDisp.add(new SearchResult(account, type, Account.isFriend(account)));      
+                panelDisp.add(new SearchResult(account, type, Account.isFriend(account) , frame));      
                 //Put individual panels into the main panel for display
                 panelToDisplay.add(panelDisp);
             }
