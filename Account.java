@@ -242,6 +242,7 @@ public class Account implements Comparable<Account>{
 
             //Now add to local friends
             MainManager.user.getFriends().add(notification.getSenderAccount());
+            MainManager.mainPage.refreshFriendsPanel();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -438,7 +439,7 @@ public class Account implements Comparable<Account>{
         //Lastly repaint and revalidete the panel;
         panelToDisplay.revalidate();
         panelToDisplay.repaint();
-        
+
     }
 
     public int compareTo(Account acc){
