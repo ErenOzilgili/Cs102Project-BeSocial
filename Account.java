@@ -406,7 +406,8 @@ public class Account implements Comparable<Account>{
 
     //Will be used in AddRemove Friends page --> AR_Friends page
     //Will be used in YourFriends page --> Your_Friends
-    public static void insertAccounts(boolean type, JPanel panelToDisplay, ArrayList<Account> accounts ,JFrame frame){
+    public static void insertAccounts(boolean type, JPanel panelToDisplay, ArrayList<Account> accounts ,JFrame frame)
+    {
         boolean passedUser = false;//For efficiency, and also, to not add user to add remove page
         final int NEEDED = 10;
 

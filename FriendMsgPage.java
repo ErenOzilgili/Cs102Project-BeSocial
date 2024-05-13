@@ -67,9 +67,9 @@ public class FriendMsgPage extends JFrame {
         receiverNameL.setBorder(new LineBorder(Color.BLACK));
         receiverNameL.setFont(new java.awt.Font("Segoe UI", 1, 36));
 
-        // SideMenu side = new SideMenu();
-        // side.setActionPerformers(this);
-        // this.add(side , BorderLayout.WEST);
+        SideMenu side = new SideMenu();
+        side.setActionPerformers(this);
+        getContentPane().add(side , BorderLayout.WEST);
     }
 
     /**
@@ -191,8 +191,10 @@ public class FriendMsgPage extends JFrame {
         menuPanel.setPreferredSize(new java.awt.Dimension(100, 600));
         menuPanel.setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        JPanel bigPanel = new JPanel();
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(bigPanel);
+        bigPanel.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -236,6 +238,7 @@ public class FriendMsgPage extends JFrame {
             .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        getContentPane().add(bigPanel , BorderLayout.CENTER);
         pack();
     }// </editor-fold>                       
 
