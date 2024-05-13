@@ -341,6 +341,18 @@ public class Account implements Comparable<Account>{
                 st2.execute("UPDATE activities SET current_quota = " + activity.getCurrQuota() + " where activityID = " + activity.getActivityID());
                 System.out.println("flkhflgkjfklghl");
                 MainManager.mainPage.updateEnrolledPanel(activity);
+
+                ActivityChat actChat = new ActivityChat(2, activity.getActivityID(), activity.getName());
+
+                actChat.sendMessage(new Message(0, "AUTO: " + MainManager.user.getName() + " joined the activity",
+                MainManager.user, activity.getActivityID(), null, true, actChat));
+    
+                Notification.sendNotiActivity(activity);
+                //When joining, show instanteniously
+                if(MainManager.mainPage.isNotiDisplayed){
+                    MainManager.mainPage.getNoti().decideAction();
+                    MainManager.mainPage.getNoti().decideAction();
+                }
             }
             catch(SQLException e){
 

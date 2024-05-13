@@ -10,7 +10,6 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.border.EtchedBorder;
 
 public class ActivitiesForPanel extends javax.swing.JPanel {
     private Activity activity;
@@ -280,18 +279,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
     }                                       
 
     private void joinBActionPerformed(java.awt.event.ActionEvent evt) {   
-        //Below is added to send notification to database;
-        //If not already enrolled to activity
-        //send a notification
-        if(!(MainManager.user.checkAlreadyInActivity(activity))){ 
-            Notification.sendNotiActivity(activity);
-            //When joining, show instanteniously
-            if(MainManager.mainPage.isNotiDisplayed){
-                MainManager.mainPage.getNoti().decideAction();
-                MainManager.mainPage.getNoti().decideAction();
-            }
-        }
-
         //Join the activity
         //Different situations are dealt within the method                                   
         MainManager.user.joinActivity(activity);
