@@ -70,8 +70,6 @@ public class FriendChat extends Chat{
         catch(SQLException e){
 
         }
-
-
     }
 
     public void sendMessage(Message message){

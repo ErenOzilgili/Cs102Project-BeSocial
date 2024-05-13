@@ -64,7 +64,7 @@ public class Page extends javax.swing.JFrame {
         Image setImage = setIcon.getImage(); // transform it 
         Image newSetImage = setImage.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         setIcon = new ImageIcon(newSetImage);  // transform it back
-        settingsButton.setIcon(setIcon);
+        renewButton.setIcon(setIcon);
 
         //Notifications
         noti = new Pop(this);
@@ -100,9 +100,9 @@ public class Page extends javax.swing.JFrame {
         });
 
         //Action performed button fro settings button
-        settingsButton.addActionListener(new java.awt.event.ActionListener() {
+        renewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsButtonActionPerformed(evt);
+                renewButtonActionPerformed(evt);
             }
         });
 
@@ -135,7 +135,7 @@ public class Page extends javax.swing.JFrame {
         rightPanel = new javax.swing.JPanel();
         profileSettingsPanel = new javax.swing.JPanel();
         notiButton = new javax.swing.JButton();
-        settingsButton = new javax.swing.JButton();
+        renewButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         rightPanelBottomP = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -369,7 +369,7 @@ public class Page extends javax.swing.JFrame {
             }
         });
 
-        //settingsButton.setText("notiButton");
+        //renewButton.setText("notiButton");
 
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,14 +388,14 @@ public class Page extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(profileSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(notiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(renewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
         profileSettingsPanelLayout.setVerticalGroup(
             profileSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileSettingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addComponent(renewButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(notiButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addContainerGap())
@@ -536,12 +536,11 @@ public class Page extends javax.swing.JFrame {
         new ProfilePage(MainManager.user , false);
     }    
     
-    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        Your_Friends yourFriendsPage = new Your_Friends();
-        this.dispose();
+    private void renewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        Refresh.renewActivities();
+        Activity.insertActivities(MainManager.mainPage.getPanelToDisplay(), MainManager.allActivities);
     }                                        
 
-    
     public void updateEnrolledPanel(Activity activity)
     {
         enActivityWithScroll.add(new EnrolledActivityMiniPanel(activity, enActivityWithScroll, this));
@@ -596,7 +595,7 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JButton createActivityButton;
     private javax.swing.JButton profileButton;
     private javax.swing.JButton notiButton;
-    private javax.swing.JButton settingsButton;
+    private javax.swing.JButton renewButton;
     private javax.swing.JLabel calendarLabel;
     private javax.swing.JLabel enrolledActivityLabel;
     private javax.swing.JPanel enrolledActivityPanel;

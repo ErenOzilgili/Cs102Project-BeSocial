@@ -111,6 +111,9 @@ public class Activity implements Comparable<Activity>{
     public void changeDislikeNum(int change){ this.dislikeNum += change; }
     public void changeLikeNum(int change){ this.likeNum += change; }
     public void changeCurrQuota(int change){this.currQuota+=change;};
+    public void setDislikeNum(int dislikeNum){ this.dislikeNum = dislikeNum; }
+    public void setLikeNum(int likeNum){ this.likeNum = likeNum; }
+    public void setCurrentQuota(int currentQuota){ this.currQuota = currentQuota; }
 
     public static ArrayList<Activity> getAllActivities(){
         /*ArrayList<Activity> allActivities = new ArrayList<Activity>();

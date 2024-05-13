@@ -1,5 +1,4 @@
 import java.sql.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,13 +7,14 @@ import javax.swing.JPanel;
 
 public class Refresh{
 
-    public static Timer t1, t2, t3, t4;
-    public static TimerTask task1, task2, task3, task4;
+    public static Timer t1, t2, t3, t4, t5;
+    public static TimerTask task1, task2, task3, task4, task5;
 
     public static void adjustTimers(){
         int interval = 10000;
 
         //Will call the method renewNotis() repeatedly
+        /* 
         t1 = new Timer();
         task1 = new TimerTask() {
             @Override
@@ -23,19 +23,7 @@ public class Refresh{
             } 
 		};
         t1.scheduleAtFixedRate(task1, 0, interval);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
-
-        //Will call the method renewAccounts() and renewFriends() repeatedly
-        t2 = new Timer();
-        task2 = new TimerTask() {
-            @Override
-            public void run() {
-                renewAccounts();
-                renewFriends();
-                MainManager.mainPage.refreshFriendsPanel();
-            } 
-		};
-        t2.scheduleAtFixedRate(task2, 0, 10000);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
-
+        */
 
         //Will call the method renewActivities() repeatedly
         t4 = new Timer();
@@ -45,8 +33,19 @@ public class Refresh{
                 renewActivities();
             } 
 		};
-        t4.scheduleAtFixedRate(task4, 0, interval);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
+        t4.scheduleAtFixedRate(task4, 20, interval);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
 
+        //Will call the method renewAccounts() and renewFriends() repeatedly
+        t5 = new Timer();
+        task5 = new TimerTask() {
+            @Override
+            public void run() {
+                renewAccounts();
+                renewFriends();
+                MainManager.mainPage.refreshFriendsPanel();
+            } 
+		};
+        t5.scheduleAtFixedRate(task5, 10, 10000);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
     }
 
     public static void adjustTimerForActChat(boolean isOn, ActivityChat chat, Activity activity, JPanel panel){
@@ -83,6 +82,7 @@ public class Refresh{
 
     }
 
+    /* 
     public static void renewNotis(){
         //We have getNotifications method in java
         //Just call the Notification.getNotification() method 
@@ -90,6 +90,7 @@ public class Refresh{
         //Notification.getNotification();
         System.out.println("RenewNotis");
     }
+    */
 
     public static void renewChatP(FriendChat chat, Account account, JPanel panel){
         System.out.println("RenewP");
@@ -104,7 +105,26 @@ public class Refresh{
     }
 
     public static void renewActivities(){
+        int queue = 0;
         System.out.println("RenewActivities");
+
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            //rs will iterate through where receiverID is the activitiesId and type = true which indicates it being activityChat
+            ResultSet rs = st.executeQuery("SELECT current_quota, likeCount, dislikeCount FROM activities"); 
+
+            while(rs.next()){
+                int current_quota = rs.getInt("current_quota");
+                int likeCount = rs.getInt("likeCount");
+                int dislikeCount = rs.getInt("dislikeCount");
+
+                MainManager.allActivities.get(queue).setCurrentQuota(current_quota);
+                MainManager.allActivities.get(queue).setLikeNum(likeCount);
+                MainManager.allActivities.get(queue).setDislikeNum(dislikeCount);
+                queue++;
+            }
+        }
+        catch(Exception e){}
  
         ArrayList<Activity> newestForm = Activity.getAllActivities();
         int toBeAddedFrom = MainManager.allActivities.size();
