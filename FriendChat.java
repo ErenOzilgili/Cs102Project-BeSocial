@@ -23,7 +23,7 @@ public class FriendChat extends Chat{
         try{
             Statement st = MainManager.db.getCon().createStatement();
             //rs will iterate through where receiverID is the activitiesId and type = true which indicates it being activityChat
-            ResultSet rs = st.executeQuery("SELECT * FROM messages WHERE (NOT type) AND ((receiverID = %d AND senderID = %d) OR (senderID = %d OR receiverID = %d))".formatted(acc.getID(), MainManager.user.getID(), acc.getID(), MainManager.user.getID()));
+            ResultSet rs = st.executeQuery("SELECT * FROM messages WHERE (NOT type) AND ((receiverID = %d AND senderID = %d) OR (senderID = %d AND receiverID = %d))".formatted(acc.getID(), MainManager.user.getID(), acc.getID(), MainManager.user.getID()));
 
             while(rs.next()){
                 //For every iteration, we find the sender account according to senderID

@@ -697,14 +697,15 @@ public class CreateActivity extends javax.swing.JFrame {
             {
                 ID = resultset.getInt("maxID") + 1;
             }        
-            String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activityID,current_quota,likeCount,dislikeCount) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" + date2 + "' , '" + time_of_activity + "','" + activity_place + "','" + activity_definition+ "','" + ID +"','"+ 1 + "','" + 0 + "','" + 0 + "' ) ";
-            String add2 = "INSERT INTO enrolledActivities(userID, actID) VALUES ('"+ MainManager.user.getID() + "' , '" + ID  +"') ";
+            String add = "INSERT INTO activities(activity_name, activity_tag, activity_quota, activity_date, activity_time, activity_place, activity_description, activityID,current_quota,likeCount,dislikeCount) VALUES ('" + name + "' , '" + tagType + "' , '" +Quota+ "' , '" + date2 + "' , '" + time_of_activity + "','" + activity_place + "','" + activity_definition+ "','" + ID +"','"+ 0 + "','" + 0 + "','" + 0 + "' ) ";
+            //String add2 = "INSERT INTO enrolledActivities(userID, actID) VALUES ('"+ MainManager.user.getID() + "' , '" + ID  +"') ";
             stm.execute(add);
-            stm.execute(add2);
+            //stm.execute(add2);
             stm.close();
             Activity newActivity = new Activity(ID);
             MainManager.allActivities.add(newActivity);
-            MainManager.user.enrolledActivities.add(newActivity);
+            //MainManager.user.enrolledActivities.add(newActivity);
+            MainManager.user.joinActivity(newActivity);
             this.turnTheTheme();
             MainManager.openMainPage(this);
         } catch (SQLException ex) {
