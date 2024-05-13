@@ -84,7 +84,7 @@ public class CreateActivity extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 600));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(215, 235, 215));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 900));
 
         NewActivityLabel.setBackground(new java.awt.Color(255, 255, 255));

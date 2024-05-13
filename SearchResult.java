@@ -85,7 +85,7 @@ public class SearchResult extends javax.swing.JPanel {
         nameText = new javax.swing.JTextField();
         button = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 255, 204));
+        setBackground(new java.awt.Color(255, 240, 219));
         setPreferredSize(new java.awt.Dimension(400, 100));
 
         //profileIconButton.setText("jButton1");

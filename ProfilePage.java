@@ -149,7 +149,7 @@ public class ProfilePage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(215, 235, 215));
 
         // javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         // jPanel3.setLayout(jPanel3Layout);
@@ -165,7 +165,7 @@ public class ProfilePage extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("About Me");
 
-        jTextField1.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField1.setBackground(new java.awt.Color(215, 235, 215));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -218,7 +218,7 @@ public class ProfilePage extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTextField2.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField2.setBackground(new java.awt.Color(215, 235, 215));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jTextField2.setText("Eren");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {

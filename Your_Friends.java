@@ -34,10 +34,10 @@ public class Your_Friends extends javax.swing.JFrame {
 
         setLayout(new java.awt.BorderLayout());
 
-        wholePagePanel.setBackground(new java.awt.Color(0, 204, 204));
+        wholePagePanel.setBackground(new java.awt.Color(215, 235, 215));
         wholePagePanel.setLayout(new java.awt.BorderLayout());
 
-        resultsPanel.setBackground(new java.awt.Color(0, 51, 153));
+        resultsPanel.setBackground(new java.awt.Color(255, 224, 202));
         resultsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

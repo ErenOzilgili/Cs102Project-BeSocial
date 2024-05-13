@@ -211,7 +211,7 @@ public class ActivityPage extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        infoPanel.setBackground(new java.awt.Color(235, 235, 235));
+        infoPanel.setBackground(new java.awt.Color(215, 235, 215));
         infoPanel.setLayout(new java.awt.BorderLayout());
 
         topPanel.setOpaque(false);
@@ -382,7 +382,7 @@ public class ActivityPage extends javax.swing.JFrame {
 
         jPanel1.add(infoPanel, java.awt.BorderLayout.CENTER);
 
-        chatPanelOuter.setBackground(new java.awt.Color(235, 235, 235));
+        chatPanelOuter.setBackground(new java.awt.Color(215, 235, 215));
 
         activityChatPanel.setBackground(new java.awt.Color(255, 255, 255));
         activityChatPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
