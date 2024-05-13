@@ -105,8 +105,13 @@ public class Your_Friends extends javax.swing.JFrame {
             }
         });
 
-        homeButton.setText("jButton1");
-
+        homeButton.setText("Home");
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e){
+                homeButtonActionPerformed(e);
+            }
+        });
+        
         javax.swing.GroupLayout search_homePanelLayout = new javax.swing.GroupLayout(search_homePanel);
         search_homePanel.setLayout(search_homePanelLayout);
         search_homePanelLayout.setHorizontalGroup(
@@ -150,7 +155,11 @@ public class Your_Friends extends javax.swing.JFrame {
 
     private void descriptionActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }                                           
+    }  
+    
+    public void homeButtonActionPerformed(java.awt.event.ActionEvent e){
+        MainManager.openMainPage(this);
+    }
 
 
     // Variables declaration - do not modify                     

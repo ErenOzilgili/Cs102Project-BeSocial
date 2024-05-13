@@ -112,7 +112,7 @@ public class AR_Friends extends javax.swing.JFrame {
         homeButton.setText("Home");
         homeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e){
-                homeButtonaActionPerformed(e);
+                homeButtonActionPerformed(e);
             }
         });
 
@@ -165,7 +165,7 @@ public class AR_Friends extends javax.swing.JFrame {
         return panelForDisplay;
     }
 
-    public void homeButtonaActionPerformed(java.awt.event.ActionEvent e){
+    public void homeButtonActionPerformed(java.awt.event.ActionEvent e){
         MainManager.openMainPage(this);
     }
 

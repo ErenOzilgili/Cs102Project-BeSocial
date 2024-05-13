@@ -1,3 +1,5 @@
+import java.sql.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,6 +23,19 @@ public class Refresh{
             } 
 		};
         t1.scheduleAtFixedRate(task1, 0, interval);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
+
+        //Will call the method renewAccounts() and renewFriends() repeatedly
+        t2 = new Timer();
+        task2 = new TimerTask() {
+            @Override
+            public void run() {
+                renewAccounts();
+                renewFriends();
+                MainManager.mainPage.refreshFriendsPanel();
+            } 
+		};
+        t2.scheduleAtFixedRate(task2, 0, 10000);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
+
 
         //Will call the method renewActivities() repeatedly
         t4 = new Timer();
@@ -113,8 +128,22 @@ public class Refresh{
     }
 
     public static void renewFriends(){
-
-
+        try{
+            Statement st = MainManager.db.getCon().createStatement();
+            ResultSet rs = st.executeQuery("SELECT friendID FROM friends WHERE userID = %d;".formatted(MainManager.user.getID()));
+            while(rs.next()){
+                int friendID = rs.getInt(1);
+                for(Account act: MainManager.allAccounts){
+                    if(act.userID == friendID){
+                        MainManager.user.getFriends().add(act);
+                        break;
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
 
     }
     
