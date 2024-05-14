@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class ActivityNotification extends javax.swing.JPanel {
     private Notification notification;
     private Page page;
@@ -16,6 +18,8 @@ public class ActivityNotification extends javax.swing.JPanel {
     }
                       
     private void initComponents() {
+        this.setBackground(new Color(215, 235, 215));
+
         //Set the line border
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -51,6 +55,8 @@ public class ActivityNotification extends javax.swing.JPanel {
                     .addComponent(accepNotification))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        activityDesc.setBackground(new Color(255, 224, 202));
     }// </editor-fold>                        
 
     private void accepNotificationActionPerformed(java.awt.event.ActionEvent evt) {                                                  

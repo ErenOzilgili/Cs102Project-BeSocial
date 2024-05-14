@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -69,7 +70,7 @@ public class Your_Friends extends javax.swing.JFrame {
         wholePagePanel.setBackground(new java.awt.Color(215, 235, 215));
         wholePagePanel.setLayout(new java.awt.BorderLayout());
 
-        resultsPanel.setBackground(new java.awt.Color(255, 224, 202));
+        //resultsPanel.setBackground(new java.awt.Color(255, 224, 202));
         resultsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -179,6 +180,10 @@ public class Your_Friends extends javax.swing.JFrame {
         wholePagePanel.add(search_homePanel, java.awt.BorderLayout.NORTH);
 
         add(wholePagePanel, java.awt.BorderLayout.CENTER);
+
+        scrollPane.getVerticalScrollBar().setUI(new NewScrollBarUI());
+        scrollPane.setBackground(new Color(255, 240, 219));
+        resultsPanel.setBackground(new Color(255, 240, 219));
     }// </editor-fold>                        
 
     private void resultsTextActionPerformed(java.awt.event.ActionEvent evt) {                                            

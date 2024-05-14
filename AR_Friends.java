@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -181,6 +182,9 @@ public class AR_Friends extends javax.swing.JFrame {
         wholePagePanel.add(search_homePanel, java.awt.BorderLayout.NORTH);
 
         add(wholePagePanel, java.awt.BorderLayout.CENTER);
+
+        scrollPane.getVerticalScrollBar().setUI(new NewScrollBarUI());
+        resultsPanel.setBackground(new Color(255, 240, 219));
     }// </editor-fold>                        
 
     private void resultsTextActionPerformed(java.awt.event.ActionEvent evt) {                                            

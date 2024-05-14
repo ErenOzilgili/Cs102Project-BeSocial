@@ -306,6 +306,10 @@ public class Account implements Comparable<Account>{
             st.execute("DELETE FROM enrolledActivities WHERE userID = " + this.userID + " and actID = " + activity.getActivityID());
             st.execute("UPDATE activities SET current_quota = " + activity.getCurrQuota() + " where activityID = " + activity.getActivityID());
             System.out.println("flkhflgkjfklghl");
+
+            ActivityChat actChat = new ActivityChat(2, activity.getActivityID(), activity.getName());
+
+            new Message(0, "AUTO: " + MainManager.user.getName() + " left the activity", MainManager.user, activity.getActivityID(), null, true, actChat);
         }
         catch(SQLException e){
 

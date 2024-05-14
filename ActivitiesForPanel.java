@@ -87,8 +87,7 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
         //ScrollBarUI
         descriptionSP.getVerticalScrollBar().setUI(new NewScrollBarUI());
-
-        
+        descriptionSP.getHorizontalScrollBar().setUI(new NewScrollBarUI());
     }
                           
     private void initComponents() {
@@ -121,8 +120,8 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
         descriptionL.setText("Description:");
 
         descriptionSP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        descriptionSP.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        descriptionSP.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        descriptionSP.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        descriptionSP.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         descriptionP.setBackground(new java.awt.Color(255,240,219));
 
