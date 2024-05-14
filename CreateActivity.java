@@ -681,12 +681,21 @@ public class CreateActivity extends javax.swing.JFrame {
                 throw new IllegalArgumentException("Minute is not valid");
             }
             str= ""+ Year+ "-"+ Month + "-" + Day;
-            Date date2 = Date.valueOf(str);//converting string into sql date
-        //Date date_of_activity = new Date(Year,Month,Day);
             Time = Hour + ":" + Minute + ":00"; 
             time_of_activity =  java.sql.Time.valueOf(Time);// solve this problem
             activity_place = GetPlace.getText();
             activity_definition = GetDescription.getText();
+            java.util.Date curDate = new java.util.Date();
+            Date date2 = Date.valueOf(str);//converting string into sql date
+            java.util.Date actDate = new java.util.Date(date2.getTime()+time_of_activity.getTime()+7200000);
+            System.out.println("actDate: " + actDate);
+            System.out.println("curDate: " + curDate);
+            System.out.println("date2: " + date2);
+        //Date date_of_activity = new Date(Year,Month,Day);
+            if(actDate.before(curDate)){
+                JOptionPane.showMessageDialog(this,"This date is not in the future","Invalid input",JOptionPane.WARNING_MESSAGE);
+                throw new IllegalArgumentException("Enter a valid date");
+            }
             Statement stm = MainManager.db.getCon().createStatement();
             //ResultSet resultset2 = stm.executeQuery("SELECT COUNT(actID) FROM acitivities");
             //resultset2.next();
