@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -27,8 +28,10 @@ public class FriendNotification extends javax.swing.JPanel {
     }
                       
     private void initComponents() {
-        //Set the line border
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        this.setBackground(new Color(215, 235, 215));
+
+        
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -36,6 +39,9 @@ public class FriendNotification extends javax.swing.JPanel {
         accept = new javax.swing.JButton();
 
         jTextField1.setEditable(false);
+        jTextField1.setBackground(new Color(255, 224, 202));
+        //Set the line border
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         //jLabel1.setText("I");
         ImageIcon profilePhoto = new ImageIcon("photos/PP" +sender.getID()%5 +".jpeg");
@@ -44,16 +50,30 @@ public class FriendNotification extends javax.swing.JPanel {
         ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
         jLabel1.setIcon(scaledProfileIcon);
 
+        //accept icon
+        ImageIcon tickIcon = new ImageIcon("photos/tick.png");
+        Image tickImage = tickIcon.getImage(); // transform it 
+        Image newTickImage = tickImage.getScaledInstance(10, 10,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        tickIcon = new ImageIcon(newTickImage);  // transform it back
+        accept.setIcon(tickIcon); 
+
+        //deny icon
+        ImageIcon denyIcon = new ImageIcon("photos/deny.png");
+        Image denyImage = denyIcon.getImage(); // transform it 
+        Image newDenyImage = denyImage.getScaledInstance(10, 10,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        denyIcon = new ImageIcon(newDenyImage);  // transform it back
+        deny.setIcon(denyIcon);
+
         //jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        deny.setText("I");
+        //deny.setText("I");
         deny.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 denyButtonActionPerformed(evt);
             }
         });
 
-        accept.setText("I");
+        //accept.setText("I");
         accept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptButtonActionPerformed(evt);

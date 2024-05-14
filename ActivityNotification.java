@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 public class ActivityNotification extends javax.swing.JPanel {
     private Notification notification;
@@ -11,6 +14,12 @@ public class ActivityNotification extends javax.swing.JPanel {
         this.page = page;
         this.notification = notification;
         addInfo(notification.getDescription());
+
+        ImageIcon eraseIcon = new ImageIcon("photos/erase.png");
+        Image eraseImage = eraseIcon.getImage(); // transform it 
+        Image newEraseImage = eraseImage.getScaledInstance(15, 15,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        eraseIcon = new ImageIcon(newEraseImage);  // transform it back
+        accepNotification.setIcon(eraseIcon);
     }
     
     private void addInfo(String Text){
@@ -28,7 +37,7 @@ public class ActivityNotification extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        accepNotification.setText("I");
+        //accepNotification.setText("I");
         accepNotification.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accepNotificationActionPerformed(evt);
@@ -42,7 +51,7 @@ public class ActivityNotification extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
                 .addComponent(activityDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(accepNotification)
                 .addGap(12, 12, 12))
         );
