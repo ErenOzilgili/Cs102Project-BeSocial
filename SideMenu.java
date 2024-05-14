@@ -32,6 +32,9 @@ public class SideMenu extends JPanel {
     private JButton button5;
     private JButton button6;
     private JButton button7;
+    private JPanel p1;
+    private JPanel p2;
+    private JPanel p3;
 
     private final int WIDTH = 600;
     private final int HEIGHT = 600;
@@ -56,11 +59,11 @@ public class SideMenu extends JPanel {
         button.addActionListener(l);
         mainPanel.add(button, BorderLayout.WEST);
         button.setBorderPainted(false);
-        JPanel p1 = new JPanel();
+        p1 = new JPanel();
         p1.setBackground(new Color(215, 235, 215));
-        JPanel p2 = new JPanel();
+        p2 = new JPanel();
         p2.setBackground(new Color(215, 235, 215));
-        JPanel p3 = new JPanel();
+        p3 = new JPanel();
         p3.setBackground(new Color(215, 235, 215));
         mainPanel.add(p1, BorderLayout.EAST);
         mainPanel.add(p2, BorderLayout.NORTH);
@@ -232,5 +235,12 @@ public class SideMenu extends JPanel {
             }
         });
 
+    }
+
+    public void changeBackground(Color color)
+    {
+        p1.setBackground(color);
+        p2.setBackground(color);
+        p3.setBackground(color);
     }
 }

@@ -448,7 +448,7 @@ public class Account implements Comparable<Account>{
             for(int i = 0 ; i < NEEDED - accounts.size() ; i++)
             {
                 JPanel empty = new JPanel();
-                empty.setBackground(new java.awt.Color(255, 255, 255));
+                empty.setBackground(new java.awt.Color(255, 224, 202));
                 panelToDisplay.add(empty);
             }
         }

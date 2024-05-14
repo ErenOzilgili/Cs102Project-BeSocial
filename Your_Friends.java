@@ -18,6 +18,8 @@ public class Your_Friends extends javax.swing.JFrame {
         this.setSize(400, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+
+        panelForDisplay.setBackground(new java.awt.Color(255, 224, 202));
     }
 
     private void addToInitComponents(){

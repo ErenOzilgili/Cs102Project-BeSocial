@@ -19,6 +19,8 @@ public class AR_Friends extends javax.swing.JFrame {
         //Set size, does not really matter since we will display this in maximized view
         this.setSize(400, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        panelForDisplay.setBackground(new java.awt.Color(255, 224, 202));
     }
 
     private void addToInitComponents(){
