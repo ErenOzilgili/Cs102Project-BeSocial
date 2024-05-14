@@ -124,6 +124,13 @@ public class ActivityPage extends javax.swing.JFrame {
             }
         });
 
+         //send button icon
+         ImageIcon sendIcon = new ImageIcon("photos/send.png");
+         Image sendImage = sendIcon.getImage(); // transform it 
+         Image newSendImage = sendImage.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+         sendIcon = new ImageIcon(newSendImage);  // transform it back
+         sendMessageB.setIcon(sendIcon);
+
         //like dislike buttons
         ImageIcon likePhoto = new ImageIcon("photos/indir.jpeg");
         Image likeImage = likePhoto.getImage();
@@ -542,6 +549,7 @@ public class ActivityPage extends javax.swing.JFrame {
     private void mainPageButtonActionPerformed()
     {
         MainManager.openMainPage(this);
+        Refresh.adjustTimerForActChat(true, actChat, activity, chatPanel);
     }
 
     private void likeBActionPerformed(java.awt.event.ActionEvent evt) {                                      

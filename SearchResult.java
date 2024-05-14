@@ -22,6 +22,8 @@ public class SearchResult extends javax.swing.JPanel {
 
         initComponents();
         addToInitComponents();
+
+        this.setBackground(new java.awt.Color(255, 224, 202));
     }
 
     private void addToInitComponents()
@@ -67,7 +69,7 @@ public class SearchResult extends javax.swing.JPanel {
         //Add profile pic according to the account
         ImageIcon profilePhoto = new ImageIcon("photos/PP" +account.getID()%5 +".jpeg");
         Image ppImage = profilePhoto.getImage();
-        Image newPPImg = ppImage.getScaledInstance(76, 76, Image.SCALE_SMOOTH);
+        Image newPPImg = ppImage.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
         ImageIcon scaledProfileIcon = new ImageIcon(newPPImg);
         profileIconButton.setIcon(scaledProfileIcon);
     }
@@ -116,11 +118,11 @@ public class SearchResult extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(profileIconButton)
+                        .addComponent(profileIconButton , javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

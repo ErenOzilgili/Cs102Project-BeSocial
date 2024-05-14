@@ -54,6 +54,7 @@ public class FriendMsgPage extends JFrame {
                 friendsPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 friendsPage.setVisible(true);
                 FriendMsgPage.this.dispose();
+                Refresh.adjustTimerForFriendChat(true, friendChat, account, chatPanel);
             }
         });
 
@@ -64,11 +65,19 @@ public class FriendMsgPage extends JFrame {
         ppicon = new ImageIcon(newppimg);  // transform it back
         pictureButton.setIcon(ppicon);
 
+        //send button icon
+        ImageIcon sendIcon = new ImageIcon("photos/send.png");
+        Image sendImage = sendIcon.getImage(); // transform it 
+        Image newSendImage = sendImage.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        sendIcon = new ImageIcon(newSendImage);  // transform it back
+        sendMessageB.setIcon(sendIcon);
+
         receiverNameL.setBorder(new LineBorder(Color.BLACK));
         receiverNameL.setFont(new java.awt.Font("Segoe UI", 1, 36));
 
         SideMenu side = new SideMenu();
         side.setActionPerformers(this);
+        side.changeBackground(new java.awt.Color(0, 204, 204));
         getContentPane().add(side , BorderLayout.WEST);
     }
 
@@ -266,6 +275,7 @@ public class FriendMsgPage extends JFrame {
         // TODO add your handling code here:
         this.dispose();
         new ProfilePage(this.account , true);
+        Refresh.adjustTimerForFriendChat(true, friendChat, account, chatPanel);
     }                                             
 
     /**

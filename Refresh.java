@@ -45,7 +45,7 @@ public class Refresh{
                 MainManager.mainPage.refreshFriendsPanel();
             } 
 		};
-        t5.scheduleAtFixedRate(task5, 10, 10000);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
+        t5.scheduleAtFixedRate(task5, 30, 10000);//Do the task1 after 0 seconds and in the time intervalvals of interval1 / 1000 seconds
     }
 
     public static void adjustTimerForActChat(boolean isOn, ActivityChat chat, Activity activity, JPanel panel){
