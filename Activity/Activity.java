@@ -49,7 +49,6 @@ public class Activity implements Comparable<Activity>{
             currQuota = rs.getInt(9);
             likeNum = rs.getInt(10);
             dislikeNum = rs.getInt(11);
-            //System.out.println(System.currentTimeMillis() + " " + date.getTime());
         }
         catch(SQLException e){
             System.out.println(e);
@@ -118,18 +117,6 @@ public class Activity implements Comparable<Activity>{
     public void setCurrentQuota(int currentQuota){ this.currQuota = currentQuota; }
 
     public static ArrayList<Activity> getAllActivities(){
-        /*ArrayList<Activity> allActivities = new ArrayList<Activity>();
-        try{
-            Statement st = MainManager.db.getCon().createStatement();
-            ResultSet rs = st.executeQuery("SELECT activityID FROM activities;");
-            while(rs.next()){
-                allActivities.add(new Activity(rs.getInt(1)));
-            }
-        }
-        catch(SQLException e){
-
-        }
-        return allActivities;*/
 
         ArrayList<Activity> allActivities = new ArrayList<Activity>();
         try{

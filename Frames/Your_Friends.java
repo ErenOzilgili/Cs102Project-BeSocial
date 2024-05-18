@@ -68,7 +68,6 @@ public class Your_Friends extends javax.swing.JFrame {
         resultsText = new javax.swing.JTextField();
         search_homePanel = new javax.swing.JPanel();
         searchBar = new javax.swing.JTextField();
-        //searchIcon = new javax.swing.JButton();
         description = new javax.swing.JTextField();
         homeButton = new javax.swing.JButton();
 
@@ -77,7 +76,6 @@ public class Your_Friends extends javax.swing.JFrame {
         wholePagePanel.setBackground(new java.awt.Color(215, 235, 215));
         wholePagePanel.setLayout(new java.awt.BorderLayout());
 
-        //resultsPanel.setBackground(new java.awt.Color(255, 224, 202));
         resultsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -133,8 +131,6 @@ public class Your_Friends extends javax.swing.JFrame {
 
         searchBar.setText("jTextField1");
 
-        //searchIcon.setText("jButton1");
-
         description.setBackground(new java.awt.Color(0, 204, 204));
         description.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         description.setText("Your Friends");
@@ -145,7 +141,6 @@ public class Your_Friends extends javax.swing.JFrame {
             }
         });
 
-        //homeButton.setText("Home");
         homeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e){
                 homeButtonActionPerformed(e);
@@ -160,7 +155,6 @@ public class Your_Friends extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(search_homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(search_homePanelLayout.createSequentialGroup()
-                        //.addComponent(searchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -179,7 +173,6 @@ public class Your_Friends extends javax.swing.JFrame {
                         .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(search_homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            //.addComponent(searchIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -214,7 +207,6 @@ public class Your_Friends extends javax.swing.JFrame {
     private javax.swing.JTextField resultsText;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextField searchBar;
-    //private javax.swing.JButton searchIcon;
     private javax.swing.JPanel search_homePanel;
     private javax.swing.JPanel wholePagePanel;
     // End of variables declaration                   

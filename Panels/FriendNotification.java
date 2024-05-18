@@ -69,16 +69,12 @@ public class FriendNotification extends javax.swing.JPanel {
         denyIcon = new ImageIcon(newDenyImage);  // transform it back
         deny.setIcon(denyIcon);
 
-        //jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        //deny.setText("I");
         deny.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 denyButtonActionPerformed(evt);
             }
         });
 
-        //accept.setText("I");
         accept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptButtonActionPerformed(evt);

@@ -71,28 +71,6 @@ public class ActivityPage extends javax.swing.JFrame {
     }
     
     private void addToInitComponents(){
-        //Way to add the chats
-        /* 
-         * 
-        chatPanel.setLayout(new GridLayout(5, 1));
-        
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.setBackground(Color.WHITE);
-        panel.add(new ChatMessages(), BorderLayout.WEST);
-        chatPanel.add(panel);
-        
-        JPanel panel2 = new JPanel();
-        panel2.setLayout(new BorderLayout());
-        panel2.setBackground(Color.WHITE);
-        panel2.add(new ChatMessages(), BorderLayout.EAST);
-        chatPanel.add(panel2);
-         * 
-         * 
-        */
-        
-        //2 samples added 1 left aligned 1 right aligned
-        //-----------------------------
 
         //home button
         ImageIcon icon = new ImageIcon("photos/25694.png");

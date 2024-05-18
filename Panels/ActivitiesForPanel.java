@@ -43,16 +43,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
 
         this.setVisible(true);
         this.setPreferredSize(new Dimension(275, 200));
-
-        /*
-         * 
-         * 
-         * JLabel label = new JLabel("Underlined Label");
-            Font font = label.getFont();
-            Map attributes = font.getAttributes();
-            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-            label.setFont(font.deriveFont(attributes));
-         */
     }
 
     private void addToInitComponents(){
@@ -325,7 +315,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
     private void likeAdd()
     {
         likeB.setBackground(Color.BLUE);
-        //likeB.setBorder(new EtchedBorder());
         MainManager.user.likedActivities.add(activity);
         activity.changeLikeNum(1);
         try
@@ -333,7 +322,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("INSERT INTO likedActivities ( userID , actID ) VALUES ( " + MainManager.user.userID + " , " + activity.getActivityID() + " )");
             st.execute("UPDATE activities SET likeCount = " + activity.getLikeCount() + " where activityID = " + activity.getActivityID());
-            System.out.println("yoktu var oldu");
         }
         catch(SQLException e){
     }   
@@ -348,7 +336,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
     private void likeRemove()
     {
         likeB.setBackground(Color.WHITE);
-        //likeB.setBorderPainted(false);
         MainManager.user.likedActivities.remove(activity);
         activity.changeLikeNum(-1);
         try
@@ -356,7 +343,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("DELETE FROM likedActivities WHERE userID = " + MainManager.user.userID + " and actID = " + activity.getActivityID());
             st.execute("UPDATE activities SET likeCount = " + activity.getLikeCount() + " where activityID = " + activity.getActivityID());
-            System.out.println("vardı yok oldu");
         }
         catch(SQLException e){
 
@@ -366,7 +352,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
     private void dislikeAdd()
     {
         dislikeB.setBackground(Color.RED);
-        //dislikeB.setBorder(new EtchedBorder());
         MainManager.user.dislikedActivities.add(activity);
         activity.changeDislikeNum(1);
         try
@@ -374,7 +359,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("INSERT INTO dislikedActivities ( activityID , userID ) VALUES ( " + activity.getActivityID() + " , " + MainManager.user.userID + " )");
             st.execute("UPDATE activities SET dislikeCount = " + activity.getDislikeCount() + " where activityID = " + activity.getActivityID());
-            System.out.println("yoktu var oldu dis");
         }
         catch(SQLException e){
 
@@ -384,7 +368,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
     private void dislikeRemove()
     {
         dislikeB.setBackground(Color.WHITE);
-        //dislikeB.setBorderPainted(false);
         MainManager.user.dislikedActivities.remove(activity);
         activity.changeDislikeNum(-1);
         try
@@ -392,7 +375,6 @@ public class ActivitiesForPanel extends javax.swing.JPanel {
             Statement st = MainManager.db.getCon().createStatement();
             st.execute("DELETE FROM dislikedActivities WHERE userID = " + MainManager.user.userID + " and activityID = " + activity.getActivityID());
             st.execute("UPDATE activities SET dislikeCount = " + activity.getDislikeCount() + " where activityID = " + activity.getActivityID());
-            System.out.println("vardı yok oldu dis");
         }
         catch(SQLException e){
 

@@ -82,9 +82,6 @@ public class Page extends javax.swing.JFrame {
         //Notifications
         noti = new Pop(this);
 
-        //profileButton.setPreferredSize(new Dimension(76,76));
-
-
         //ComponenetListener to keep track of if frame has been resized or not
         this.addComponentListener(new java.awt.event.ComponentListener() {
 
@@ -118,14 +115,6 @@ public class Page extends javax.swing.JFrame {
                 renewButtonActionPerformed(evt);
             }
         });
-
-        /* 
-        notiButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                notiButtonActionPerformed(evt);
-            }
-        });
-        */
     }
                        
     private void initComponents() {
@@ -201,7 +190,6 @@ public class Page extends javax.swing.JFrame {
         //add enrolled activites to a new panel
         enActivityWithScroll = new JPanel();
         JScrollPane jScrollPane2 = new JScrollPane();
-        //enActivityWithScroll.setLayout(new BoxLayout(enActivityWithScroll, BoxLayout.Y_AXIS));
         enActivityWithScroll.setLayout(new GridLayout(0,1));
         enActivityWithScroll.setBorder(new LineBorder(Color.CYAN));
         for(Activity act : MainManager.user.enrolledActivities)
@@ -306,8 +294,6 @@ public class Page extends javax.swing.JFrame {
 
         //to show when there is no activity to display 
         panelToDisplay.setBackground(new Color(215, 235, 215));
-
-        //SearchPage searchBar = new SearchPage();
 
         searchPanel.setBackground(new Color(215, 235, 215));
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
@@ -540,12 +526,6 @@ public class Page extends javax.swing.JFrame {
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
         this.dispose();
-        //JFrame profileFrame = new JFrame();
-        //profileFrame.add(new ProfilePage());
-        //profileFrame.pack();
-        //profileFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //profileFrame.setVisible(true);
-        //profileFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         new ProfilePage(MainManager.user , false);
     }    
     
@@ -620,7 +600,6 @@ public class Page extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel mainPanel;
-    //private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel middlePanel;
     private javax.swing.JPanel panelToDisplay;
     private javax.swing.JPanel profileSettingsPanel;

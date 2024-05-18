@@ -16,7 +16,7 @@ public class MainManager {
     public static ArrayList<Account> allAccounts;
     public static ArrayList<Activity>allActivities;
     public static Page mainPage;
-    //public static final Color Green = new Color(204, 255, 204);
+
     public static void main(String[] args){
         
         db = new Database();        
@@ -27,11 +27,6 @@ public class MainManager {
         login.pack();
         login.setLocationRelativeTo(null); //center  
         
-        /* 
-        user = new Account("a");
-        ActivityPage actPage = new ActivityPage(new Activity(1));
-        actPage.setVisible(true);  
-        */
     }
 
     //When user logs in or signs up, all commands that will be done once are here.   

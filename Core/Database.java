@@ -16,9 +16,7 @@ public class Database {
     public void crateConnection()  {
 
     try
-        {
-        //Class.forName("com.mysql.cj.jdbc.Driver");
-        //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/databaselogin", "root", "03g8lal24");       
+        {      
         String url = "jdbc:mysql://34.88.41.65:3306/BeSocial?connectTimeout=5000";
         String user = "BeSocial";
         String password = "SeKa";

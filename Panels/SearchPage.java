@@ -35,8 +35,6 @@ public class SearchPage extends JPanel{
         list = new JList<>(model);
 
         res = new JScrollPane(list);
-        // res.setVisible(false);
-        // this.add(res);
         
         bar.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
@@ -77,7 +75,6 @@ public class SearchPage extends JPanel{
         model.clear();
         if(result.size() > 0)
         {
-            //res.setVisible(true);
             for(String s : result)
             {
                 model.addElement(s);
@@ -87,7 +84,6 @@ public class SearchPage extends JPanel{
         }
         else
         {
-            //res.setVisible(false);
             this.remove(res);
         }
         revalidate();

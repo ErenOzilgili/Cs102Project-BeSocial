@@ -18,20 +18,7 @@ public class NewScrollBarUI extends BasicScrollBarUI{
     @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         super.paintThumb(g, c, thumbBounds);
-        /* 
-        g.setColor(Color.GRAY);
-        g.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);
-
-        g.setColor(Color.WHITE);
-        int spaceAbove = 30;
-        g.fillRect(thumbBounds.x + thumbBounds.width / 5, thumbBounds.y + spaceAbove, thumbBounds.width - (2 * (thumbBounds.width / 5)), thumbBounds.height - 2 * spaceAbove);
-
-        g.setColor(Color.BLACK);
-        int height = 6;
-        g.fillRect(thumbBounds.x + thumbBounds.width / 3, thumbBounds.y + (thumbBounds.height / 2) - ((height / 2) + 2 * height), thumbBounds.width - 2 * thumbBounds.width / 3, height);
-        g.fillRect(thumbBounds.x + thumbBounds.width / 3, thumbBounds.y + (thumbBounds.height / 2) - (height / 2), thumbBounds.width - 2 * thumbBounds.width / 3, height);
-        g.fillRect(thumbBounds.x + thumbBounds.width / 3, thumbBounds.y + (thumbBounds.height / 2) - ((height / 2) - 2 * height), thumbBounds.width - 2 * thumbBounds.width / 3, height);
-        */
+       
 
         g.setColor(Color.GRAY);
         g.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);

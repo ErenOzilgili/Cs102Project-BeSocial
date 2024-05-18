@@ -194,12 +194,5 @@ public class FullScreenCalendar extends JFrame {
   {
     super.dispose();
   }
-
-  public static void main(String[] arguments) {
-    JFrame.setDefaultLookAndFeelDecorated(false);
-    FullScreenCalendar sc = new FullScreenCalendar();
-  }
  
-
-
 }
