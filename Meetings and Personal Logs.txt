@@ -1,0 +1,119 @@
+////////
+Meetings
+////////
+We met before when the reports were due to plan few things about how we can approach the particular parts of the app. Then we worked on our reports. To give more details, on the 10th of April, we made the first significant progress for our project. In the second week of April, we wrote the UI of our project and then we learned SQL and found the Google cloud for our database. In April we mainly focused on the UI of our project. At the end of April, we focused on the database and we tried to implement notifications, pop-ups, chat, create activities, etc. Also At the end of April, we have made good progress. In May, we worked a lot on the project implementation. We discussed UI and improved it a lot during the process. Also, we finished our database tables and all the SQL code. To talk about the last week of the project, we worked everyday from 8 am to 12 pm. Some codes broke the other codes and we fixed all the bugs. Furthermore, we made a lot of improvements in UI such as colors. We also discussed about recommendation system and worked on some methods in our project. In the end, we are very happy with what we have produced as a project.
+
+/////////////
+Personal Logs
+/////////////
+-----------------
+Eren Özilgili --> 
+-----------------
+29 - 30 March
+First classes written as a scratch, tag class implemented. Approximately 5 hours.
+
+1 - 13 April
+Learning about database, working on GUI classes such as page, notifications, etc. Approximately 15 hours.
+
+14 - 21 April
+Further learned materials and also worked on Netbeans GUI builder. Approximately 10 hours. 
+
+22 - 28 April
+Learning materials. Approximately 10 hours.
+
+29 - 30 April
+Refresh class contributions, add / remove panel GUI and further GUI improved. Approximately 5 hours.
+
+May 1 - 7
+Chat mechanism aditions, GUI improvements, message class implementations, scrollBar UI, and worked on activity class. Approximately 15 hours.
+
+May 8 - 14
+Chat bug fixes, further GUI improvements, notification pop-up functionalities, activity / friend notifications, account and activity class modifications. Approximately 25 hours.
+
+---------------------
+Yusuf Burak Tutuş -->
+---------------------
+1-7 April
+UI design. Approximately 4 hours
+
+8-14 April
+GUI implementation. Approximately 3 hours
+
+15-21 April
+Creating a connection between Java and MySQL, creating database tables. Approximately 4-5 hours
+
+22-28 April
+Working on database tables, some UI improvements. Approximately 8 hours
+
+29-5 May
+Create activity gui and database tables. Approximately 7-8 hours
+
+6-12 May
+Gui improvements, profile page and friends profile page. Approximately 7/24 work 
+
+13-19 May
+Minor errors solved, minor gui improvements, last Works. Approximately 6-7 hours
+
+---------------------
+Ahmet Eren Gözübenli -->
+---------------------
+1-7 April
+Making sketches of UI desings. Approximately 3-4 hours
+
+8-14 April
+Learning about GUI implementation on Project. Approximately 2-3 hours
+
+15-21 April
+Learning MySQL, basic queries, creating and modifying tables, how to connect our project to sql via JDBC. Approximately 4-5 hours
+
+22-28 April
+Implementation of JDBC on project, creating connection, log in and sign up db issues. Approximately 5-6 hours
+
+29-5 May
+Starting processes, enrolled activities,profile details (including pp) added. Approximately 7-8 hours
+
+6-12 May
+Gui improvements, joining and leaving activities, like and dislike, search bars, mini panels. Approximately 7/24 work 
+
+13-19 May
+Minor errors solved, minor gui improvements, last Works. Approximately 6-7 hours
+
+---------------------
+Hikmet Şamil Karaş -->
+---------------------
+1-7 April
+Planning on the project in meetings. Finding online resources for the calendar and creating a weak demo. Approximately 2-3 hours
+
+8-14 April
+Implementing a working full screen calendar. Approximately 3-4 hours
+
+15-21 April
+Made contributions to activity and account classes. Approximately 4-5 hours
+
+22-28 April
+Nothing.
+
+29-5 May
+Learning MySQL. Made contributions to activity and account classes. Creating local objects by getting info from the database. Approximately 5-6 hours
+
+6-12 May
+Further functionality on fullscreen calendar, implementation of mini calendar panel. Writing recommendation algorithm.
+Helping other parts of the code. Approximately full-time job
+
+13-19 May
+Finishing touches. Approximately 3-4 hours
+
+---------------------
+Mehmet Efe Mutlu -->
+---------------------
+3 - 9 May 
+Learning materials. Approximately 4 hours
+
+7 - 9 May 
+Gui improvements. Approxiamtely 7 hours
+
+10 - 12 May 
+Side Menu implementations - Add/Remove Friends functionality. Approximately 6 hours
+
+12 - 15 May 
+Friend and activity implementations. Approximately 9 hours
